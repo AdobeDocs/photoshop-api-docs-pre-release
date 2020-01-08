@@ -76,7 +76,7 @@ The Adobe Photoshop APIs will allow you to make both layer and document level ed
 
 The API documentation is published at
 
-[Photoshop API Documentation](https://adobedocs.github.io/photoshop-api-docs/)
+[Photoshop API Documentation](https://adobedocs.github.io/photoshop-api-docs-pre-release/)
 
 [Lightroom API Documentation](https://adobedocs.github.io/lightroom-api-docs/)
 
