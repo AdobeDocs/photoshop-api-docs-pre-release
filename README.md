@@ -172,11 +172,11 @@ Clients can use assets stored on one of the following storage types:
 
 The Photoshop APIs currently support creating and editing of Text Layer with different fonts, character styles and paragraph styles.
 
-The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs/#api-Photoshop-document_operations)
+The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop-document_operations)
 
 We also have an example of making a simple text layer edit.
 
-[Text layer Example Code](https://github.com/AdobeDocs/photoshop-api-docs#example-1-making-a-simple-edit-to-a-text-layer)
+[Text layer Example Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-1-making-a-simple-edit-to-a-text-layer)
 
 #### Fonts
 
@@ -196,11 +196,13 @@ The Photoshop APIs currently support creating and editing of Embedded Smart Obje
 
 - In order to update an embedded smart object that is referenced by multiple layers you only need to update one of those layers, the effect will be reflected in all layers referencing the same smart object.
 
-The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs/#api-Photoshop-document_operations)
+- The replaced smart object takes the bounds of the new image by default. If your document contains transparent pixels (e.g some .png) , you may not get consistent bounds.
+
+The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop-document_operations)
 
 We also have an example of replacing a Smart Object within a layer.
 
-[Smart Object Example Code](https://github.com/AdobeDocs/photoshop-api-docs#example-6-swapping-the-image-in-a-smart-object-layer)
+[Smart Object Example Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-6-swapping-the-image-in-a-smart-object-layer)
 
 Smart Object support is a work in progress.
 
@@ -265,7 +267,7 @@ This is a partial list of currently supported features.  Please also see the [Re
 
 ## How to use the APIs
 
-The API's are documented at https://adobedocs.github.io/photoshop-api-docs/
+The API's are documented at https://adobedocs.github.io/photoshop-api-docs-pre-release/
 
 ### /documentManifest (Retrieving a PSD manifest)
 
