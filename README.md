@@ -20,15 +20,15 @@
 - [Photoshop](#photoshop)
   - [General Workflow](#general-workflow)
     - [Input and Output file storage](#input-and-output-file-storage)
-    - [Text layers](#text-layers)
-      - [Fonts](#fonts)
-    - [SmartObject](#smartobject)
     - [Tracking document changes](#tracking-document-changes)
   - [Supported Features](#supported-features)
     - [Layer level edits](#layer-level-edits)
     - [Artboards](#artboards)
     - [Document level edits](#document-level-edits)
     - [Rendering / Conversions](#rendering--conversions)
+    - [Text layers](#text-layers)
+      - [Fonts](#fonts)
+    - [SmartObject](#smartobject)
       - [Compatibility with Photoshop versions](#compatibility-with-photoshop-versions)
   - [How to use the APIs](#how-to-use-the-apis)
     - [/documentManifest (Retrieving a PSD manifest)](#documentmanifest-retrieving-a-psd-manifest)
@@ -64,15 +64,14 @@
 
 # Prerelease Program
 
-The Photoshop APIs are made available through the Adobe Prelease program. For the ability to make API calls we invite you to join the program.
+The Photoshop APIs are made available through the Adobe Pre-release program. For the ability to make API calls we invite you to join the program.
 
-Please be aware of some aspects of the program. For example, you will need to agree to the Adobe Prelease agreement and NDA. The APIs are provided for evaluation purposes. The current APIs are subject to change. You can find more information on the Adobe Prerelease page.
-
-If you are not currently a member, please sign up at [https://photoshop.adobelanding.com/prerelease-stack/](https://photoshop.adobelanding.com/prerelease-stack/)
+Please be aware that you will need to agree to the Adobe Pre-release agreement and NDA before using the service. The APIs are provided for evaluation purposes and are therefore subject to change. You can find more information on the Adobe Prerelease page.
+If you are not currently a member, please sign up at https://photoshop.adobelanding.com/prerelease-stack/
 
 # Welcome to Photoshop APIs!
 
-The Adobe Photoshop APIs will allow you to make both layer and document level edits to Photoshop PSD files.  This page is meant to help you onboard with the service and get you started with some basic usage examples.
+The Adobe Photoshop APIs enable you to make creative edits to your images and Ps files by providing access to core Adobe technologies.  This document  will help you onboard to the services, familiarize you with available features, and get you started with some basic usage examples.
 
 The API documentation is published at
 
@@ -168,43 +167,6 @@ Clients can use assets stored on one of the following storage types:
 3. Azure: By generating a SAS (Shared Access Signature) for upload/download
 4. Dropbox: Generate temporary upload/download links using https://dropbox.github.io/dropbox-api-v2-explorer/
 
-### Text layers
-
-The Photoshop APIs currently support creating and editing of Text Layer with different fonts, character styles and paragraph styles.
-
-The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop-document_operations)
-
-We also have an example of making a simple text layer edit.
-
-[Text layer Example Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-1-making-a-simple-edit-to-a-text-layer)
-
-#### Fonts
-
-The APIs all use Postscript names.
-
-The Photoshop APIs supports using fonts from two locations:
-- [Currently Installed Fonts](SupportedFonts.md)
-- Fonts the user is authorized to access via [Typekit](https://fonts.adobe.com/fonts). (Currently only available for OAuth tokens, service token support is forthcoming...)
-
-If your font is not included in either of these locations you must include an href to the font in your request. See the api docs for more information.
-
-Font support is a work in progress.
-
-### SmartObject
-
-The Photoshop APIs currently support creating and editing of Embedded Smart Objects. Support for Linked Smart Objects is forthcoming.
-
-- In order to update an embedded smart object that is referenced by multiple layers you only need to update one of those layers, the effect will be reflected in all layers referencing the same smart object.
-
-- The replaced smart object takes the bounds of the new image by default. If your document contains transparent pixels (e.g some .png) , you may not get consistent bounds.
-
-The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop-document_operations)
-
-We also have an example of replacing a Smart Object within a layer.
-
-[Smart Object Example Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-6-swapping-the-image-in-a-smart-object-layer)
-
-Smart Object support is a work in progress.
 
 ### Tracking document changes
 
@@ -258,6 +220,45 @@ This is a partial list of currently supported features.  Please also see the [Re
 - Create a JPEG, TIFF or PNG rendition of various sizes
 - Request thumbnail previews of all renderable layers
 - Convert between any of the supported filetypes (PSD, JPEG, TIFF, PNG)
+
+
+### Text layers
+
+The Photoshop APIs currently support creating and editing of Text Layer with different fonts, character styles and paragraph styles.
+
+The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop-document_operations)
+
+We also have an example of making a simple text layer edit.
+
+[Text layer Example Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-1-making-a-simple-edit-to-a-text-layer)
+
+#### Fonts
+
+The APIs all use Postscript names.
+
+The Photoshop APIs supports using fonts from two locations:
+- [Currently Installed Fonts](SupportedFonts.md)
+- Fonts the user is authorized to access via [Typekit](https://fonts.adobe.com/fonts). (Currently only available for OAuth tokens, service token support is forthcoming...)
+
+If your font is not included in either of these locations you must include an href to the font in your request. See the api docs for more information.
+
+Font support is a work in progress.
+
+### SmartObject
+
+The Photoshop APIs currently support creating and editing of Embedded Smart Objects. Support for Linked Smart Objects is forthcoming.
+
+- In order to update an embedded smart object that is referenced by multiple layers you only need to update one of those layers, the effect will be reflected in all layers referencing the same smart object.
+
+- The replaced smart object takes the bounds of the new image by default. If your document contains transparent pixels (e.g some .png) , you may not get consistent bounds.
+
+The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop-document_operations)
+
+We also have an example of replacing a Smart Object within a layer.
+
+[Smart Object Example Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-6-swapping-the-image-in-a-smart-object-layer)
+
+Smart Object support is a work in progress.
 
 #### Compatibility with Photoshop versions
 
