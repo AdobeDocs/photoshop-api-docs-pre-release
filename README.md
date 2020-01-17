@@ -90,8 +90,8 @@ The API documentation is published at
 
 The Photoshop API uses client id’s (also know as api keys) and authentication tokens to authenticate requests. There are two different kinds of authorization tokens available:  
 
-1. Individual user access (OAuth 2.0 access token)
-2. Adobe Enterprise ETLA (Service token using JSON Web Token/JWT)
+1. Individual user access (OAuth 2.0 access token).
+2. Adobe Enterprise ETLA (Service token using JSON Web Token/JWT).
 
 If this is your first time using Adobe API’s we suggest trying out the OAuth workflow.
 
@@ -115,10 +115,10 @@ After you've been accepted to the PreRelease program you will be emailed your cr
 
 2. Test out your credentials.
 This will allow you to verify that your credentials work and show you want an OAuth token looks like for when you eventually do this programmatically.
-  1. Browse to https://ps-prerelease-us-east-1.cloud.adobe.io
-  2. Enter the client id and secret
-  3. Follow through the login process
-  4. If your credentials work you should see an authorization token appear on your screen
+  - Browse to https://ps-prerelease-us-east-1.cloud.adobe.io
+  - Enter the client id and secret
+  - Follow through the login process
+  - If your credentials work you should see an authorization token appear on your screen
 This is the OAuth token that’s required to make calls to the Photoshop API’s and if you’d like you can jump ahead and immediately try them out now.  Eventually you will make this process programmatic (instructions below) but in the meantime the token expires in 24 hours and you can use this workflow during development for as long as you’d like.
 
 3. Make an authenticated call to ensure you can round trip successfully with the API’s
@@ -144,7 +144,7 @@ The access token must never be transmitted as a URI parameter. Doing so would ex
 
 Your access token will expire typically in 24 hours.  You will receive a ‘refresh_token’ when you initially obtain the access token that you can use to get a new access token.  Be aware that refreshing your token might require a new login event.  Please reference the [OAuth documentation](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md) for additional instructions.
 
-Here’s an example call to IMS to retrieve your auth token.  Please refer to the [OAuth sample code] for how you would do this in an actual production environment.
+Here’s an example call to IMS to retrieve your auth token.  Please refer to the [OAuth sample code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/sudipta/archydoc/sample_code/oauth-sample-app) for how you would do this in an actual production environment.
 
 Don’t forget to escape your username.  For example “`yoda@adobe.com`" becomes “`yoda%40adobe.com`".  
 
@@ -154,10 +154,10 @@ curl -X POST 'https://ims-na1-cc1.adobelogin.com/ims/token/v1?client_id=<INSERT_
 #### Additional OAuth 2.0 and IMS Information
 
 You can find details on interacting with Adobe IMS API’s and authentication in general
-1. [General Authentication Information] (https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/AuthenticationGuide.md)
-2. [OAuth Authentication] (https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md)
-3. [IMS API’s] (https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/Resources/IMS.md)
-4. OAuth Sample Code
+1. [General Authentication Information](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/AuthenticationGuide.md)
+2. [OAuth Authentication](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md)
+3. [IMS API’s](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/Resources/IMS.md)
+4. [OAuth Sample Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/sudipta/archydoc/sample_code/oauth-sample-app)
 
 ### Service Token Workflow (Adobe ETLA users)
 In order to be an enterprise user you must already have an ETLA.  To find out if you have an ETLA reach out to your system administrator or your Adobe Account Executive.  
@@ -175,7 +175,7 @@ On Step 1 of the Service Integration docs, ‘Subscribe to an Adobe Service’ y
 3. Create a JSON Web Token (JWT) and exchange it for an access token
 Take the information from your integration, plus your private key that you created when you created your integration and follow the instructions at [JWT Instructions:](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/JWT/JWT.md)
 
-You can refer to [JWT sample code] for additional help
+You can refer to [JWT sample code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/sudipta/archydoc/sample_code/jwt-sample-app) for additional help
 
 4. Make your first Photoshop API call
 Make an authenticated call to ensure you can round trip successfully with the API’s
@@ -189,16 +189,16 @@ curl --request GET \
   ```
 Congrats! You just made your first request to the Photoshop API.
 
-5. 5. Automate your access token retrieval
+5. Automate your access token retrieval
 Go back to step 3 to obtain a fresh service token
 
-6. Additional Service Token and JWT Information
+#### Additional Service Token and JWT Information
 
 You can find details on interacting with Adobe IMS API’s and authentication in general
-  1. [General Authentication Information] (https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/AuthenticationGuide.md)
-  2. [JWT/Service Token Authentication] (https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/JWT/JWT.md)
-  3. [IMS API’s] (https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/Resources/IMS.md) 
-  4. JWT Sample Code  
+  1. [General Authentication Information](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/AuthenticationGuide.md)
+  2. [JWT/Service Token Authentication](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/JWT/JWT.md)
+  3. [IMS API’s](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/Resources/IMS.md)
+  4. [JWT Sample Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/sudipta/archydoc/sample_code/jwt-sample-app)  
 
 ## API Keys
 
