@@ -13,6 +13,7 @@
     - [Individual users](#individual-users)
       - [Additional OAuth 2.0 and IMS Information](#additional-oauth-20-and-ims-information)
     - [Service Token Workflow (Adobe ETLA users)](#service-token-workflow-adobe-etla-users)
+      - [Additional Service Token and JWT Information](#additional-service-token-and-jwt-information)
   - [API Keys](#api-keys)
   - [Retries](#retries)
   - [Rate Limiting](#rate-limiting)
