@@ -78,11 +78,13 @@ The links below provide more detailed information about the API services includi
 
 The API documentation is published at
 
-[Photoshop API Documentation](https://adobedocs.github.io/photoshop-api-docs-pre-release/)
+[Photoshop API Refernce](https://adobedocs.github.io/photoshop-api-docs-pre-release/)
 
-[Lightroom API Documentation](https://adobedocs.github.io/lightroom-api-docs/)
+[Lightroom API Getting Started](https://github.com/AdobeDocs/lightroom-api-docs/blob/master/README.md)
 
-[Image Cutout API Documentation](https://adobedocs.github.io/photoshop-api-docs/#api-Sensei-ImageCutout)
+[Lightroom API Refrence](https://adobedocs.github.io/lightroom-api-docs/)
+
+[Image Cutout API Reference](https://adobedocs.github.io/photoshop-api-docs/#api-Sensei-ImageCutout)
 
 # General Setup and Onboarding
 
@@ -131,13 +133,7 @@ curl --request GET \
 ```
   Congrats! You just made your first request to the Photoshop API.
 
-4.  Make a Photoshop API call with real assets
-
-  Now that you can successfully authenticate and talk to the API’s it’s time to make “real” calls…
-
-  [link to individual services]
-
-5. Automate token retrieval
+4. Automate token retrieval
 
   Eventually you will need to automate the OAuth token retrieval process. The Photoshop API does not provide any API methods for authentication or authorization.  Instead, access tokens are granted by Adobe's IMS service. When you call IMS to retrieve your token you will need to pass in a `scope`  parameter. The Photoshop API needs an access token with a scope="openid,creative_sdk" and hence it is required that you pass in this parameter to the IMS Login Authorization API.
 
