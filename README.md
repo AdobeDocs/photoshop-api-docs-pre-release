@@ -135,20 +135,21 @@ curl --request GET \
 
   Now that you can successfully authenticate and talk to the API’s it’s time to make “real” calls…
 
-  ``` shell
+  ```shell
   curl -X POST \
-  https://image.adobe.io/pie/psdService/documentManifest \
-  -H 'Authorization: Bearer <auth_token>' \
-  -H 'Content-Type: application/json' \
-  -H 'x-api-key: <YOUR_API_KEY>' \
-  -d '{
-  "inputs": [
-    {
-      "href":"files/Example.psd",
-      "storage":"adobe"
-    }
-  ]
-}'``
+    https://image.adobe.io/pie/psdService/documentManifest \
+    -H 'Authorization: Bearer <auth_token>' \
+    -H 'Content-Type: application/json' \
+    -H 'x-api-key: <YOUR_API_KEY>' \
+    -d '{
+    "inputs": [
+      {
+        "href":"files/Example.psd",
+        "storage":"adobe"
+      }
+    ]
+  }'
+  ```
 
 5. Automate token retrieval
 
