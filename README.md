@@ -82,7 +82,7 @@ The API documentation is published at
 
 [Lightroom API Documentation](https://adobedocs.github.io/lightroom-api-docs/)
 
-[Image Cutout API Documentation](https://adobedocs.github.io/photoshop-api-docs/#api-Sensei-ImageCutout)
+[Image Cutout API Documentation](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei-ImageCutout)
 
 # General Setup and Onboarding
 
