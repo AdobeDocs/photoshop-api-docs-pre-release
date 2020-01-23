@@ -78,11 +78,13 @@ The links below provide more detailed information about the API services includi
 
 The API documentation is published at
 
-[Photoshop API Documentation](https://adobedocs.github.io/photoshop-api-docs-pre-release/)
+[Photoshop API Reference](https://adobedocs.github.io/photoshop-api-docs-pre-release/)
 
-[Lightroom API Documentation](https://adobedocs.github.io/lightroom-api-docs/)
+[Lightroom Getting Started](https://github.com/AdobeDocs/lightroom-api-docs)
+[Lightroom API Reference](https://adobedocs.github.io/lightroom-api-docs/)
 
-[Image Cutout API Documentation](https://adobedocs.github.io/photoshop-api-docs/#api-Sensei-ImageCutout)
+[Image Cutout Getting Started](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#imagecutout)
+[Image Cutout API Reference](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei-ImageCutout)
 
 # General Setup and Onboarding
 
