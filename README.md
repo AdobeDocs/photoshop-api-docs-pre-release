@@ -1104,7 +1104,7 @@ The typical workflow involves making a synchronous API call to the POST endpoint
 
 ## How to use the API's
 
-The API's are documented at [https://adobedocs.github.io/photoshop-api-docs/#api-Sensei-ImageCutout](https://adobedocs.github.io/photoshop-api-docs/#api-Sensei-ImageCutout)
+The API's are documented at [https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei-ImageCutout](https://adobedocs.github.io/photoshop-api-docs/#api-Sensei-ImageCutout)
 
 # Lightroom APIs
 
