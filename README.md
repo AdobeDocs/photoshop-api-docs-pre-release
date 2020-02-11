@@ -4,32 +4,32 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Private Beta](#private-beta)
+- [Prerelease Program](#prerelease-program)
 - [Welcome to Photoshop APIs!](#welcome-to-photoshop-apis)
 - [General Setup and Onboarding](#general-setup-and-onboarding)
   - [Authentication](#authentication)
-    - [Overview](#overview)
-    - [Workflow and Use Cases](#workflow-and-use-cases)
     - [Individual users](#individual-users)
-      - [Additional OAuth 2.0 and IMS Information](#additional-oauth-20-and-ims-information)
-    - [Service Token Workflow (Adobe ETLA users)](#service-token-workflow-adobe-etla-users)
-      - [Additional Service Token and JWT Information](#additional-service-token-and-jwt-information)
+    - [Adobe Enterprise ETLA customers](#adobe-enterprise-etla-customers)
+      - [OAuth 2.0 Guide](#oauth-20-guide)
+    - [Service-to-service clients](#service-to-service-clients)
+      - [Assets stored on Adobe's Creative Cloud](#assets-stored-on-adobes-creative-cloud)
+      - [Assets stored externally to Adobe](#assets-stored-externally-to-adobe)
   - [API Keys](#api-keys)
   - [Retries](#retries)
   - [Rate Limiting](#rate-limiting)
 - [Photoshop](#photoshop)
   - [General Workflow](#general-workflow)
     - [Input and Output file storage](#input-and-output-file-storage)
+    - [Text layers](#text-layers)
+      - [Fonts](#fonts)
+    - [SmartObject](#smartobject)
     - [Tracking document changes](#tracking-document-changes)
   - [Supported Features](#supported-features)
     - [Layer level edits](#layer-level-edits)
     - [Artboards](#artboards)
     - [Document level edits](#document-level-edits)
     - [Rendering / Conversions](#rendering--conversions)
-    - [Text layers](#text-layers)
-      - [Fonts](#fonts)
-    - [SmartObject](#smartobject)
-    - [Compatibility with Photoshop versions](#compatibility-with-photoshop-versions)
+      - [Compatibility with Photoshop versions](#compatibility-with-photoshop-versions)
   - [How to use the APIs](#how-to-use-the-apis)
     - [/documentManifest (Retrieving a PSD manifest)](#documentmanifest-retrieving-a-psd-manifest)
       - [Example 1: Initiate a job to retrieve a PSD's JSON manifest](#example-1-initiate-a-job-to-retrieve-a-psds-json-manifest)
@@ -54,170 +54,98 @@
   - [Current Limitations](#current-limitations)
   - [Release Notes](#release-notes)
 - [ImageCutout](#imagecutout)
-  - [General Workflow](#general-workflow-1)
-  - [How to use the API's](#how-to-use-the-apis)
+  - [Version 2](#version-2)
+    - [General Workflow](#general-workflow-1)
+    - [How to use the API's](#how-to-use-the-apis)
+      - [Example 1: Initiate a job to create an image cutout](#example-1-initiate-a-job-to-create-an-image-cutout)
+      - [Example 2: Poll for status and results](#example-2-poll-for-status-and-results-3)
+      - [Example 3: Get completed job](#example-3-get-completed-job)
+      - [Example 4: Initiate a job to create an image mask](#example-4-initiate-a-job-to-create-an-image-mask)
+  - [Version 1 [DEPRECATED]](#version-1-deprecated)
+    - [General Workflow](#general-workflow-2)
+    - [How to use the API's](#how-to-use-the-apis-1)
 - [Lightroom APIs](#lightroom-apis)
-  - [General Workflow](#general-workflow-2)
-  - [How to use the API's](#how-to-use-the-apis-1)
+  - [General Workflow](#general-workflow-3)
+  - [How to use the API's](#how-to-use-the-apis-2)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Private Beta
+# Prerelease Program
 
-The Photoshop APIs are made available through an invitation only Private Beta. In order to be considered for the Private Beta please apply here https://photoshop.adobelanding.com/api-signup/
+The Photoshop APIs are made available through the Adobe Prelease program. For the ability to make API calls we invite you to join the program.
 
-Make sure to take a look at the Pre-release agreement before applying and ensure you understand the aspects of the program.
+Please be aware of some aspects of the program. For example, you will need to agree to the Adobe Prelease agreement and NDA. The APIs are provided for evaluation purposes. The current APIs are subject to change. You can find more information on the Adobe Prerelease page.
+
+If you are not currently a member, please sign up at [https://photoshop.adobelanding.com/prerelease-stack/](https://photoshop.adobelanding.com/prerelease-stack/)
 
 # Welcome to Photoshop APIs!
 
-The Adobe Photoshop API gives you access to a subset of Photoshop, Lightroom, and Sensei  services. The API will allow you to make both layer and document level edits to Photoshop PSD files as well as perform a number of image edits and improvements.
-
-The Photoshop API is designed with REST like principles and uses standard HTTP response codes, verbs and authentication and returns JSON-encoded responses.
-
-The links below provide more detailed information about the API services including code samples and reference guides.  Once you are done setting up your Authentication you can dive into these links.
+The Adobe Photoshop APIs will allow you to make both layer and document level edits to Photoshop PSD files.  This page is meant to help you onboard with the service and get you started with some basic usage examples.
 
 The API documentation is published at
 
-[Photoshop API Reference](https://adobedocs.github.io/photoshop-api-docs-pre-release/)
+[Photoshop API Documentation](https://adobedocs.github.io/photoshop-api-docs/)
 
-[Lightroom Getting Started](https://github.com/AdobeDocs/lightroom-api-docs)
+[Lightroom API Documentation](https://adobedocs.github.io/lightroom-api-docs/)
 
-[Lightroom API Reference](https://adobedocs.github.io/lightroom-api-docs/)
-
-[Image Cutout Getting Started](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#imagecutout)
-
-[Image Cutout API Reference](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei-ImageCutout)
+[Image Cutout API Documentation](https://adobedocs.github.io/photoshop-api-docs/#api-Sensei-ImageCutout)
 
 # General Setup and Onboarding
 
 ## Authentication
-### Overview
 
-The Photoshop API uses client id’s (also know as api keys) and authentication tokens to authenticate requests. There are two different kinds of authorization tokens available:  
-
-1. Individual user access (OAuth 2.0 access token)
-2. Adobe Enterprise ETLA (Service token using JSON Web Token/JWT)
-
-If this is your first time using Adobe API’s we suggest trying out the OAuth workflow.
-
-In order to use the Photoshop API's you’ll need to get a Client ID (also known as an API key) and a Client Secret. Once you have those you can use them to programmatically get an access token to authenticate your requests.  We’ll walk you through the steps below.
-
-
-### Workflow and Use Cases
-
-Here are the workflows we currently support.  You are…
-
-- An individual user logged in who has an Adobe Creative Cloud Account
-- An organization with an Adobe ETLA (an enterprise account)
-- Running a job on a server
-- Running in a browser
-
-If your workflow falls outside of these please contact us at psdservices@adobe.com so we can help meet your needs.
+We have two kinds of authorizations.
+1. OAuth 2.0 access token for individual user access
+2. JSON Web Token (JWT) for service integration for Adobe Enterprise ETLA customers only
 
 ### Individual users
-1. Get your client id and client secret.
-After you've been accepted to the PreRelease program you will be emailed your credentials (your client ID and client Secret) required for API authentication.
+You will use the 1st authorization flow here.
+You will be emailed your Client ID and Client Secret required for API authentication after you've been accepted to the PreRelease program.
+You will create the OAuth access token using Adobe IMS endpoints.
+Once you've received your Client ID and Client Secret by email...
+- Do a quick test:
+  - Browse to [https://ps-prerelease-us-east-1.cloud.adobe.io/](https://ps-prerelease-us-east-1.cloud.adobe.io/)
+  - Add your Client ID and Client Secret sent in email
+  - Enter your Adobe credentials when prompted
+  - Use the access token to try the example calls further down this README
 
-2. Test out your credentials.
-This will allow you to verify that your credentials work and show you want an OAuth token looks like for when you eventually do this programmatically.
-  - Browse to https://ps-prerelease-us-east-1.cloud.adobe.io
-  - Enter the client id and secret
-  - Follow through the login process
-  - If your credentials work you should see an authorization token appear on your screen
-This is the OAuth token that’s required to make calls to the Photoshop API’s and if you’d like you can jump ahead and immediately try them out now.  Eventually you will make this process programmatic (instructions below) but in the meantime the token expires in 24 hours and you can use this workflow during development for as long as you’d like.
+You must pass in an OAuth 2.0 access token with every request.The Photoshop APIs does not provide any API methods for authentication or authorization. Access tokens are granted by Adobe's IMS service. The Photoshop API needs an access token in the scope="openid,creative_sdk" and hence it is required that you pass in this parameter to the IMS Login Authorization API.
 
-3. Make an authenticated call to ensure you can round trip successfully with the API’s
-```shell
-curl --request GET \
-  --url https://image.adobe.io/pie/psdService/hello  \
-  --header 'Authorization: Bearer <YOUR_OAUTH_TOKEN>' \
-  --header 'x-api-key: <YOUR_CLIENT_ID>' \
-```
-  Congrats! You just made your first request to the Photoshop API.
+The access token must never be transmitted as a URI parameter. Doing so would expose it to being captured in-the-clear by intermediaries such as proxy server logs. The API does not allow you to send an access token anywhere except the Authorization header field.
 
-4.  Make a Photoshop API call with real assets
 
-  Now that you can successfully authenticate and talk to the API’s it’s time to make “real” calls…
+### Adobe Enterprise ETLA customers
+You may use 1st authorization flow or the 2nd depending on your integration.
+If your company has an Adobe ETLA agreement you may be able to create your own integration using the instructions below. You may generate a user access token using an OAuth 2.0 workflow, or, a service token.
 
-  ```shell
-  curl -X POST \
-    https://image.adobe.io/pie/psdService/documentManifest \
-    -H 'Authorization: Bearer <auth_token>' \
-    -H 'Content-Type: application/json' \
-    -H 'x-api-key: <YOUR_API_KEY>' \
-    -d '{
-    "inputs": [
-      {
-        "href":"files/Example.psd",
-        "storage":"adobe"
-      }
-    ]
-  }'
-  ```
+#### OAuth 2.0 Guide  
 
-5. Automate token retrieval
+ - Instructions regarding the Adobe IMS endpoints can be found at [Generating Access Tokens](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md#authentication)
+ - Additional instructions can be found at [Setting up OAuth authentication](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md)
+ - An OAuth playground can be found [here]([https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/Resources/Tools/ToolsOverview.md](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/Resources/Tools/ToolsOverview.md))
+ - Complete examples for OAuth endpoints can be found at [OAuth endpoint examples]([https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/samples/samples.md](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/samples/samples.md))
 
-  Eventually you will need to automate the OAuth token retrieval process. The Photoshop API does not provide any API methods for authentication or authorization.  Instead, access tokens are granted by Adobe's IMS service. When you call IMS to retrieve your token you will need to pass in a `scope`  parameter. The Photoshop API needs an access token with a scope="openid,creative_sdk" and hence it is required that you pass in this parameter to the IMS Login Authorization API.
 
-  The access token must never be transmitted as a URI parameter. Doing so would expose it to being captured in-the-clear by intermediaries such as proxy server logs. The API does not allow you to send an access token anywhere except the Authorization header field.
+### Service-to-service clients
 
-  Your access token will expire typically in 24 hours.  You will receive a ‘refresh_token’ when you initially obtain the access token that you can use to get a new access token.  Be aware that refreshing your token might require a new login event.  Please reference the [OAuth documentation](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md) for additional instructions.
+For service-to-service clients you'll need to set up an Adobe I/O Console Integration and create a JSON Web Token (JWT) to retrieve your access token for Photoshop APIs. It is assumed your organization already has an Adobe IMS Org ID and you have added the required users to it.
 
-  Here’s an example call to IMS to retrieve your auth token.  Please refer to the [OAuth sample code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/sudipta/archydoc/sample_code/oauth-sample-app) for how you would do this in an actual production environment.
 
-  Don’t forget to escape your username.  For example “`yoda@adobe.com`" becomes “`yoda%40adobe.com`".  
+#### Assets stored on Adobe's Creative Cloud
 
-  ``` shell
-  curl -X POST 'https://ims-na1-cc1.adobelogin.com/ims/token/v1?client_id=<INSERT_CLIENT_ID>&username=<INSERT_ADOBE_USERNAME>&password=<INSERT_PASSWORD>&scope=AdobeID%2Ccreative_sdk&grant_type=password&client_secret=<INSERT_SECRET>'
-  ```
-#### Additional OAuth 2.0 and IMS Information
+The Adobe Photoshop APIs currently have a limitation that Service clients must store their assets externally to Adobe's Creative Cloud...
 
-You can find details on interacting with Adobe IMS API’s and authentication in general
-1. [General Authentication Information](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/AuthenticationGuide.md)
-2. [OAuth Authentication](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md)
-3. [IMS API’s](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/Resources/IMS.md)
-4. [OAuth Sample Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/sudipta/archydoc/sample_code/oauth-sample-app)
+#### Assets stored externally to Adobe
+This applies to assets stored outside of Adobe's Creative Cloud and accessed via preSigned URL's
 
-### Service Token Workflow (Adobe ETLA users)
-In order to be an enterprise user you must already have an ETLA.  To find out if you have an ETLA reach out to your system administrator or your Adobe Account Executive.  
+- Browse to https://console.adobe.io/integrations
+- Select New Integration
+- Select `Access an API`
+- Select `Photoshop`
+- Select `Service Account integration`
+- Select `Create new integration`
 
-Enterprise users will not have access to assets stored in the Creative Cloud so you must use an external storage source when making calls to the API.
-1. Get a developer role in the Adobe Admin Console
-You system admin will need to give you developer access in the [Adobe Admin Console](https://adminconsole.adobe.com/overview)
-2. Go to https://console.adobe.io and create a service integration and follow the instructions at [Service Token Instructions](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/ServiceAccountIntegration.md)
-
-  On Step 1 of the Service Integration docs, ‘Subscribe to an Adobe Service’ you will select the following
-    1. Photoshop
-    2. Lightroom / Camera Raw API
-    3. Image Cutout
-
-3. Create a JSON Web Token (JWT) and exchange it for an access token
-Take the information from your integration, plus your private key that you created when you created your integration and follow the instructions at [JWT Instructions:](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/JWT/JWT.md)
-
-  You can refer to [JWT sample code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/sudipta/archydoc/sample_code/jwt-sample-app) for additional help
-
-4. Make your first Photoshop API call
-Make an authenticated call to ensure you can round trip successfully with the API’s
-
-``` shell
-
-curl --request GET \
-  --url https://image.adobe.io/pie/psdService/hello \
-  --header 'Authorization: Bearer <YOUR_SERVICE_TOKEN>' \
-  --header 'x-api-key: <YOUR_CLIENT_ID>'
-  ```
-  Congrats! You just made your first request to the Photoshop API.
-
-5. Automate your access token retrieval
-Go back to step 3 to obtain a fresh service token
-
-#### Additional Service Token and JWT Information
-
-You can find details on interacting with Adobe IMS API’s and authentication in general
-  1. [General Authentication Information](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/AuthenticationGuide.md)
-  2. [JWT/Service Token Authentication](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/JWT/JWT.md)
-  3. [IMS API’s](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/Resources/IMS.md)
-  4. [JWT Sample Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/sudipta/archydoc/sample_code/jwt-sample-app)  
+To retrieve your access token see additional instructions at [Setting up JWT Authentication](https://www.adobe.io/authentication/auth-methods.html#!adobeio/adobeio-documentation/master/auth/JWTAuthenticationQuickStart.md)
 
 ## API Keys
 
@@ -234,6 +162,7 @@ Also known as the `client_id`. You must additionally pass in your Adobe API key 
 
 We have not put a throttle limit on requests to the API at this time.
 
+
 # Photoshop
 
 ## General Workflow
@@ -248,6 +177,41 @@ Clients can use assets stored on one of the following storage types:
 3. Azure: By generating a SAS (Shared Access Signature) for upload/download
 4. Dropbox: Generate temporary upload/download links using https://dropbox.github.io/dropbox-api-v2-explorer/
 
+### Text layers
+
+The Photoshop APIs currently support creating and editing of Text Layer with different fonts, character styles and paragraph styles.
+
+The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs/#api-Photoshop-document_operations)
+
+We also have an example of making a simple text layer edit.
+
+[Text layer Example Code](https://github.com/AdobeDocs/photoshop-api-docs#example-1-making-a-simple-edit-to-a-text-layer)
+
+#### Fonts
+
+The APIs all use Postscript names.
+
+The Photoshop APIs supports using fonts from two locations:
+- [Currently Installed Fonts](SupportedFonts.md)
+- Fonts the user is authorized to access via [Typekit](https://fonts.adobe.com/fonts). (Currently only available for OAuth tokens, service token support is forthcoming...)
+
+If your font is not included in either of these locations you must include an href to the font in your request. See the api docs for more information.
+
+Font support is a work in progress.
+
+### SmartObject
+
+The Photoshop APIs currently support creating and editing of Embedded Smart Objects. Support for Linked Smart Objects is forthcoming.
+
+- In order to update an embedded smart object that is referenced by multiple layers you only need to update one of those layers, the effect will be reflected in all layers referencing the same smart object.
+
+The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs/#api-Photoshop-document_operations)
+
+We also have an example of replacing a Smart Object within a layer.
+
+[Smart Object Example Code](https://github.com/AdobeDocs/photoshop-api-docs#example-6-swapping-the-image-in-a-smart-object-layer)
+
+Smart Object support is a work in progress.
 
 ### Tracking document changes
 
@@ -302,48 +266,7 @@ This is a partial list of currently supported features.  Please also see the [Re
 - Request thumbnail previews of all renderable layers
 - Convert between any of the supported filetypes (PSD, JPEG, TIFF, PNG)
 
-
-### Text layers
-
-The Photoshop APIs currently support creating and editing of Text Layer with different fonts, character styles and paragraph styles.
-
-The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop-document_operations)
-
-We also have an example of making a simple text layer edit.
-
-[Text layer Example Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-1-making-a-simple-edit-to-a-text-layer)
-
-#### Fonts
-
-The APIs all use Postscript names.
-
-The Photoshop APIs supports using fonts from two locations:
-- [Currently Installed Fonts](SupportedFonts.md)
-- Fonts the user is authorized to access via [Typekit](https://fonts.adobe.com/fonts). (Currently only available for OAuth tokens, service token support is forthcoming...)
-
-If your font is not included in either of these locations you must include an href to the font in your request. See the api docs for more information.
-
-Font support is a work in progress.
-
-### SmartObject
-
-The Photoshop APIs currently support creating and editing of Embedded Smart Objects. Support for Linked Smart Objects is forthcoming.
-
-- In order to update an embedded smart object that is referenced by multiple layers you only need to update one of those layers, the effect will be reflected in all layers referencing the same smart object. 
-
-- The replaced smart object is placed within the bounding box of the original image. If the new image is bigger or smaller than the original image, it fits into the original bounding box maintaining the aspect ratio. You can change the bounds of the replacement image by passing bounds parameters in the API call.
-
-- If your document contains transparent pixels (e.g some .png) for the smart object layer, you may not get consistent bounds.
-
-The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop-document_operations)
-
-We also have an example of replacing a Smart Object within a layer.
-
-[Smart Object Example Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-6-swapping-the-image-in-a-smart-object-layer)
-
-Smart Object support is a work in progress.
-
-### Compatibility with Photoshop versions
+#### Compatibility with Photoshop versions
 
 1. The API’s will open any PSD created with Photoshop 1.0 through the current release and this will always be true.
 2.  When saving as PSD, the API’s will create PSD’s compatible with the current shipping Photoshop.
@@ -351,7 +274,7 @@ Smart Object support is a work in progress.
 
 ## How to use the APIs
 
-The API's are documented at https://adobedocs.github.io/photoshop-api-docs-pre-release/
+The API's are documented at https://adobedocs.github.io/photoshop-api-docs/
 
 ### /documentManifest (Retrieving a PSD manifest)
 
@@ -1088,7 +1011,7 @@ Note that the sample code is covered by the MIT license.
 ## Current Limitations
 There are a few limitations to the APIs you should be aware of ahead of time.  
 - Multi-part uploads and downloads are not yet supported
-- The `/documentOperations` , `/documentManifest`, `/renditionCreate` and `/smartObject` endpoints only support a single PSD input
+- The `/documentOperations` endpoint only supports a single PSD input
 - Error handling is a work in progress. Sometimes you may not see the most helpful of messages
 
 The file Example.psd is included in this repository if you'd like to experiment with these example calls on your own.
@@ -1098,15 +1021,115 @@ Please see the [Release Notes](https://forums.adobeprerelease.com/photoshopapise
 
 # ImageCutout
 
-Image Cutout Service is based on Photoshop technology and [Adobe Sensei](https://www.adobe.com/sensei.html) technology. You can call this service to execute the task of identifying and “cutting out” the most salient object in a digital image. It returns a mask of the most salient object in an image.
+**IMPORTANT: V1 of the Image Cutout service is being deprecated in favor of a new, more performant V2.**
 
-## General Workflow
+The Image Cutout API is powered by Sensei, Adobe’s Artificial Intelligence Technology, and Photoshop. The API's can identify the main subject of an image and produce two types of outputs. You can create a greyscale [mask](https://helpx.adobe.com/photoshop/using/masking-layers.html) png file that you can composite onto the original image (or any other).  You can also create a cutout where the mask has already composited onto your original image so that everything except the main subject has been removed.
+
+
+| Original        | Mask           | Cutout  |
+| :-------------: |:-------------:| :-----:|
+| ![Alt text](assets/sensei_orig.jpg?raw=true "Original Image") | ![Alt text](assets/sensei_mask.png?raw=true "Mask") | ![Alt text](assets/sensei_cutout.png?raw=true "Original Image") |
+
+
+## Version 2
+
+### General Workflow
+
+The typical workflow involves making an API POST call to the endpoint https://image.adobe.io/sensei for which the response will contain a link to check the status of the asynchronous job. Making a GET call to this link will return the status of the job and, eventually, the links to your generated output.
+
+### How to use the API's
+
+The API's are documented at [https://adobedocs.github.io/photoshop-api-docs/#api-Sensei](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei)
+
+First be sure to follow the instructions in the [Authentication](#authentication) section to get your token.
+
+#### Example 1: Initiate a job to create an image cutout
+
+The `/cutout` api takes a single input image to generate your mask or cutout from. Using Example.jpg, with the use case of a document stored in Adobe's Creative Cloud, a typical curl call might look like this:
+
+```shell
+curl -X POST \
+  https://image.adobe.io/sensei/cutout \
+  -H 'Authorization: Bearer <auth_token>' \
+  -H 'Content-Type: application/json' \
+  -H 'x-api-key: <YOUR_API_KEY>' \
+  -d '{
+   "input":{
+      "storage":"adobe",
+      "href":"/files/images/Example.jpg"
+   },
+   "output":{
+      "storage":"adobe",
+      "href":"/files/output/cutout.png",
+      "mask":{
+         "format":"binary"
+      }
+   }
+}'
+```
+
+This initiates an asynchronous job and returns a response containing the href to poll for job status and the JSON manifest.
+```json
+{
+    "_links": {
+        "self": {
+            "href": "https://image.adobe.io/sensei/status/e3a13d81-a462-4b71-9964-28b2ef34aca7"
+        }
+    }
+}
+```
+
+#### Example 2: Poll for status and results
+
+Using the job id returned from the previous call you can poll on the returned `/status` href to get the job status
+
+```shell
+curl -X GET \
+  https://image.adobe.io/sensei/status/e3a13d81-a462-4b71-9964-28b2ef34aca7 \
+  -H 'Authorization: Bearer <auth_token>' \
+  -H 'Content-Type: application/json' \
+  -H 'x-api-key: <YOUR_API_KEY>'
+```
+
+#### Example 3: Get completed job
+
+Once the job is complete your successful `/status` response will look similar to the response below; The output will have been placed in your requested location. In the event of failure the errors will be shown instead
+
+```json
+{
+    "jobID": "e3a13d81-a462-4b71-9964-28b2ef34aca7",
+    "status": "succeeded",
+    "created": "2020-02-11T21:08:43.789Z",
+    "modified": "2020-02-11T21:08:48.492Z",
+    "input": "/files/images/Example.jpg",
+    "_links": {
+        "self": {
+            "href": "https://image-stage.adobe.io/sensei/status/e3a13d81-a462-4b71-9964-28b2ef34aca7"
+        }
+    },
+    "output": {
+        "storage": "adobe",
+        "href": "/files/output/cutout.png",
+        "mask": {
+            "format": "binary"
+        }
+    }
+}
+```
+
+#### Example 4: Initiate a job to create an image mask
+
+The workflow is exactly the same as [creating an image cutout](#example-1-initiate-a-job-to-create-an-image-cutout) except you use the `/mask` endpoint instead of `/cutout`.  
+
+## Version 1 [DEPRECATED]
+
+### General Workflow
 
 The typical workflow involves making a synchronous API call to the POST endpoint https://sensei.adobe.io/services/v1/predict for which the response will contain a link to the created mask file.
 
-## How to use the API's
+### How to use the API's
 
-The API's are documented at [https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei-ImageCutout](https://adobedocs.github.io/photoshop-api-docs/#api-Sensei-ImageCutout)
+The API's are documented at [https://adobedocs.github.io/photoshop-api-docs/#api-Sensei-ImageCutout_V1](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei-ImageCutout_V1)
 
 # Lightroom APIs
 
