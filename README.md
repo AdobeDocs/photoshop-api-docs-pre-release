@@ -104,7 +104,7 @@ You will be emailed your Client ID and Client Secret required for API authentica
 You will create the OAuth access token using Adobe IMS endpoints.
 Once you've received your Client ID and Client Secret by email...
 - Do a quick test:
-  - Browse to [https://ps-prerelease-us-east-1.cloud.adobe.io/](https://ps-prerelease-us-east-1.cloud.adobe.io/)
+  - Browse to [https://ps-prerelease-us-east-1.cloud.adobe.io/](https://photoshop.adobelanding.com/api-signup/)
   - Add your Client ID and Client Secret sent in email
   - Enter your Adobe credentials when prompted
   - Use the access token to try the example calls further down this README
