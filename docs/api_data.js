@@ -5498,6 +5498,35 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "https://image.adobe.io/pie/isitup",
+    "title": "service health",
+    "description": "<p>Check if the service is up and healthy</p>",
+    "version": "1.0.0",
+    "name": "isitup",
+    "group": "Photoshop",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request (CURL command)",
+          "content": "curl -H \"x-api-key: $api_key\" \\\nhttps://image.adobe.io/pie/isitup",
+          "type": "http"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Response",
+          "content": "si",
+          "type": "string"
+        }
+      ]
+    },
+    "filename": "docs-src/pre-release/get-pits-health.js",
+    "groupTitle": "Photoshop"
+  },
+  {
+    "type": "get",
     "url": "https://image.adobe.io/pie/psdService/status/<:jobID>",
     "title": "rendition create status",
     "description": "<p>Returns the status of a create rendition job. Will return 202 as long as there are child jobs still running and 200 once all children are complete</p>",
@@ -6427,7 +6456,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/sensei/cutout",
+    "url": "https://image.adobe.io/sensei/cutout",
     "title": "cutout create",
     "description": "<p>Initiate an asynchronous job to generate a PNG file in 4 channel RGBA format with the generated cutout mask applied to the input image</p>",
     "version": "1.0.0",
@@ -6579,8 +6608,37 @@ define({ "api": [
     }
   },
   {
+    "type": "get",
+    "url": "https://image.adobe.io/sensei/isitup",
+    "title": "service health",
+    "description": "<p>Check if the service is up and healthy</p>",
+    "version": "1.0.0",
+    "name": "isitup",
+    "group": "Sensei",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request (CURL command)",
+          "content": "curl -H \"x-api-key: $api_key\" \\\nhttps://image.adobe.io/sensei/isitup",
+          "type": "http"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Response",
+          "content": "si",
+          "type": "string"
+        }
+      ]
+    },
+    "filename": "docs-src/pre-release/get-imagecutout-health.js",
+    "groupTitle": "Sensei"
+  },
+  {
     "type": "post",
-    "url": "/sensei/mask",
+    "url": "https://image.adobe.io/sensei/mask",
     "title": "mask create",
     "description": "<p>Initiate an asynchronous job to generate a mask PNG</p>",
     "version": "1.0.0",
@@ -6733,7 +6791,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/sensei/status/<:jobID>",
+    "url": "https://image.adobe.io/sensei/status/<:jobID>",
     "title": "job status",
     "description": "<p>Get the status for an asynchronous cutout/mask job</p>",
     "version": "1.0.0",
