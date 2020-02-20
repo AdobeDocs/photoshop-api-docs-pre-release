@@ -31,25 +31,25 @@
     - [SmartObject](#smartobject)
     - [Compatibility with Photoshop versions](#compatibility-with-photoshop-versions)
   - [How to use the APIs](#how-to-use-the-apis)
-    - [/documentManifest (Retrieving a PSD manifest)](#documentmanifest-retrieving-a-psd-manifest)
-      - [Example 1: Initiate a job to retrieve a PSD's JSON manifest](#example-1-initiate-a-job-to-retrieve-a-psds-json-manifest)
-      - [Example 2: Poll for status and results](#example-2-poll-for-status-and-results)
-      - [Example 3: The returned manifest](#example-3-the-returned-manifest)
-    - [/documentOperations (Making PSD edits and renders)](#documentoperations-making-psd-edits-and-renders)
+    - [Example 1: /documentManifest (Retrieving a PSD manifest)](#example-1-documentmanifest-retrieving-a-psd-manifest)
+      - [Step 1: Initiate a job to retrieve a PSD's JSON manifest](#step-1-initiate-a-job-to-retrieve-a-psds-json-manifest)
+      - [Step 2: Poll for status and results](#step-2-poll-for-status-and-results)
+      - [Step 3: The returned manifest](#step-3-the-returned-manifest)
+    - [Example 2: /documentOperations (Making PSD edits and renders)](#example-2-documentoperations-making-psd-edits-and-renders)
       - [The add, edit and delete objects](#the-add-edit-and-delete-objects)
-      - [Example 1: Making a simple edit (to a text layer)](#example-1-making-a-simple-edit-to-a-text-layer)
-      - [Example 2: Poll for status and results](#example-2-poll-for-status-and-results-1)
-      - [Example 3: Adding a new adjustment layer](#example-3-adding-a-new-adjustment-layer)
-      - [Example 4: Editing the image in a pixel layer](#example-4-editing-the-image-in-a-pixel-layer)
-      - [Example 5: Creating new Renditions](#example-5-creating-new-renditions)
-      - [Example 6: Swapping the image in a smart object layer](#example-6-swapping-the-image-in-a-smart-object-layer)
-    - [/renditionCreate (Generating New Renditions)](#renditioncreate-generating-new-renditions)
-        - [Example 1: A single file input](#example-1-a-single-file-input)
-      - [Example 2: Poll for status and results](#example-2-poll-for-status-and-results-2)
-      - [Example 3: A folder input (multiple files)](#example-3-a-folder-input-multiple-files)
-    - [/smartObject (Replacing smartobject)](#smartobject-replacing-smartobject)
-        - [Example 1: Replacing a SmartObject](#example-1-replacing-a-smartobject)
-        - [Example 2: Creating a SmartObject](#example-2-creating-a-smartobject)
+      - [Step 1: Making a simple edit (to a text layer)](#step-1-making-a-simple-edit-to-a-text-layer)
+      - [Step 2: Poll for status and results](#step-2-poll-for-status-and-results-1)
+      - [Step 3: Adding a new adjustment layer](#step-3-adding-a-new-adjustment-layer)
+      - [Step 4: Editing the image in a pixel layer](#step-4-editing-the-image-in-a-pixel-layer)
+      - [Step 5: Creating new Renditions](#step-5-creating-new-renditions)
+      - [Step 6: Swapping the image in a smart object layer](#step-6-swapping-the-image-in-a-smart-object-layer)
+    - [Example 3: /renditionCreate (Generating New Renditions)](#example-3-renditioncreate-generating-new-renditions)
+        - [Step 1: A single file input](#step-1-a-single-file-input)
+      - [Step 2: Poll for status and results](#step-2-poll-for-status-and-results-2)
+      - [Step 3: A folder input (multiple files)](#step-3-a-folder-input-multiple-files)
+    - [Example 4: /smartObject (Replacing smartobject)](#example-4-smartobject-replacing-smartobject)
+        - [Step 1: Replacing a SmartObject](#step-1-replacing-a-smartobject)
+        - [Step 2: Creating a SmartObject](#step-2-creating-a-smartobject)
   - [Sample Code](#sample-code)
   - [Current Limitations](#current-limitations)
 - [ImageCutout](#imagecutout)
@@ -353,9 +353,9 @@ Smart Object support is a work in progress.
 
 The API's are documented at https://adobedocs.github.io/photoshop-api-docs-pre-release/
 
-### /documentManifest (Retrieving a PSD manifest)
+### Example 1: /documentManifest (Retrieving a PSD manifest)
 
-#### Example 1: Initiate a job to retrieve a PSD's JSON manifest
+#### Step 1: Initiate a job to retrieve a PSD's JSON manifest
 
 The `/documentManifest` api can take one or more input PSD's to generate JSON manifest files from. The JSON manifest is the tree representation of all of the layer objects contained in the PSD document. Using Example.psd, with the use case of a document stored in Adobe's Creative Cloud, a typical curl call might look like this:
 
@@ -386,7 +386,7 @@ This initiates an asynchronous job and returns a response containing the href to
 }
 ```
 
-#### Example 2: Poll for status and results
+#### Step 2: Poll for status and results
 
 Using the job id returned from the previous call you can poll on the returned `/status` href to get the job status and, upon success, the JSON Manifest
 
@@ -398,7 +398,7 @@ curl -X GET \
   -H 'x-api-key: <YOUR_API_KEY>'
 ```
 
-#### Example 3: The returned manifest
+#### Step 3: The returned manifest
 
 Once your job completes (and does not report any errors) the status response will contain your document's JSON manifest along with other metadata about the input document. The JSON Manifest is further described in the [api docs](https://git.corp.adobe.com/pages/dice/pie-in-the-sky/#api-Documents-document_manifest_status)
 
@@ -568,7 +568,7 @@ Once your job completes (and does not report any errors) the status response wil
 }
 ```
 
-### /documentOperations (Making PSD edits and renders)
+### Example 2: /documentOperations (Making PSD edits and renders)
 
 Once you have your PSD file's JSON manifest you can use it to make layer and/or document level edits to your PSD and then generate new renditions with the changes. You can pass in either all or a subset of the JSON manifest to `/documentOperations` as represented in the request body's `options.layers` argument. In other words you can choose to pass `options.layers` as a flat array of only the layers that you wish to act upon and can, if desired, leave out the rest.
 
@@ -578,7 +578,7 @@ The layer id or layer name are used by the service to identify the correct layer
 
 The `add`, `edit`, `move` and `delete` blocks are how you communicate that you'd like action taken on that particular layer object. Any layer block passed into the API that is missing the one of these attributes will be ignored.
 
-#### Example 1: Making a simple edit (to a text layer)
+#### Step 1: Making a simple edit (to a text layer)
 
 In this example we will be editing a single text layer from Example.psd. We are only including a single layer object in the `options.layers` array. We will be editing layer id 412 from the `/documentManfest` examples above and making the following requests:
 
@@ -656,7 +656,7 @@ This initiates an asynchronous job and returns a request body containing the hre
 }
 ```
 
-#### Example 2: Poll for status and results
+#### Step 2: Poll for status and results
 
 Using the job id returned from the previous call you can poll on the returned `/status` href to get the status for the edit job and each requested output
 
@@ -699,7 +699,7 @@ And this will return a request body containing the job status for each requested
 ```
 
 
-#### Example 3: Adding a new adjustment layer
+#### Step 3: Adding a new adjustment layer
 
 This example shows how you can add a new brightnessContrast adjustment layer to the top of your PSD.  Things to note:
 
@@ -750,7 +750,7 @@ curl -X POST \
 ```
 
 
-#### Example 4: Editing the image in a pixel layer
+#### Step 4: Editing the image in a pixel layer
 
 In this example we want to replace the image in an existing pixel layer, the Hero Image layer in Example.psd. We are requesting the following:
 
@@ -805,11 +805,11 @@ curl -X POST \
 '
 ```
 
-#### Example 5: Creating new Renditions
+#### Step 5: Creating new Renditions
 
 See the `/renditionCreate` examples below as the format for the `outputs` object in the request body is identical
 
-#### Example 6: Swapping the image in a smart object layer
+#### Step 6: Swapping the image in a smart object layer
 
 In this example we want to swap the smart object in an existing embedded smart object layer, the Hero Image layer in Example.psd. We are requesting the following:
 
@@ -872,11 +872,11 @@ curl -X POST \
 '
 ```
 
-### /renditionCreate (Generating New Renditions)
+### Example 3: /renditionCreate (Generating New Renditions)
 
 The `/renditionsCreate` endpoint can take a number of input PSD files and generate new image renditions or a new PSD
 
-##### Example 1: A single file input
+##### Step 1: A single file input
 
 In this example we are requesting two different outputs from our Example.psd input:
 
@@ -926,7 +926,7 @@ This initiates an asynchronous job and returns a request body containing the hre
 }
 ```
 
-#### Example 2: Poll for status and results
+#### Step 2: Poll for status and results
 
 Using the job id returned from the previous call you can poll on the returned `/status` href to get the status for each requested output
 
@@ -974,7 +974,7 @@ This will return a request body containing the job status for each requested out
 }
 ```
 
-#### Example 3: A folder input (multiple files)
+#### Step 3: A folder input (multiple files)
 
 In this example we are requesting new full size jpeg renditions from an input folder containing multiple PSD documents.
 
@@ -1003,12 +1003,12 @@ curl -X POST \
 }
 '
 ```
-### /smartObject (Replacing smartobject)
+### Example 4: /smartObject (Replacing smartobject)
 
 The `/smartObject` endpoint can take an input PSD file with an embedded smartobject and can replace with another smartobject.
 This API is a simple API developed to ease the smartObject replacement workflow for an user.
 
-##### Example 1: Replacing a SmartObject
+##### Step 1: Replacing a SmartObject
 This example shows how you can replace an embedded smart object
 
 ``` shell
@@ -1042,7 +1042,7 @@ https: //image.adobe.io/pie/psdService/smartObject \
 
 ```
 
-##### Example 2: Creating a SmartObject
+##### Step 2: Creating a SmartObject
 This example shows how you can create an embedded smart object
 
 ``` shell
