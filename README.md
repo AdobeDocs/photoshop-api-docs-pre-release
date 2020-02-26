@@ -1012,11 +1012,11 @@ This API is a simple API developed to ease the smartObject replacement workflow 
 This example shows how you can replace an embedded smart object
 
 ``` shell
-curl - H "Authorization: Bearer $token" \
-- H "x-api-key: $api_key" \
-- X POST \
-https: //image.adobe.io/pie/psdService/smartObject \
-- d '{
+curl -H "Authorization: Bearer $token" \
+-H "x-api-key: $api_key" \
+-X POST \
+https://image.adobe.io/pie/psdService/smartObject \
+-d '{
   "inputs": [
   {
     "href": "files/SOCreate.psd",
@@ -1046,11 +1046,11 @@ https: //image.adobe.io/pie/psdService/smartObject \
 This example shows how you can create an embedded smart object
 
 ``` shell
-curl - H "Authorization: Bearer $token" \
-- H "x-api-key: $api_key" \
-- X POST \
-https: //image.adobe.io/pie/psdService/smartObject
-- d '{
+curl -H "Authorization: Bearer $token" \
+-H "x-api-key: $api_key" \
+-X POST \
+https://image.adobe.io/pie/psdService/smartObject
+-d '{
   "inputs": [
   {
     "href": "files/SO.psd",
