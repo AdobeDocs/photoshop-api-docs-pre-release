@@ -775,7 +775,7 @@ curl -X POST \
   "options":{
     "layers":[
       {
-        "edit":{},										// <--- NEW KEYWORD TO INDICATE AN ADDITION
+        "edit":{},										// <--- NEW KEYWORD TO INDICATE AN EDIT
         "input":{                                       // <--- NEW KEYWORD TO INDICATE IMAGE REPLACEMENT INFO
           "href":"/files/newBackgroundImage.jpeg",
           "storage":"adobe"
@@ -1103,7 +1103,7 @@ The Image Cutout API is powered by Sensei, Adobe’s Artificial Intelligence Tec
 
 | Original        | Mask           | Cutout  |
 | :-------------: |:-------------:| :-----:|
-| ![Alt text](assets/sensei_orig.jpg?raw=true "Original Image") | ![Alt text](assets/sensei_mask.png?raw=true "Mask") | ![Alt text](assets/sensei_cutout.png?raw=true "Original Image") |
+| ![Alt text](assets/sensei_orig.jpg?raw=true "Original Image") | ![Alt text](assets/sensei_mask.png?raw=true "Mask") | ![Alt text](assets/sensei_cutout.png?raw=true "Cutout") |
 
 
 ## Version 2
