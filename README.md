@@ -53,17 +53,13 @@
   - [Sample Code](#sample-code)
   - [Current Limitations](#current-limitations)
 - [ImageCutout](#imagecutout)
-  - [Version 2](#version-2)
-    - [General Workflow](#general-workflow-1)
-    - [How to use the API's](#how-to-use-the-apis)
-      - [Example 1: Initiate a job to create an image cutout](#example-1-initiate-a-job-to-create-an-image-cutout)
-      - [Example 2: Initiate a job to create an image mask](#example-2-initiate-a-job-to-create-an-image-mask)
-  - [Version 1 [DEPRECATED]](#version-1-deprecated)
-    - [General Workflow](#general-workflow-2)
-    - [How to use the API's](#how-to-use-the-apis-1)
+  - [General Workflow](#general-workflow-1)
+  - [How to use the API's](#how-to-use-the-apis)
+    - [Example 1: Initiate a job to create an image cutout](#example-1-initiate-a-job-to-create-an-image-cutout)
+    - [Example 2: Initiate a job to create an image mask](#example-2-initiate-a-job-to-create-an-image-mask)
 - [Lightroom APIs](#lightroom-apis)
-  - [General Workflow](#general-workflow-3)
-  - [How to use the API's](#how-to-use-the-apis-2)
+  - [General Workflow](#general-workflow-2)
+  - [How to use the API's](#how-to-use-the-apis-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -329,13 +325,11 @@ Font support is a work in progress.
 
 The Photoshop APIs currently support creating and editing of Embedded Smart Objects. Support for Linked Smart Objects is forthcoming.
 
-- If the replacement image is of same size as of the original, the replaced smart object is placed in the bounding box of the original.
-If the replacement image is bigger or smaller than the original image, it fits into the original bounding box maintaining the aspect ratio.
-You can change the bounds of the replacement image by passing bounds parameters in the API call.
+- In order to update an embedded smart object that is referenced by multiple layers you only need to update one of those layers, the effect will be reflected in all layers referencing the same smart object.
 
-- In order to replace an embedded smart object that is referenced by multiple layers you need to update all of those layers with the replacement image. Currently only same size image replacement is supported for this scenario.
+- The replaced smart object is placed within the bounding box of the original image. If the new image is bigger or smaller than the original image, it fits into the original bounding box maintaining the aspect ratio. You can change the bounds of the replaced image by passing bounds parameters in the API call.
 
-- Smart Object replacement is supported for file types, `psd`, `tif`, `jpeg` and `png`. We don't support `pdf` and `ai` files yet.
+- If your document contains transparent pixels (e.g some .png) for the smart object layer, you may not get consistent bounds.
 
 The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop-document_operations)
 
@@ -775,7 +769,7 @@ curl -X POST \
   "options":{
     "layers":[
       {
-        "edit":{},										// <--- NEW KEYWORD TO INDICATE AN EDIT
+        "edit":{},										// <--- NEW KEYWORD TO INDICATE AN ADDITION
         "input":{                                       // <--- NEW KEYWORD TO INDICATE IMAGE REPLACEMENT INFO
           "href":"/files/newBackgroundImage.jpeg",
           "storage":"adobe"
@@ -1014,11 +1008,11 @@ This API is a simple API developed to ease the smartObject replacement workflow 
 This example shows how you can replace an embedded smart object
 
 ``` shell
-curl -H "Authorization: Bearer $token" \
--H "x-api-key: $api_key" \
--X POST \
-https://image.adobe.io/pie/psdService/smartObject \
--d '{
+curl - H "Authorization: Bearer $token" \
+- H "x-api-key: $api_key" \
+- X POST \
+https: //image.adobe.io/pie/psdService/smartObject \
+- d '{
   "inputs": [
   {
     "href": "files/SOCreate.psd",
@@ -1048,11 +1042,11 @@ https://image.adobe.io/pie/psdService/smartObject \
 This example shows how you can create an embedded smart object
 
 ``` shell
-curl -H "Authorization: Bearer $token" \
--H "x-api-key: $api_key" \
--X POST \
-https://image.adobe.io/pie/psdService/smartObject
--d '{
+curl - H "Authorization: Bearer $token" \
+- H "x-api-key: $api_key" \
+- X POST \
+https: //image.adobe.io/pie/psdService/smartObject
+- d '{
   "inputs": [
   {
     "href": "files/SO.psd",
@@ -1096,29 +1090,26 @@ There are a few limitations to the APIs you should be aware of ahead of time.
 The file Example.psd is included in this repository if you'd like to experiment with these example calls on your own.
 # ImageCutout
 
-**IMPORTANT: V1 of the Image Cutout service is being deprecated in favor of a new, more performant V2.**
 
-The Image Cutout API is powered by Sensei, Adobe’s Artificial Intelligence Technology, and Photoshop. The API's can identify the main subject of an image and produce two types of outputs. You can create a greyscale [mask](https://helpx.adobe.com/photoshop/using/masking-layers.html) png file that you can composite onto the original image (or any other).  You can also create a cutout where the mask has already composited onto your original image so that everything except the main subject has been removed.
+The Image Cutout API is powered by Sensei, Adobe’s Artificial Intelligence Technology, and Photoshop. The API's can identify the main subject of an image and produce two types of outputs. You can create a greyscale [mask](https://en.wikipedia.org/wiki/Layers_(digital_image_editing)#Layer_mask) png file that you can composite onto the original image (or any other).  You can also create a cutout where the mask has already composited onto your original image so that everything except the main subject has been removed.
 
 
 | Original        | Mask           | Cutout  |
 | :-------------: |:-------------:| :-----:|
-| ![Alt text](assets/sensei_orig.jpg?raw=true "Original Image") | ![Alt text](assets/sensei_mask.png?raw=true "Mask") | ![Alt text](assets/sensei_cutout.png?raw=true "Cutout") |
+| ![Alt text](assets/sensei_orig.jpg?raw=true "Original Image") | ![Alt text](assets/sensei_mask.png?raw=true "Mask") | ![Alt text](assets/sensei_cutout.png?raw=true "Original Image") |
 
 
-## Version 2
-
-### General Workflow
+## General Workflow
 
 The typical workflow involves making an API POST call to the endpoint https://image.adobe.io/sensei for which the response will contain a link to check the status of the asynchronous job. Making a GET call to this link will return the status of the job and, eventually, the links to your generated output.
 
-### How to use the API's
+## How to use the API's
 
 The API's are documented at [https://adobedocs.github.io/photoshop-api-docs/#api-Sensei](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei)
 
 First be sure to follow the instructions in the [Authentication](#authentication) section to get your token.
 
-#### Example 1: Initiate a job to create an image cutout
+### Example 1: Initiate a job to create an image cutout
 
 The `/cutout` api takes a single input image to generate your mask or cutout from. Using Example.jpg, with the use case of a document stored in Adobe's Creative Cloud, a typical curl call might look like this:
 
@@ -1189,19 +1180,9 @@ Once the job is complete your successful `/status` response will look similar to
 }
 ```
 
-#### Example 2: Initiate a job to create an image mask
+### Example 2: Initiate a job to create an image mask
 
 The workflow is exactly the same as [creating an image cutout](#example-1-initiate-a-job-to-create-an-image-cutout) except you use the `/mask` endpoint instead of `/cutout`.  
-
-## Version 1 [DEPRECATED]
-
-### General Workflow
-
-The typical workflow involves making a synchronous API call to the POST endpoint https://sensei.adobe.io/services/v1/predict for which the response will contain a link to the created mask file.
-
-### How to use the API's
-
-The API's are documented at [https://adobedocs.github.io/photoshop-api-docs/#api-Sensei-ImageCutout_V1](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei-ImageCutout_V1)
 
 # Lightroom APIs
 
