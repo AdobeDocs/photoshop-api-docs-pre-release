@@ -66,6 +66,13 @@
   - [Registering your application to our Event Provider](#registering-your-application-to-our-event-provider)
     - [Prerequisites needed to use the Event Provider](#prerequisites-needed-to-use-the-event-provider)
     - [Registering the Webhook](#registering-the-webhook)
+  - [Triggering an Event from the API's](#triggering-an-event-from-the-apis)
+    - [Example 1: /documentManifest (Retrieving a PSD manifest from the Photoshop API)](#example-1-documentmanifest-retrieving-a-psd-manifest-from-the-photoshop-api)
+      - [Step 1: Initiate a job to retrieve a PSD's JSON manifest](#step-1-initiate-a-job-to-retrieve-a-psds-json-manifest-1)
+      - [Step 2: Receive the Job's status on the Webhook application when the job is complete](#step-2-receive-the-jobs-status-on-the-webhook-application-when-the-job-is-complete)
+    - [Example 2: /autoTone (Auto tone an image through the Lightroom API)](#example-2-autotone-auto-tone-an-image-through-the-lightroom-api)
+      - [Step 1: Initiate a job to auto tone an image](#step-1-initiate-a-job-to-auto-tone-an-image)
+      - [Step 2: Receive the Job's status on the Webhook application when the job is complete](#step-2-receive-the-jobs-status-on-the-webhook-application-when-the-job-is-complete-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -448,7 +455,7 @@ Once your job completes (and does not report any errors) the status response wil
               "text": {
                 "content":"Reset your customers’ expectations.",
                 "paragraphStyles":[
-                  {   
+                  {
                     "alignment":"left"
                   }
                 ],
@@ -457,7 +464,7 @@ Once your job completes (and does not report any errors) the status response wil
                   "fontName":"AdobeClean-Bold",
                   "fontSize":36,
                   "orientation":"horizontal",
-                }]               
+                }]
               },
               "id":412,
               "index":6,
@@ -1234,3 +1241,315 @@ As the names indicate, these event types represent events triggered by the indiv
 ### Registering the Webhook
 Once the above prerequisites are met, you can now proceed to register the webhook to the service integration. The steps to do that can be found  [here](https://www.adobe.io/apis/experienceplatform/events/docs.html#!adobedocs/adobeio-events/master/intro/webhook_docs_intro.md#registering-the-webhook).
 After the webhook has been successfully registered, you will start to receive the events for any submitted job that either succeeded or failed, from the Event Types selected. This eliminates the need for your application to poll for the status of the job using the jobID.
+
+## Triggering an Event from the API's
+In order to start receiving the events in your Webhook Application, the additional thing that needs to be done is to pass in your IMS ORG ID in a header: `x-gw-ims-org-id: <YOUR_IMS_ORG_ID>`, when you make an API call to initiate a job. Please have a look at the examples below that demonstrates the usage of the new header and a sample event received for that job.
+### Example 1: /documentManifest (Retrieving a PSD manifest from the Photoshop API)
+
+#### Step 1: Initiate a job to retrieve a PSD's JSON manifest
+
+The `/documentManifest` api can take one or more input PSD's to generate JSON manifest files from. The JSON manifest is the tree representation of all of the layer objects contained in the PSD document. Using Example.psd, with the use case of a document stored in Adobe's Creative Cloud, a typical curl call might look like this:
+
+```shell
+curl -X POST \
+  https://image.adobe.io/pie/psdService/documentManifest \
+  -H 'Authorization: Bearer <auth_token>' \
+  -H 'Content-Type: application/json' \
+  -H 'x-api-key: <YOUR_API_KEY>' \
+  -H 'x-gw-ims-org-id: <YOUR_IMS_ORG_ID>' \
+  -d '{
+  "inputs": [
+    {
+      "href":"<SIGNED_GET_URL>",
+      "storage":"external"
+    }
+  ]
+}'
+```
+
+This initiates an asynchronous job and returns a response containing the href to poll for job status and the JSON manifest.
+```json
+{
+    "_links": {
+        "self": {
+            "href": "https://image.adobe.io/pie/psdService/status/63c6e812-6cb8-43de-8a60-3681a9ec6feb"
+        }
+    }
+}
+```
+#### Step 2: Receive the Job's status on the Webhook application when the job is complete
+The value in the key `body` inside the event JSON contains the result of the job. Here is a sample event received from the job initiated above:
+```json
+{
+  "event_id": "b412a90e-8bc0-4f0d-931e-9e9b8d24993d",
+  "event": {
+    "header": {
+      "msgType": "JOB_COMPLETION_STATUS",
+      "msgId": "8afa1a46-2733-406c-a646-e1c1acdee333",
+      "imsOrgId": "<YOUR_IMS_ORG_ID>",
+      "eventCode": "photoshop-job-status",
+      "_pipelineMeta": {
+        "pipelineMessageId": "1586288145511:631472:VA7_A1:142:0"
+      },
+      "_smarts": {
+        "definitionId": "3ee6c9056a9d72fc40e09ddf5fdbb0af752e8e49",
+        "runningSmartId": "psmart-yw6wosjksniuuathenny"
+      },
+      "_adobeio": {
+        "imsOrgId": "<YOUR_IMS_ORG_ID>",
+        "providerMetadata": "di_event_code",
+        "eventCode": "photoshop-job-status"
+      }
+    },
+    "body": {
+      "jobId":"63c6e812-6cb8-43de-8a60-3681a9ec6feb",
+      "outputs":[
+        {
+          "input":"<SIGNED_GET_URL>",
+          "status":"succeeded",
+          "created":"2018-08-24T23:07:36.8Z",
+          "modified":"2018-08-24T23:07:37.688Z",
+          "layers":[
+            {
+              "bounds":{
+                "height":64,
+                "left":12,
+                "top":1,
+                "width":39
+              },
+              "id":549,
+              "index":8,
+              "locked":false,
+              "name":"CompanyLogo",
+              "type":"smartObject",
+              "visible":true
+            },
+            {
+              "bounds":{
+                "height":153,
+                "left":31,
+                "top":334,
+                "width":197
+              },
+              "children":[
+                {
+                  "bounds":{
+                    "height":136,
+                    "left":29,
+                    "top":326,
+                    "width":252
+                  },
+                  "text": {
+                    "content":"Reset your customers’ expectations.",
+                    "paragraphStyles":[
+                      {
+                        "alignment":"left"
+                      }
+                    ],
+                    "characterStyles":[{
+                      "fontAvailable":true,
+                      "fontName":"AdobeClean-Bold",
+                      "fontSize":36,
+                      "orientation":"horizontal",
+                    }]
+                  },
+                  "id":412,
+                  "index":6,
+                  "locked":false,
+                  "name":"Reset your customers’ expectations.",
+                  "type":"textLayer",
+                  "visible":true
+                },
+                {
+                  "bounds":{
+                    "height":67,
+                    "left":30,
+                    "top":452,
+                    "width":230
+                  },
+                  "text":{
+                    "content":"Get our retail experience article and infographic.",
+                    "paragraphStyles":[{
+                      "alignment":"left"
+                    }],
+                    "characterStyles":[{
+                      "fontAvailable":true,
+                      "fontName":"AdobeClean-Regular",
+                      "fontSize":15,
+                      "orientation":"horizontal",
+                    }]
+                  },
+                  "id":676,
+                  "index":5,
+                  "locked":false,
+                  "name":"Get our retail experience article and infographic.",
+                  "type":"textLayer",
+                  "visible":true
+                }
+              ],
+              "id":453,
+              "index":7,
+              "locked":false,
+              "name":"Headline",
+              "type":"layerSection",
+              "visible":true
+            },
+            {
+              "bounds":{
+                "height":34,
+                "left":31,
+                "top":508,
+                "width":99
+              },
+              "id":762,
+              "index":3,
+              "locked":false,
+              "name":"CallToAction",
+              "type":"smartObject",
+              "visible":true
+            },
+            {
+              "bounds":{
+                "height":405,
+                "left":0,
+                "top":237,
+                "width":300
+              },
+              "id":751,
+              "index":2,
+              "locked":false,
+              "name":"BackgroundGradient",
+              "type":"layer",
+              "visible":true
+            },
+            {
+              "bounds":{
+                "height":515,
+                "left":-385,
+                "top":-21,
+                "width":929
+              },
+              "id":750,
+              "index":1,
+              "locked":false,
+              "name":"HeroImage",
+              "type":"smartObject",
+              "visible":true
+            },
+            {
+              "bounds":{
+                "height":600,
+                "left":0,
+                "top":0,
+                "width":300
+              },
+              "id":557,
+              "index":0,
+              "locked":false,
+              "name":"Background",
+              "type":"layer",
+              "visible":true
+            }
+          ],
+          "document":{
+            "height":600,
+            "name":"Example.psd",
+            "width":300
+          }
+        }
+      ],
+      "_links":{
+        "self":{
+          "href":"https://image.adobe.io/pie/psdService/status/8ec6e4f5-b580-41ac-b693-a72f150fec59"
+        }
+      }
+    }
+  }
+}
+```
+### Example 2: /autoTone (Auto tone an image through the Lightroom API)
+
+#### Step 1: Initiate a job to auto tone an image
+```shell
+curl -X POST \
+  https://image.adobe.io/lrService/autoTone \
+  -H "Authorization: Bearer $token" \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: <YOUR_API_KEY>" \
+  -H 'x-gw-ims-org-id: <YOUR_IMS_ORG_ID>' \
+  -d '{
+    "inputs": {
+      "href": "<SIGNED_GET_URL>",
+      "storage": "external"
+    },
+    "outputs": [
+    {
+      "href": "<SIGNED_PUT_URL>",
+      "type": "<type>",
+      "storage": "external",
+      "overwrite": <boolean>
+    }
+  ]
+}'
+```
+
+This initiates an asynchronous job and returns a request body containing the href to poll for job status.
+
+```json
+{
+    "_links": {
+        "self": {
+            "href": "https://image.adobe.io/lrService/status/eb4a9211-eb8a-4e88-b853-b9c08ba47427"
+        }
+    }
+}
+```
+#### Step 2: Receive the Job's status on the Webhook application when the job is complete
+The value in the key `body` inside the event JSON contains the result of the job. Here is a sample event received from the job initiated above:
+```json
+{
+  "event_id": "7b59cc70-88d7-4895-b204-87f5350a0cce",
+  "event": {
+    "header": {
+      "msgType": "JOB_COMPLETION_STATUS",
+      "msgId": "eb4a9211-eb8a-4e88-b853-b9c08ba47427",
+      "imsOrgId": "<YOUR_IMS_ORG_ID>",
+      "eventCode": "lightroom-job-status",
+      "_pipelineMeta": {
+        "pipelineMessageId": "1586290300876:944289:VA7_A1:149:0"
+      },
+      "_smarts": {
+        "definitionId": "3ee6c9056a9d72fc40e09ddf5fdbb0af752e8e49",
+        "runningSmartId": "psmart-yw6wosjksniuuathenny"
+      },
+      "_adobeio": {
+        "imsOrgId": "<YOUR_IMS_ORG_ID>",
+        "providerMetadata": "di_event_code",
+        "eventCode": "lightroom-job-status"
+      }
+    },
+    "body": {
+      "jobId": "eb4a9211-eb8a-4e88-b853-b9c08ba47427",
+      "outputs": [
+        {
+          "input": "<SIGNED_GET_URL>",
+          "status": "succeeded",
+          "_links": {
+            "self": [
+              {
+                "href": "<SIGNED_PUT_URL>",
+                "storage": "external"
+              }
+            ]
+          }
+        }
+      ],
+      "_links": {
+        "self": {
+          "href": "https://image.adobe.io/lrService/status/eb4a9211-eb8a-4e88-b853-b9c08ba47427"
+        }
+      }
+    }
+  }
+}
+```
