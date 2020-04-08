@@ -1302,159 +1302,37 @@ The value in the key `body` inside the event JSON contains the result of the job
       }
     },
     "body": {
-      "jobId":"63c6e812-6cb8-43de-8a60-3681a9ec6feb",
-      "outputs":[
+      "jobId": "63c6e812-6cb8-43de-8a60-3681a9ec6feb",
+      "outputs": [
         {
-          "input":"<SIGNED_GET_URL>",
-          "status":"succeeded",
-          "created":"2018-08-24T23:07:36.8Z",
-          "modified":"2018-08-24T23:07:37.688Z",
-          "layers":[
+          "status": "succeeded",
+          "layers": [
             {
-              "bounds":{
-                "height":64,
-                "left":12,
-                "top":1,
-                "width":39
+              "id": 2,
+              "index": 0,
+              "type": "layer",
+              "name": "Layer",
+              "locked": false,
+              "visible": true,
+              "bounds": {
+                "top": 0,
+                "left": 0,
+                "width": 100,
+                "height": 100
               },
-              "id":549,
-              "index":8,
-              "locked":false,
-              "name":"CompanyLogo",
-              "type":"smartObject",
-              "visible":true
-            },
-            {
-              "bounds":{
-                "height":153,
-                "left":31,
-                "top":334,
-                "width":197
-              },
-              "children":[
-                {
-                  "bounds":{
-                    "height":136,
-                    "left":29,
-                    "top":326,
-                    "width":252
-                  },
-                  "text": {
-                    "content":"Reset your customers’ expectations.",
-                    "paragraphStyles":[
-                      {
-                        "alignment":"left"
-                      }
-                    ],
-                    "characterStyles":[{
-                      "fontAvailable":true,
-                      "fontName":"AdobeClean-Bold",
-                      "fontSize":36,
-                      "orientation":"horizontal",
-                    }]
-                  },
-                  "id":412,
-                  "index":6,
-                  "locked":false,
-                  "name":"Reset your customers’ expectations.",
-                  "type":"textLayer",
-                  "visible":true
-                },
-                {
-                  "bounds":{
-                    "height":67,
-                    "left":30,
-                    "top":452,
-                    "width":230
-                  },
-                  "text":{
-                    "content":"Get our retail experience article and infographic.",
-                    "paragraphStyles":[{
-                      "alignment":"left"
-                    }],
-                    "characterStyles":[{
-                      "fontAvailable":true,
-                      "fontName":"AdobeClean-Regular",
-                      "fontSize":15,
-                      "orientation":"horizontal",
-                    }]
-                  },
-                  "id":676,
-                  "index":5,
-                  "locked":false,
-                  "name":"Get our retail experience article and infographic.",
-                  "type":"textLayer",
-                  "visible":true
-                }
-              ],
-              "id":453,
-              "index":7,
-              "locked":false,
-              "name":"Headline",
-              "type":"layerSection",
-              "visible":true
-            },
-            {
-              "bounds":{
-                "height":34,
-                "left":31,
-                "top":508,
-                "width":99
-              },
-              "id":762,
-              "index":3,
-              "locked":false,
-              "name":"CallToAction",
-              "type":"smartObject",
-              "visible":true
-            },
-            {
-              "bounds":{
-                "height":405,
-                "left":0,
-                "top":237,
-                "width":300
-              },
-              "id":751,
-              "index":2,
-              "locked":false,
-              "name":"BackgroundGradient",
-              "type":"layer",
-              "visible":true
-            },
-            {
-              "bounds":{
-                "height":515,
-                "left":-385,
-                "top":-21,
-                "width":929
-              },
-              "id":750,
-              "index":1,
-              "locked":false,
-              "name":"HeroImage",
-              "type":"smartObject",
-              "visible":true
-            },
-            {
-              "bounds":{
-                "height":600,
-                "left":0,
-                "top":0,
-                "width":300
-              },
-              "id":557,
-              "index":0,
-              "locked":false,
-              "name":"Background",
-              "type":"layer",
-              "visible":true
+              "blendOptions": {
+                "opacity": 100,
+                "mode": "normal"
+              }
             }
           ],
-          "document":{
-            "height":600,
-            "name":"Example.psd",
-            "width":300
+          "document": {
+            "name": "test.psd",
+            "width": 1000,
+            "height": 1000,
+            "bitDepth": 8,
+            "imageMode": "rgb",
+            "photoshopBuild": "Adobe Creative Imaging Service"
           }
         }
       ],
