@@ -690,6 +690,68 @@ define({ "api": [
             "optional": false,
             "field": "outputs.output.layers.name",
             "description": "<p>the layer name.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.iccProfile",
+            "description": "<p>An object describing the icc profile to convert to.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.iccProfile.imageMode",
+            "description": "<p>the image mode</p> <ul>   <li>Allowed Value for iccProfile File</li>   <ul>       <li>grayscale</li>       <li>rgb</li>       <li>cmyk</li>   </ul> </ul> <ul>    <li>Allowed Value for iccProfile Name</li>    <ul>    <li>rgb</li>    <li>grayscale</li>    </ul> </ul>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.iccProfile.input",
+            "description": "<p>An object describing the icc profile.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"adobe\"",
+              "\"external\"",
+              "\"azure\"",
+              "\"dropbox\""
+            ],
+            "optional": false,
+            "field": "outputs.output.color.icc.storage",
+            "defaultValue": "adobe",
+            "description": "<p>storage platforms supported</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.iccProfile.input.href",
+            "description": "<p>Either a Creative Cloud assets path for storage=&quot;adobe&quot; OR a presignedGETURL.</p> <ul>   <li>CC Storage hrefs can be either a single asset or a folder</li>   <li>CC Storage hrefs must be prepended with `/files`. The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li> </ul>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"Adobe RGB (1998)\"",
+              "\"Apple RGB\"",
+              "\"ColorMatch RGB\"",
+              "\"sRGB IEC61966-2.1\"",
+              "\"Dot Gain 10%\"",
+              "\"Dot Gain 15%\"",
+              "\"Dot Gain 20%\"",
+              "\"Dot Gain 25%\"",
+              "\"Dot Gain 30%\"",
+              "\"Gray Gamma 1.8\"",
+              "\"Gray Gamma 2.2\""
+            ],
+            "optional": false,
+            "field": "outputs.output.color.profileName",
+            "description": "<p>the name of the color profile.</p>"
           }
         ]
       },
@@ -712,6 +774,16 @@ define({ "api": [
         {
           "title": "HTTP Batch Example",
           "content": "POST https://image.adobe.io/pie/psdService/renditionCreate HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n   \"inputs\":[\n      {\n         \"href\":\"files/project_files\",\n         \"storage\":\"adobe\"\n      }\n   ],\n   \"outputs\":[\n      {\n         \"href\":\"/files/outputs\",\n         \"storage\":\"adobe\",\n         \"type\":\"image/jpeg\",\n         \"width\":0,\n         \"overwrite\":true,\n         \"quality\":3\n      },\n      {\n         \"href\":\"/files/outputs\",\n         \"storage\":\"adobe\",\n         \"type\":\"image/png\",\n         \"width\":0,\n         \"overwrite\":true,\n         \"compression\":\"medium\"\n      },\n      {\n         \"href\":\"/files/outputs\",\n         \"storage\":\"adobe\",\n         \"type\":\"vnd.adobe.photoshop\",\n         \"overwrite\":true\n      }\n   ]\n}",
+          "type": "http"
+        },
+        {
+          "title": "Request: Color Conversion by iccProfile Name",
+          "content": "POST https://image.adobe.io/pie/psdService/renditionCreate HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"inputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\": \"<storage>\"\n    }\n  ],\n  \"outputs\": [\n     {\n      \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\": \"<storage>\"\n      \"type\": \"<type>\",\n      \"iccProfile\": {\n          \"imageMode\": \"<imageMode>\",\n          \"profileName\": \"<profileName>\"\n      }\n    }\n  ]\n}",
+          "type": "http"
+        },
+        {
+          "title": "Request: Color Conversion by iccProfile File",
+          "content": "POST https://image.adobe.io/pie/psdService/renditionCreate HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"inputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\": \"<storage>\"\n    }\n  ],\n  \"outputs\": [\n     {\n      \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\": \"<storage>\"\n      \"type\": \"<type>\",\n      \"iccProfile\": {\n          \"imageMode\": \"<imageMode>\",\n          \"iccProfile\": {\n            \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n            \"storage\": \"<storage>\"\n          }\n      }\n    }\n  ]\n}",
           "type": "http"
         },
         {
@@ -3017,6 +3089,68 @@ define({ "api": [
             "optional": false,
             "field": "outputs.output.layers.name",
             "description": "<p>the layer name.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.iccProfile",
+            "description": "<p>An object describing the icc profile to convert to.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.iccProfile.imageMode",
+            "description": "<p>the image mode</p> <ul>   <li>Allowed Value for iccProfile File</li>   <ul>       <li>grayscale</li>       <li>rgb</li>       <li>cmyk</li>   </ul> </ul> <ul>    <li>Allowed Value for iccProfile Name</li>    <ul>    <li>rgb</li>    <li>grayscale</li>    </ul> </ul>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.iccProfile.input",
+            "description": "<p>An object describing the icc profile.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"adobe\"",
+              "\"external\"",
+              "\"azure\"",
+              "\"dropbox\""
+            ],
+            "optional": false,
+            "field": "outputs.output.color.icc.storage",
+            "defaultValue": "adobe",
+            "description": "<p>storage platforms supported</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.iccProfile.input.href",
+            "description": "<p>Either a Creative Cloud assets path for storage=&quot;adobe&quot; OR a presignedGETURL.</p> <ul>   <li>CC Storage hrefs can be either a single asset or a folder</li>   <li>CC Storage hrefs must be prepended with `/files`. The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li> </ul>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"Adobe RGB (1998)\"",
+              "\"Apple RGB\"",
+              "\"ColorMatch RGB\"",
+              "\"sRGB IEC61966-2.1\"",
+              "\"Dot Gain 10%\"",
+              "\"Dot Gain 15%\"",
+              "\"Dot Gain 20%\"",
+              "\"Dot Gain 25%\"",
+              "\"Dot Gain 30%\"",
+              "\"Gray Gamma 1.8\"",
+              "\"Gray Gamma 2.2\""
+            ],
+            "optional": false,
+            "field": "outputs.output.color.profileName",
+            "description": "<p>the name of the color profile.</p>"
           }
         ]
       },
@@ -4422,6 +4556,68 @@ define({ "api": [
             "optional": false,
             "field": "outputs.output.layers.name",
             "description": "<p>the layer name.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.iccProfile",
+            "description": "<p>An object describing the icc profile to convert to.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.iccProfile.imageMode",
+            "description": "<p>the image mode</p> <ul>   <li>Allowed Value for iccProfile File</li>   <ul>       <li>grayscale</li>       <li>rgb</li>       <li>cmyk</li>   </ul> </ul> <ul>    <li>Allowed Value for iccProfile Name</li>    <ul>    <li>rgb</li>    <li>grayscale</li>    </ul> </ul>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.iccProfile.input",
+            "description": "<p>An object describing the icc profile.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"adobe\"",
+              "\"external\"",
+              "\"azure\"",
+              "\"dropbox\""
+            ],
+            "optional": false,
+            "field": "outputs.output.color.icc.storage",
+            "defaultValue": "adobe",
+            "description": "<p>storage platforms supported</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.iccProfile.input.href",
+            "description": "<p>Either a Creative Cloud assets path for storage=&quot;adobe&quot; OR a presignedGETURL.</p> <ul>   <li>CC Storage hrefs can be either a single asset or a folder</li>   <li>CC Storage hrefs must be prepended with `/files`. The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li> </ul>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"Adobe RGB (1998)\"",
+              "\"Apple RGB\"",
+              "\"ColorMatch RGB\"",
+              "\"sRGB IEC61966-2.1\"",
+              "\"Dot Gain 10%\"",
+              "\"Dot Gain 15%\"",
+              "\"Dot Gain 20%\"",
+              "\"Dot Gain 25%\"",
+              "\"Dot Gain 30%\"",
+              "\"Gray Gamma 1.8\"",
+              "\"Gray Gamma 2.2\""
+            ],
+            "optional": false,
+            "field": "outputs.output.color.profileName",
+            "description": "<p>the name of the color profile.</p>"
           }
         ]
       },
