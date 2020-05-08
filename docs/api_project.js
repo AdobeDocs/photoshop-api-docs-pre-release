@@ -1,6 +1,6 @@
 define({
   "name": "Photoshop API Docs",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Your interface to Adobe Photoshop and Imaging API's",
   "title": "Photoshop API Docs",
   "sampleUrl": false,
@@ -8,8 +8,8 @@ define({
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2020-04-30T21:55:03.646Z",
+    "time": "2020-05-08T18:34:46.664Z",
     "url": "http://apidocjs.com",
-    "version": "0.20.1"
+    "version": "0.22.1"
   }
 });
