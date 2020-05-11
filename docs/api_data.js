@@ -2,7 +2,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/status/<:jobId>",
-    "title": "autostraighten check status",
+    "title": "autostraighten status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
     "name": "auto-straighten-job-get",
@@ -205,7 +205,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/autoStraighten",
-    "title": "autostraighten post job",
+    "title": "autostraighten job",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to auto straighten an image</p>",
     "name": "auto-straighten-post",
@@ -439,7 +439,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/status/<:jobId>",
-    "title": "autotone check status",
+    "title": "autotone status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
     "name": "auto-tone-job-get",
@@ -642,7 +642,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/autoTone",
-    "title": "autotone post job",
+    "title": "autotone job",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to auto tone an image</p>",
     "name": "auto-tone-post",
@@ -876,7 +876,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/status/<:jobId>",
-    "title": "edit check status",
+    "title": "edit status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
     "name": "edit-job-get",
@@ -1079,7 +1079,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/edit",
-    "title": "edit post job",
+    "title": "edit job",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply a set of edit parameters on an image</p>",
     "name": "edit-post",
@@ -1525,7 +1525,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/status/<:jobId>",
-    "title": "presets check status",
+    "title": "presets status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
     "name": "presets-job-get",
@@ -1728,7 +1728,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/presets",
-    "title": "presets post job",
+    "title": "presets job",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply a preset on an image</p>",
     "name": "presets-post",
@@ -1997,7 +1997,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/status/<:jobId>",
-    "title": "xmp check status",
+    "title": "xmp status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
     "name": "xmp-job-get",
@@ -2200,7 +2200,7 @@ define({ "api": [
   {
     "type": "post",
     "url": "/xmp",
-    "title": "xmp post job",
+    "title": "xmp job",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply an XMP setting to an image</p>",
     "name": "xmp-post",
@@ -8326,35 +8326,6 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "https://image.adobe.io/pie/isitup",
-    "title": "service health",
-    "description": "<p>Check if the service is up and healthy</p>",
-    "version": "1.0.0",
-    "name": "isitup",
-    "group": "Photoshop",
-    "parameter": {
-      "examples": [
-        {
-          "title": "Request (CURL command)",
-          "content": "curl -H \"x-api-key: $api_key\" \\\nhttps://image.adobe.io/pie/isitup",
-          "type": "http"
-        }
-      ]
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Response",
-          "content": "si",
-          "type": "string"
-        }
-      ]
-    },
-    "filename": "docs-src/pre-release/get-pits-health.js",
-    "groupTitle": "Photoshop"
-  },
-  {
-    "type": "get",
     "url": "https://image.adobe.io/pie/psdService/status/<:jobID>",
     "title": "rendition create status",
     "description": "<p>Returns the status of a create rendition job. Will return 202 as long as there are child jobs still running and 200 once all children are complete</p>",
@@ -9256,35 +9227,6 @@ define({ "api": [
         }
       ]
     }
-  },
-  {
-    "type": "get",
-    "url": "https://image.adobe.io/sensei/isitup",
-    "title": "service health",
-    "description": "<p>Check if the service is up and healthy</p>",
-    "version": "1.0.0",
-    "name": "isitup",
-    "group": "Sensei",
-    "parameter": {
-      "examples": [
-        {
-          "title": "Request (CURL command)",
-          "content": "curl -H \"x-api-key: $api_key\" \\\nhttps://image.adobe.io/sensei/isitup",
-          "type": "http"
-        }
-      ]
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Response",
-          "content": "si",
-          "type": "string"
-        }
-      ]
-    },
-    "filename": "docs-src/pre-release/get-imagecutout-health.js",
-    "groupTitle": "Sensei"
   },
   {
     "type": "post",
