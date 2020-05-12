@@ -205,7 +205,7 @@
   {
     "type": "post",
     "url": "/autoStraighten",
-    "title": "autostraighten job",
+    "title": "autostraighten",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to auto straighten an image</p>",
     "name": "auto-straighten-post",
@@ -642,7 +642,7 @@
   {
     "type": "post",
     "url": "/autoTone",
-    "title": "autotone job",
+    "title": "autotone",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to auto tone an image</p>",
     "name": "auto-tone-post",
@@ -1079,7 +1079,7 @@
   {
     "type": "post",
     "url": "/edit",
-    "title": "edit job",
+    "title": "edit",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply a set of edit parameters on an image</p>",
     "name": "edit-post",
@@ -1728,7 +1728,7 @@
   {
     "type": "post",
     "url": "/presets",
-    "title": "presets job",
+    "title": "presets",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply a preset on an image</p>",
     "name": "presets-post",
@@ -2200,7 +2200,7 @@
   {
     "type": "post",
     "url": "/xmp",
-    "title": "xmp job",
+    "title": "xmp",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply an XMP setting to an image</p>",
     "name": "xmp-post",
@@ -9078,7 +9078,7 @@
   {
     "type": "post",
     "url": "https://image.adobe.io/sensei/cutout",
-    "title": "cutout create",
+    "title": "cutout",
     "description": "<p>Initiate an asynchronous job to generate a PNG file in 4 channel RGBA format with the generated cutout mask applied to the input image</p>",
     "version": "1.0.0",
     "name": "cutout",
@@ -9229,9 +9229,347 @@
     }
   },
   {
+    "type": "get",
+    "url": "https://image.adobe.io/sensei/status/<:jobID>",
+    "title": "cutout status",
+    "description": "<p>Get the status for an asynchronous cutout/mask job</p>",
+    "version": "1.0.0",
+    "name": "get-cutout-job-status",
+    "group": "Sensei",
+    "success": {
+      "fields": {
+        "URL Param": [
+          {
+            "group": "URL Param",
+            "type": "string",
+            "optional": false,
+            "field": "jobID",
+            "description": "<p>The job to get status for.</p>"
+          }
+        ],
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "jobID",
+            "description": "<p>the job's id requested</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "created",
+            "description": "<p>&quot;YYYY-DD-MMThh:mm:ss.mmmmmZ&quot; created timestamp of the job</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "modified",
+            "description": "<p>&quot;YYYY-DD-MMThh:mm:ss.mmmmmZ&quot;  modified timestamp of the job</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "allowedValues": [
+              "\"pending\"",
+              "\"running\"",
+              "\"succeeded\"",
+              "\"failed\""
+            ],
+            "optional": false,
+            "field": "status",
+            "description": "<p>the job status</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "input",
+            "description": "<p>the original input href</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "output",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "output.storage",
+            "description": "<p>The type of storage where the output asset is location</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "output.href",
+            "description": "<p>The href to the output asset</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "output.mask",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "allowedValues": [
+              "\"binary\"",
+              "\"soft\""
+            ],
+            "optional": false,
+            "field": "output.mask.format",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "_links",
+            "description": "<p>any link the client follow, described by their relationship</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Pending (or Running)",
+          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"pending\",\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Succeeded",
+          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"succeeded\",\n   \"output\":{\n      \"storage\":\"adobe\",\n      \"href\":\"/files/cutout/output/mask.png\",\n      \"mask\":{\n         \"format\":\"binary\"\n      },\n      \"color\":{\n         \"space\":\"rgb\"\n      }\n   },\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Job Failed",
+          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"failed\",\n   \"errors\":{\n      \"type\":\"<errorType>\",\n      \"code\":\"<errorCode>\",\n      \"title\":\"<errorDescription>\",\n      \"<errorDetails>\":[\n         {\n            \"name\":\"<paramName>\",\n            \"reason\":\"<error>\"\n         }\n      ]\n   },\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
+          "type": "object"
+        },
+        {
+          "title": "Request: HTTP Example",
+          "content": "GET /sensei/status/<:jobID> HTTP/1.1\nHost: image.adobe.io\nAuthorization: Bearer $token\nX-Api-Key: $api_key",
+          "type": "http"
+        },
+        {
+          "title": "Request: CURL Templated",
+          "content": "curl -H \"Authorization: Bearer $token\" -H \"x-api-key: $api_key\" -X GET https://image.adobe.io/sensei/status/<:jobID>",
+          "type": "curl"
+        }
+      ]
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request (CURL command)",
+          "content": "curl -H \"Authorization: Bearer $token\" \\\n-H \"x-api-key: $api_key\" \\\nhttps://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b",
+          "type": "http"
+        }
+      ]
+    },
+    "filename": "docs-src/pre-release/get-image-cutout-cutout.js",
+    "groupTitle": "Sensei",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Authorization value.</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>a client id</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "https://image.adobe.io/sensei/status/<:jobID>",
+    "title": "mask status",
+    "description": "<p>Get the status for an asynchronous cutout/mask job</p>",
+    "version": "1.0.0",
+    "name": "get-mask-job-status",
+    "group": "Sensei",
+    "success": {
+      "fields": {
+        "URL Param": [
+          {
+            "group": "URL Param",
+            "type": "string",
+            "optional": false,
+            "field": "jobID",
+            "description": "<p>The job to get status for.</p>"
+          }
+        ],
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "jobID",
+            "description": "<p>the job's id requested</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "created",
+            "description": "<p>&quot;YYYY-DD-MMThh:mm:ss.mmmmmZ&quot; created timestamp of the job</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "modified",
+            "description": "<p>&quot;YYYY-DD-MMThh:mm:ss.mmmmmZ&quot;  modified timestamp of the job</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "allowedValues": [
+              "\"pending\"",
+              "\"running\"",
+              "\"succeeded\"",
+              "\"failed\""
+            ],
+            "optional": false,
+            "field": "status",
+            "description": "<p>the job status</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "input",
+            "description": "<p>the original input href</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "output",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "output.storage",
+            "description": "<p>The type of storage where the output asset is location</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "optional": false,
+            "field": "output.href",
+            "description": "<p>The href to the output asset</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "output.mask",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "allowedValues": [
+              "\"binary\"",
+              "\"soft\""
+            ],
+            "optional": false,
+            "field": "output.mask.format",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
+            "field": "_links",
+            "description": "<p>any link the client follow, described by their relationship</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Pending (or Running)",
+          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"pending\",\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Succeeded",
+          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"succeeded\",\n   \"output\":{\n      \"storage\":\"adobe\",\n      \"href\":\"/files/cutout/output/mask.png\",\n      \"mask\":{\n         \"format\":\"binary\"\n      },\n      \"color\":{\n         \"space\":\"rgb\"\n      }\n   },\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Job Failed",
+          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"failed\",\n   \"errors\":{\n      \"type\":\"<errorType>\",\n      \"code\":\"<errorCode>\",\n      \"title\":\"<errorDescription>\",\n      \"<errorDetails>\":[\n         {\n            \"name\":\"<paramName>\",\n            \"reason\":\"<error>\"\n         }\n      ]\n   },\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
+          "type": "object"
+        },
+        {
+          "title": "Request: HTTP Example",
+          "content": "GET /sensei/status/<:jobID> HTTP/1.1\nHost: image.adobe.io\nAuthorization: Bearer $token\nX-Api-Key: $api_key",
+          "type": "http"
+        },
+        {
+          "title": "Request: CURL Templated",
+          "content": "curl -H \"Authorization: Bearer $token\" -H \"x-api-key: $api_key\" -X GET https://image.adobe.io/sensei/status/<:jobID>",
+          "type": "curl"
+        }
+      ]
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request (CURL command)",
+          "content": "curl -H \"Authorization: Bearer $token\" \\\n-H \"x-api-key: $api_key\" \\\nhttps://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b",
+          "type": "http"
+        }
+      ]
+    },
+    "filename": "docs-src/pre-release/get-image-cutout-mask.js",
+    "groupTitle": "Sensei",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Authorization value.</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>a client id</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "post",
     "url": "https://image.adobe.io/sensei/mask",
-    "title": "mask create",
+    "title": "mask",
     "description": "<p>Initiate an asynchronous job to generate a mask PNG</p>",
     "version": "1.0.0",
     "name": "mask",
@@ -9379,175 +9717,6 @@
           "type": "object"
         }
       ]
-    }
-  },
-  {
-    "type": "get",
-    "url": "https://image.adobe.io/sensei/status/<:jobID>",
-    "title": "job status",
-    "description": "<p>Get the status for an asynchronous cutout/mask job</p>",
-    "version": "1.0.0",
-    "name": "status",
-    "group": "Sensei",
-    "success": {
-      "fields": {
-        "URL Param": [
-          {
-            "group": "URL Param",
-            "type": "string",
-            "optional": false,
-            "field": "jobID",
-            "description": "<p>The job to get status for.</p>"
-          }
-        ],
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "string",
-            "optional": false,
-            "field": "jobID",
-            "description": "<p>the job's id requested</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "string",
-            "optional": false,
-            "field": "created",
-            "description": "<p>&quot;YYYY-DD-MMThh:mm:ss.mmmmmZ&quot; created timestamp of the job</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "string",
-            "optional": false,
-            "field": "modified",
-            "description": "<p>&quot;YYYY-DD-MMThh:mm:ss.mmmmmZ&quot;  modified timestamp of the job</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "string",
-            "allowedValues": [
-              "\"pending\"",
-              "\"running\"",
-              "\"succeeded\"",
-              "\"failed\""
-            ],
-            "optional": false,
-            "field": "status",
-            "description": "<p>the job status</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "object",
-            "optional": false,
-            "field": "input",
-            "description": "<p>the original input href</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "object",
-            "optional": false,
-            "field": "output",
-            "description": ""
-          },
-          {
-            "group": "Success 200",
-            "type": "string",
-            "optional": false,
-            "field": "output.storage",
-            "description": "<p>The type of storage where the output asset is location</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "string",
-            "optional": false,
-            "field": "output.href",
-            "description": "<p>The href to the output asset</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "object",
-            "optional": false,
-            "field": "output.mask",
-            "description": ""
-          },
-          {
-            "group": "Success 200",
-            "type": "string",
-            "allowedValues": [
-              "\"binary\"",
-              "\"soft\""
-            ],
-            "optional": false,
-            "field": "output.mask.format",
-            "description": ""
-          },
-          {
-            "group": "Success 200",
-            "type": "object",
-            "optional": false,
-            "field": "_links",
-            "description": "<p>any link the client follow, described by their relationship</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Response: Pending (or Running)",
-          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"pending\",\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
-          "type": "object"
-        },
-        {
-          "title": "Response: Succeeded",
-          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"succeeded\",\n   \"output\":{\n      \"storage\":\"adobe\",\n      \"href\":\"/files/cutout/output/mask.png\",\n      \"mask\":{\n         \"format\":\"binary\"\n      },\n      \"color\":{\n         \"space\":\"rgb\"\n      }\n   },\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
-          "type": "object"
-        },
-        {
-          "title": "Response: Job Failed",
-          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"failed\",\n   \"errors\":{\n      \"type\":\"<errorType>\",\n      \"code\":\"<errorCode>\",\n      \"title\":\"<errorDescription>\",\n      \"<errorDetails>\":[\n         {\n            \"name\":\"<paramName>\",\n            \"reason\":\"<error>\"\n         }\n      ]\n   },\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
-          "type": "object"
-        },
-        {
-          "title": "Request: HTTP Example",
-          "content": "GET /sensei/status/<:jobID> HTTP/1.1\nHost: image.adobe.io\nAuthorization: Bearer $token\nX-Api-Key: $api_key",
-          "type": "http"
-        },
-        {
-          "title": "Request: CURL Templated",
-          "content": "curl -H \"Authorization: Bearer $token\" -H \"x-api-key: $api_key\" -X GET https://image.adobe.io/sensei/status/<:jobID>",
-          "type": "curl"
-        }
-      ]
-    },
-    "parameter": {
-      "examples": [
-        {
-          "title": "Request (CURL command)",
-          "content": "curl -H \"Authorization: Bearer $token\" \\\n-H \"x-api-key: $api_key\" \\\nhttps://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b",
-          "type": "http"
-        }
-      ]
-    },
-    "filename": "docs-src/pre-release/get-imagecutout-status.js",
-    "groupTitle": "Sensei",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "authorization",
-            "description": "<p>Authorization value.</p>"
-          },
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "x-api-key",
-            "description": "<p>a client id</p>"
-          }
-        ]
-      }
     }
   }
 ]
