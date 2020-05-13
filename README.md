@@ -88,11 +88,11 @@ The links below provide more detailed information about the API services includi
 
 The API documentation is published at
 
-[Photoshop API Reference](https://adobedocs.github.io/photoshop-api-docs-pre-release/)
+[Photoshop API Reference](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop)
 
-[Lightroom Getting Started](https://github.com/AdobeDocs/lightroom-api-docs)
+[Lightroom Getting Started](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#lightroom-apis)
 
-[Lightroom API Reference](https://adobedocs.github.io/lightroom-api-docs/)
+[Lightroom API Reference](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Lightroom)
 
 [Image Cutout Getting Started](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#imagecutout)
 
@@ -328,7 +328,6 @@ The Photoshop APIs supports using fonts from two locations:
 
 If your font is not included in either of these locations you must include an href to the font in your request. See the api docs for more information.
 
-Font support is a work in progress.
 
 ### SmartObject
 
@@ -346,7 +345,7 @@ We also have an example of replacing a Smart Object within a layer.
 
 [Smart Object Example Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-6-swapping-the-image-in-a-smart-object-layer)
 
-Smart Object support is a work in progress.
+For better performance, we rasterize our smart objects that are bigger than  2000 pixels * 2000 pixels.
 
 ### Compatibility with Photoshop versions
 
@@ -1203,7 +1202,7 @@ The typical workflow involves making an API POST call to the endpoint https://im
 
 ## How to use the API's
 
-The API's are documented at [https://github.com/AdobeDocs/lightroom-api-docs](https://github.com/AdobeDocs/lightroom-api-docs/)
+The API's are documented at [https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Lightroom](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Lightroom)
 
 # Using Webhooks through Adobe I/O Events
 Adobe I/O Events offers the possibility to build an event-driven application, based on events originating from Photoshop and Lightroom API's. To start listening for events, your application needs to register a webhook URL, specifying the Event Types to receive. Whenever a matching event gets triggered, your application is notified through an HTTP POST request to the webhook URL.
