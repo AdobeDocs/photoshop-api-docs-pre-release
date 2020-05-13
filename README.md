@@ -316,7 +316,7 @@ The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-p
 
 We also have an example of making a simple text layer edit.
 
-[Text layer Example Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-1-making-a-simple-edit-to-a-text-layer)
+[Text layer Example Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#step-1-making-a-simple-edit-to-a-text-layer)
 
 #### Fonts
 
