@@ -96,7 +96,7 @@ The API documentation is published at
 
 [Image Cutout Getting Started](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#imagecutout)
 
-[Image Cutout API Reference](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei-ImageCutout)
+[Image Cutout API Reference](https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei)
 
 # General Setup and Onboarding
 
