@@ -197,7 +197,7 @@ Take the information from the email, and follow the instructions at
 
 [JWT Instructions for Node:](https://www.npmjs.com/package/@adobe/jwt-auth)
 
-4. Make your first Photoshop API call
+3. Make your first Photoshop API call
 Make an authenticated call to ensure you can round trip successfully with the API’s
 
 ``` shell
@@ -208,9 +208,6 @@ curl --request GET \
   --header 'x-api-key: <YOUR_CLIENT_ID>'
   ```
   Congrats! You just made your first request to the Photoshop API.
-
-5. Automate your access token retrieval
-Go back to step 3 to obtain a fresh service token
 
 #### Additional Service Token and JWT Information
 
