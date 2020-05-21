@@ -192,7 +192,9 @@ Enterprise users will not have access to assets stored in the Creative Cloud so 
 1. Reach out to psdservices@adobe.com and request a JWT integration.
 2. Create a JSON Web Token (JWT) and exchange it for an access token
 Take the information from the email, and follow the instructions at 
+
 [JWT Instructions for Python:](https://www.datanalyst.info/python/adobe-io-user-management/adobe-io-jwt-authentication-with-python/)
+
 [JWT Instructions for Node:](https://www.npmjs.com/package/@adobe/jwt-auth)
 
 4. Make your first Photoshop API call
