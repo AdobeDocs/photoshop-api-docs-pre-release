@@ -184,22 +184,16 @@ You can find details on interacting with Adobe IMS API’s and authentication in
 4. [OAuth Sample Code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/sudipta/archydoc/sample_code/oauth-sample-app)
 
 ### Service Token Workflow (Adobe ETLA users)
-In order to be an enterprise user you must already have an ETLA.  To find out if you have an ETLA reach out to your system administrator or your Adobe Account Executive.  
+To automate the token generation , we suggest using JWT tokens.
+To find out if you have an ETLA reach out to your system administrator or your Adobe Account Executive.  
 
 Enterprise users will not have access to assets stored in the Creative Cloud so you must use an external storage source when making calls to the API.
-1. Get a developer role in the Adobe Admin Console
-You system admin will need to give you developer access in the [Adobe Admin Console](https://adminconsole.adobe.com/overview)
-2. Go to https://console.adobe.io and create a service integration and follow the instructions at [Service Token Instructions](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/AuthenticationOverview/ServiceAccountIntegration.md)
 
-  On Step 1 of the Service Integration docs, ‘Subscribe to an Adobe Service’ you will select the following
-    1. Photoshop
-    2. Lightroom / Camera Raw API
-    3. Image Cutout
-
-3. Create a JSON Web Token (JWT) and exchange it for an access token
-Take the information from your integration, plus your private key that you created when you created your integration and follow the instructions at [JWT Instructions:](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/JWT/JWT.md)
-
-  You can refer to [JWT sample code](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/sudipta/archydoc/sample_code/jwt-sample-app) for additional help
+1. Reach out to psdservices@adobe.com and request a JWT integration.
+2. Create a JSON Web Token (JWT) and exchange it for an access token
+Take the information from the email, and follow the instructions at 
+[JWT Instructions for Python:](https://www.datanalyst.info/python/adobe-io-user-management/adobe-io-jwt-authentication-with-python/)
+[JWT Instructions for Node:](https://www.npmjs.com/package/@adobe/jwt-auth)
 
 4. Make your first Photoshop API call
 Make an authenticated call to ensure you can round trip successfully with the API’s
