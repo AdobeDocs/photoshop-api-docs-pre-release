@@ -8705,7 +8705,7 @@
             "type": "object",
             "optional": false,
             "field": "options.layers.layer.input",
-            "description": "<p>An object describing the input file to add or replace for the Embedded Smart Object layer. Currently supported filetypes include:</p> <ul>   <li>png</li>   <li>jpeg</li>   <li>psd</li>   <li>svg</li>   <li>ai</li>   <li>pdf</li> </ul> Added images are always placed at (top,left = 0,0) and bounds are ignored</br> Edited images are replaced for exact pixel size"
+            "description": "<p>An object describing the input file to add or replace for the Embedded Smart Object layer. Currently supported filetypes include:</p> <ul>   <li>ai</li>   <li>jpeg</li>   <li>pdf</li>   <li>png</li>   <li>psb</li>   <li>psd</li>   <li>svg</li> </ul> Added images are always placed at (top,left = 0,0) and bounds are ignored</br> Edited images are replaced for exact pixel size"
           },
           {
             "group": "Request",
