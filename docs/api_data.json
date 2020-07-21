@@ -9078,6 +9078,14 @@
             "optional": false,
             "field": "x-api-key",
             "description": "<p>a client id</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": true,
+            "field": "x-gw-ims-org-id",
+            "defaultValue": "nil",
+            "description": "<p>x-gw-ims-org-id the IMS organization ID. This needs to be sent only if it is desirable to receive the job status through Adobe I/O Events</p>"
           }
         ]
       }
@@ -9372,6 +9380,14 @@
             "optional": false,
             "field": "x-api-key",
             "description": "<p>a client id</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": true,
+            "field": "x-gw-ims-org-id",
+            "defaultValue": "nil",
+            "description": "<p>x-gw-ims-org-id the IMS organization ID. This needs to be sent only if it is desirable to receive the job status through Adobe I/O Events</p>"
           }
         ]
       }
@@ -9541,6 +9557,14 @@
             "optional": false,
             "field": "x-api-key",
             "description": "<p>a client id</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": true,
+            "field": "x-gw-ims-org-id",
+            "defaultValue": "nil",
+            "description": "<p>x-gw-ims-org-id the IMS organization ID. This needs to be sent only if it is desirable to receive the job status through Adobe I/O Events</p>"
           }
         ]
       }
@@ -9577,6 +9601,14 @@
             "optional": false,
             "field": "x-api-key",
             "description": "<p>a client id</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": true,
+            "field": "x-gw-ims-org-id",
+            "defaultValue": "nil",
+            "description": "<p>x-gw-ims-org-id the IMS organization ID. This needs to be sent only if it is desirable to receive the job status through Adobe I/O Events</p>"
           }
         ]
       }
