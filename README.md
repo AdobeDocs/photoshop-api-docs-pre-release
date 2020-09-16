@@ -274,7 +274,7 @@ The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-p
 
 We also have an example of replacing a Smart Object within a layer.
 
-[Smart Object Example Code](#example-6-swapping-the-image-in-a-smart-object-layer)
+[Smart Object Example Code](#sample-1-replacing-a-smartobject)
 
 For better performance, we rasterize our smart objects that are bigger than  2000 pixels * 2000 pixels.
 
@@ -294,7 +294,7 @@ The API's are documented [here](https://adobedocs.github.io/photoshop-api-docs-p
 
 We also have an example of making a simple text layer edit.
 
-[Text layer Example Code](#step-1-making-a-simple-edit-to-a-text-layer)
+[Text layer Example Code](#sample-21-making-a-text-layer-edit)
 
 #### Font handling
 In order to be able to correctly operate on text layers in the PSD, the corresponding fonts needed for these layers will need to be available when the server is processing the PSD. These include fonts from the following cases:
@@ -379,9 +379,9 @@ The `add` and `move` blocks must also supply one of the attributes `insertAbove`
 **Note**: Adding a new layer does not require the ID to be included, the service will generate a new layer id for you.
 
 Here are some examples of making various layer level edits.
-[Layer level editing](#sample-31-making-a-simple-edit)
-[Adding a new Adjustment Layer](#sample-34-adding-a-new-adjustment-layer)
-[Editing Image in a Pixel Layer](#sample-35-editing-the-image-in-a-pixel-layer)
+- [Layer level editing](#sample-31-making-a-simple-edit)
+- [Adding a new Adjustment Layer](#sample-34-adding-a-new-adjustment-layer)
+- [Editing Image in a Pixel Layer](#sample-35-editing-the-image-in-a-pixel-layer)
 
 ### Document level edits
 
