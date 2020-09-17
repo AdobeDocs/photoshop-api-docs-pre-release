@@ -5,7 +5,7 @@ define({ "api": [
     "title": "autostraighten status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
-    "name": "auto-straighten-job-get",
+    "name": "auto_straighten_job_get",
     "group": "Lightroom",
     "parameter": {
       "fields": {
@@ -208,7 +208,7 @@ define({ "api": [
     "title": "autostraighten",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to auto straighten an image</p>",
-    "name": "auto-straighten-post",
+    "name": "auto_straighten_post",
     "group": "Lightroom",
     "parameter": {
       "examples": [
@@ -438,7 +438,7 @@ define({ "api": [
     "title": "autotone status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
-    "name": "auto-tone-job-get",
+    "name": "auto_tone_job_get",
     "group": "Lightroom",
     "parameter": {
       "fields": {
@@ -641,7 +641,7 @@ define({ "api": [
     "title": "autotone",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to auto tone an image</p>",
-    "name": "auto-tone-post",
+    "name": "auto_tone_post",
     "group": "Lightroom",
     "parameter": {
       "examples": [
@@ -871,7 +871,7 @@ define({ "api": [
     "title": "edit status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
-    "name": "edit-job-get",
+    "name": "edit_job_get",
     "group": "Lightroom",
     "parameter": {
       "fields": {
@@ -1074,7 +1074,7 @@ define({ "api": [
     "title": "edit",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply a set of edit parameters on an image</p>",
-    "name": "edit-post",
+    "name": "edit_post",
     "group": "Lightroom",
     "parameter": {
       "fields": {
@@ -1516,7 +1516,7 @@ define({ "api": [
     "title": "presets status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
-    "name": "presets-job-get",
+    "name": "presets_job_get",
     "group": "Lightroom",
     "parameter": {
       "fields": {
@@ -1719,7 +1719,7 @@ define({ "api": [
     "title": "presets",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply a preset on an image</p>",
-    "name": "presets-post",
+    "name": "presets_post",
     "group": "Lightroom",
     "parameter": {
       "fields": {
@@ -1984,7 +1984,7 @@ define({ "api": [
     "title": "xmp status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
-    "name": "xmp-job-get",
+    "name": "xmp_job_get",
     "group": "Lightroom",
     "parameter": {
       "fields": {
@@ -2187,7 +2187,7 @@ define({ "api": [
     "title": "xmp",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply an XMP setting to an image</p>",
-    "name": "xmp-post",
+    "name": "xmp_post",
     "group": "Lightroom",
     "parameter": {
       "fields": {
@@ -2433,12 +2433,268 @@ define({ "api": [
     }
   },
   {
+    "type": "post",
+    "url": "https://image.adobe.io/pie/psdService/artboardCreate",
+    "title": "artboard create",
+    "description": "<p>Initiates an asynchronous job to apply (optional) psd edits and then generate renditions and/or save a new psd</p>",
+    "version": "1.0.0",
+    "name": "artboard_create",
+    "group": "Photoshop",
+    "parameter": {
+      "fields": {
+        "Request": [
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": false,
+            "field": "options",
+            "description": "<p>available options to apply to all input files</p>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": false,
+            "field": "options.artboard",
+            "description": "<p>Represents an array of input objects</p>"
+          },
+          {
+            "group": "Request",
+            "type": "input[]",
+            "optional": false,
+            "field": "options.artboard.inputs",
+            "description": "<p>An array of input objects.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": false,
+            "field": "options.artboard.inputs.input",
+            "description": "<p>An object describing the input PSD to add to the artboard. Each input object will be either 'external' OR 'adobe'. Current support is for files less than 1000MB</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"adobe\"",
+              "\"external\"",
+              "\"azure\"",
+              "\"dropbox\""
+            ],
+            "optional": false,
+            "field": "options.artboard.inputs.input.storage",
+            "defaultValue": "adobe",
+            "description": "<p>storage platforms supported</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "optional": false,
+            "field": "options.artboard.inputs.input.href",
+            "description": "<p>Either a Creative Cloud assets path for storage=&quot;adobe&quot; OR a presignedGETURL.</p> <ul>   <li>CC Storage hrefs can be either a single asset or a folder</li>   <li>CC Storage hrefs must be prepended with `/files`. The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li> </ul>"
+          },
+          {
+            "group": "Request",
+            "type": "output[]",
+            "optional": false,
+            "field": "outputs",
+            "description": "<p>An array of output objects</p>"
+          },
+          {
+            "group": "Request",
+            "type": "output",
+            "optional": false,
+            "field": "outputs.output",
+            "description": "<p>An object describing the requested file output (a new PSD file. right now supports a single output PSD)</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"adobe\"",
+              "\"external\"",
+              "\"azure\"",
+              "\"dropbox\""
+            ],
+            "optional": false,
+            "field": "outputs.output.storage",
+            "defaultValue": "adobe",
+            "description": "<p>storage platforms supported</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.href",
+            "description": "<p>Either a Creative Cloud assets path for storage=&quot;adobe&quot; OR a presignedPUTURL..</p> <ul>   <li>CC Storage hrefs</li>   <ul>     <li>Can be either a single asset or a folder</li>     <li>Must be prepended with `/files`. The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li>   </ul>   <li>Template Tokens: At runtime these three tokens get replaced with their respective values... (FOR \"adobe\" STORED FILES ONLY)</li>   <ul>     <li>$ReqID - replaced with the request id generated by the service</li>     <li>$FileNum - replaced with an increment-by-1 counter, beginning at 0, so that each output file gets a unique number assigned </li>     <li>$FileName - replaced with file name minus the \".\" and file extension</li>   </ul> </ul>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"image/vnd.adobe.photoshop\""
+            ],
+            "optional": false,
+            "field": "outputs.output.type",
+            "description": "<p>desired image format.</p> <ul>  <li>image/vnd.adobe.photoshop - Create a new PSD file</li> </ul>"
+          },
+          {
+            "group": "Request",
+            "type": "bool",
+            "optional": false,
+            "field": "outputs.output.overwrite",
+            "defaultValue": "true",
+            "description": "<p>If the file already exists, indicates if the output file should be overwritten. Will eventually support eTags. Only applies to CC Storage</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request: HTTP Templated",
+          "content": "POST https://image.adobe.io/pie/psdService/artboardCreate HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"options\": {\n    \"artboard\": [\n      {\n        \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n        \"storage\":\"<storage>\"\n      }\n    ]\n  },\n  \"outputs\":[\n    {\n      \"href\":\"<cc_storage_location>\",\n      \"storage\":\"adobe\",\n      \"type\":\"<type>\",\n      \"width\":<width>,\n      \"overwrite\":<bool>\n    },\n    {\n      \"href\":\"<presigned_putURL>\",\n      \"storage\":\"<storage>\",\n      \"type\":\"<type>\",\n      \"width\":<width>,\n      \"overwrite\":<bool>\n    }\n  ]\n}",
+          "type": "http"
+        },
+        {
+          "title": "Request: HTTP Example",
+          "content": "POST https://image.adobe.io/pie/psdService/artboardCreate HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n   \"options\":{\n      \"artboard\":[\n         {\n            \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n            \"storage\":\"external\"\n         },\n         {\n            \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n            \"storage\":\"external\"\n         },\n         {\n            \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n            \"storage\":\"external\"\n         }\n      ]\n   },\n   \"outputs\":[\n      {\n         \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n         \"storage\":\"external\",\n         \"type\":\"image/vnd.adobe.photoshop\",\n         \"overwrite\":false\n      }\n   ]\n}",
+          "type": "http"
+        },
+        {
+          "title": "Request: CURL Templated",
+          "content": "curl -H \"Authorization: Bearer $token\" -H \"x-api-key: $api_key\" -X POST -d '{\"options\":{\"artboard\":[{\"href\":\"<href>\",\"storage\":\"<storage>\"}, {\"href\":\"<href>\",\"storage\":\"<storage>\"}, {\"href\":\"<href>\",\"storage\":\"<storage>\"}],\"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\"}]}' https://image.adobe.io/pie/psdService/artboardCreate",
+          "type": "curl"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 202": [
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "_links.self",
+            "description": "<p>The link to GET the job status from</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "_links",
+            "description": "<p>any link the client follow, described by their relationship</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Success Templated",
+          "content": "HTTP/1.1 202 ACCEPTED\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"_links\": {\n      \"self\" :{ \"href\" : \"https://image.adobe.io/pie/psdService/status/<:jobId>\" }\n  }\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Success Example",
+          "content": "HTTP/1.1 202 ACCEPTED\nContent-Type: application/json\nContent-Length: 682\n{\n  \"_links\": {\n      \"self\" :{ \"href\" : \"https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\" }\n  }\n}",
+          "type": "object"
+        }
+      ]
+    },
+    "filename": "docs-src/pre-release/post-artboard-create.js",
+    "groupTitle": "Photoshop",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Authorization value.</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "Content-Type",
+            "description": "<p>&quot;application/json&quot;</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>a client id</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": true,
+            "field": "x-gw-ims-org-id",
+            "defaultValue": "nil",
+            "description": "<p>x-gw-ims-org-id the IMS organization ID. This needs to be sent only if it is desirable to receive the job status through Adobe I/O Events</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Errors": [
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>a machine-readable error type</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "code",
+            "description": "<p>a machine-readable error code</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>short, human-readable summary of the problem</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "array",
+            "optional": false,
+            "field": "errorDetails",
+            "description": "<p>further descriptions of the exact errors where <code>errorDetail</code> is substituted for a specific issue.</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "details",
+            "optional": false,
+            "field": "errorCodes",
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Error Templated",
+          "content": "// This is a templated example for when the call itself fails\n\nHTTP/1.1 <Status_Code> <Reason>\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"type\": \"<errorType>\",\n  \"code\": \"<errorCode>\",\n  \"title\": \"<errorDescription>\",\n  \"<errorDetails>\": [\n    {\n      \"name\":\"<paramName>\",\n      \"reason\":\"<error>\"\n    }\n  ]\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Error Example",
+          "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        }
+      ]
+    }
+  },
+  {
     "type": "get",
     "url": "https://image.adobe.io/pie/psdService/status/<:jobID>",
     "title": "artboard create status",
     "description": "<p>Returns the status of a artboard create job. Will return 202 as long as there are child jobs still running and 200 once all children are complete</p>",
     "version": "1.0.0",
-    "name": "artboard-create-status",
+    "name": "artboard_create_status",
     "group": "Photoshop",
     "parameter": {
       "fields": {
@@ -2704,262 +2960,6 @@ define({ "api": [
           "content": " // In this example the GET call to /status succeeds but one of the initiated jobs has failed\n\n HTTP/1.1 200 OK\n Content-Type: application/json\n Content-Length: {xsd:nonNegativeInteger}\n Location: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n {\n   \"jobId\":\"f54e0fcb-260b-47c3-b520-de0d17dc2b67\",\n   \"outputs\":[\n      {\n         \"input\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n         \"status\":\"failed\",\n         \"created\":\"2018-01-04T12:57:15.12345Z\",\n         \"modified\":\"2018-01-04T12:58:36.12345Z\",\n         \"error\":{\n            \"type\":\"FileExistsError\",\n            \"title\":\"input file does not exist\",\n            \"code\":\"400\"\n         }\n      }\n   ]\n}",
           "type": "object"
         },
-        {
-          "title": "Response: Error Templated",
-          "content": "// This is a templated example for when the call itself fails\n\nHTTP/1.1 <Status_Code> <Reason>\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"type\": \"<errorType>\",\n  \"code\": \"<errorCode>\",\n  \"title\": \"<errorDescription>\",\n  \"<errorDetails>\": [\n    {\n      \"name\":\"<paramName>\",\n      \"reason\":\"<error>\"\n    }\n  ]\n}",
-          "type": "object"
-        },
-        {
-          "title": "Response: Error Example",
-          "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
-          "type": "object"
-        }
-      ]
-    }
-  },
-  {
-    "type": "post",
-    "url": "https://image.adobe.io/pie/psdService/artboardCreate",
-    "title": "artboard create",
-    "description": "<p>Initiates an asynchronous job to apply (optional) psd edits and then generate renditions and/or save a new psd</p>",
-    "version": "1.0.0",
-    "name": "artboard_create",
-    "group": "Photoshop",
-    "parameter": {
-      "fields": {
-        "Request": [
-          {
-            "group": "Request",
-            "type": "object",
-            "optional": false,
-            "field": "options",
-            "description": "<p>available options to apply to all input files</p>"
-          },
-          {
-            "group": "Request",
-            "type": "object",
-            "optional": false,
-            "field": "options.artboard",
-            "description": "<p>Represents an array of input objects</p>"
-          },
-          {
-            "group": "Request",
-            "type": "input[]",
-            "optional": false,
-            "field": "options.artboard.inputs",
-            "description": "<p>An array of input objects.</p>"
-          },
-          {
-            "group": "Request",
-            "type": "object",
-            "optional": false,
-            "field": "options.artboard.inputs.input",
-            "description": "<p>An object describing the input PSD to add to the artboard. Each input object will be either 'external' OR 'adobe'. Current support is for files less than 1000MB</p>"
-          },
-          {
-            "group": "Request",
-            "type": "string",
-            "allowedValues": [
-              "\"adobe\"",
-              "\"external\"",
-              "\"azure\"",
-              "\"dropbox\""
-            ],
-            "optional": false,
-            "field": "options.artboard.inputs.input.storage",
-            "defaultValue": "adobe",
-            "description": "<p>storage platforms supported</p>"
-          },
-          {
-            "group": "Request",
-            "type": "string",
-            "optional": false,
-            "field": "options.artboard.inputs.input.href",
-            "description": "<p>Either a Creative Cloud assets path for storage=&quot;adobe&quot; OR a presignedGETURL.</p> <ul>   <li>CC Storage hrefs can be either a single asset or a folder</li>   <li>CC Storage hrefs must be prepended with `/files`. The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li> </ul>"
-          },
-          {
-            "group": "Request",
-            "type": "output[]",
-            "optional": false,
-            "field": "outputs",
-            "description": "<p>An array of output objects</p>"
-          },
-          {
-            "group": "Request",
-            "type": "output",
-            "optional": false,
-            "field": "outputs.output",
-            "description": "<p>An object describing the requested file output (a new PSD file. right now supports a single output PSD)</p>"
-          },
-          {
-            "group": "Request",
-            "type": "string",
-            "allowedValues": [
-              "\"adobe\"",
-              "\"external\"",
-              "\"azure\"",
-              "\"dropbox\""
-            ],
-            "optional": false,
-            "field": "outputs.output.storage",
-            "defaultValue": "adobe",
-            "description": "<p>storage platforms supported</p>"
-          },
-          {
-            "group": "Request",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.href",
-            "description": "<p>Either a Creative Cloud assets path for storage=&quot;adobe&quot; OR a presignedPUTURL..</p> <ul>   <li>CC Storage hrefs</li>   <ul>     <li>Can be either a single asset or a folder</li>     <li>Must be prepended with `/files`. The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li>   </ul>   <li>Template Tokens: At runtime these three tokens get replaced with their respective values... (FOR \"adobe\" STORED FILES ONLY)</li>   <ul>     <li>$ReqID - replaced with the request id generated by the service</li>     <li>$FileNum - replaced with an increment-by-1 counter, beginning at 0, so that each output file gets a unique number assigned </li>     <li>$FileName - replaced with file name minus the \".\" and file extension</li>   </ul> </ul>"
-          },
-          {
-            "group": "Request",
-            "type": "string",
-            "allowedValues": [
-              "\"image/vnd.adobe.photoshop\""
-            ],
-            "optional": false,
-            "field": "outputs.output.type",
-            "description": "<p>desired image format.</p> <ul>  <li>image/vnd.adobe.photoshop - Create a new PSD file</li> </ul>"
-          },
-          {
-            "group": "Request",
-            "type": "bool",
-            "optional": false,
-            "field": "outputs.output.overwrite",
-            "defaultValue": "true",
-            "description": "<p>If the file already exists, indicates if the output file should be overwritten. Will eventually support eTags. Only applies to CC Storage</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request: HTTP Templated",
-          "content": "POST https://image.adobe.io/pie/psdService/artboardCreate HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"options\": {\n    \"artboard\": [\n      {\n        \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n        \"storage\":\"<storage>\"\n      }\n    ]\n  },\n  \"outputs\":[\n    {\n      \"href\":\"<cc_storage_location>\",\n      \"storage\":\"adobe\",\n      \"type\":\"<type>\",\n      \"width\":<width>,\n      \"overwrite\":<bool>\n    },\n    {\n      \"href\":\"<presigned_putURL>\",\n      \"storage\":\"<storage>\",\n      \"type\":\"<type>\",\n      \"width\":<width>,\n      \"overwrite\":<bool>\n    }\n  ]\n}",
-          "type": "http"
-        },
-        {
-          "title": "Request: HTTP Example",
-          "content": "POST https://image.adobe.io/pie/psdService/artboardCreate HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n   \"options\":{\n      \"artboard\":[\n         {\n            \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n            \"storage\":\"external\"\n         },\n         {\n            \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n            \"storage\":\"external\"\n         },\n         {\n            \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n            \"storage\":\"external\"\n         }\n      ]\n   },\n   \"outputs\":[\n      {\n         \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n         \"storage\":\"external\",\n         \"type\":\"image/vnd.adobe.photoshop\",\n         \"overwrite\":false\n      }\n   ]\n}",
-          "type": "http"
-        },
-        {
-          "title": "Request: CURL Templated",
-          "content": "curl -H \"Authorization: Bearer $token\" -H \"x-api-key: $api_key\" -X POST -d '{\"options\":{\"artboard\":[{\"href\":\"<href>\",\"storage\":\"<storage>\"}, {\"href\":\"<href>\",\"storage\":\"<storage>\"}, {\"href\":\"<href>\",\"storage\":\"<storage>\"}],\"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\"}]}' https://image.adobe.io/pie/psdService/artboardCreate",
-          "type": "curl"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 202": [
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "_links.self",
-            "description": "<p>The link to GET the job status from</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "_links",
-            "description": "<p>any link the client follow, described by their relationship</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Response: Success Templated",
-          "content": "HTTP/1.1 202 ACCEPTED\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"_links\": {\n      \"self\" :{ \"href\" : \"https://image.adobe.io/pie/psdService/status/<:jobId>\" }\n  }\n}",
-          "type": "object"
-        },
-        {
-          "title": "Response: Success Example",
-          "content": "HTTP/1.1 202 ACCEPTED\nContent-Type: application/json\nContent-Length: 682\n{\n  \"_links\": {\n      \"self\" :{ \"href\" : \"https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\" }\n  }\n}",
-          "type": "object"
-        }
-      ]
-    },
-    "filename": "docs-src/pre-release/post-artboard-create.js",
-    "groupTitle": "Photoshop",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "authorization",
-            "description": "<p>Authorization value.</p>"
-          },
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "Content-Type",
-            "description": "<p>&quot;application/json&quot;</p>"
-          },
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "x-api-key",
-            "description": "<p>a client id</p>"
-          },
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": true,
-            "field": "x-gw-ims-org-id",
-            "defaultValue": "nil",
-            "description": "<p>x-gw-ims-org-id the IMS organization ID. This needs to be sent only if it is desirable to receive the job status through Adobe I/O Events</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Errors": [
-          {
-            "group": "Errors",
-            "type": "string",
-            "optional": false,
-            "field": "type",
-            "description": "<p>a machine-readable error type</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "string",
-            "optional": false,
-            "field": "code",
-            "description": "<p>a machine-readable error code</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "string",
-            "optional": false,
-            "field": "title",
-            "description": "<p>short, human-readable summary of the problem</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "array",
-            "optional": false,
-            "field": "errorDetails",
-            "description": "<p>further descriptions of the exact errors where <code>errorDetail</code> is substituted for a specific issue.</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "details",
-            "optional": false,
-            "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
-          }
-        ]
-      },
-      "examples": [
         {
           "title": "Response: Error Templated",
           "content": "// This is a templated example for when the call itself fails\n\nHTTP/1.1 <Status_Code> <Reason>\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"type\": \"<errorType>\",\n  \"code\": \"<errorCode>\",\n  \"title\": \"<errorDescription>\",\n  \"<errorDetails>\": [\n    {\n      \"name\":\"<paramName>\",\n      \"reason\":\"<error>\"\n    }\n  ]\n}",
@@ -3352,1230 +3352,6 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "https://image.adobe.io/pie/psdService/documentManifest",
-    "title": "document manifest",
-    "description": "<p>Initiates an asynchronous job to extract and return a psd file's layer information</p>",
-    "version": "1.0.0",
-    "name": "document-manifest",
-    "group": "Photoshop",
-    "parameter": {
-      "fields": {
-        "Request": [
-          {
-            "group": "Request",
-            "type": "input[]",
-            "optional": false,
-            "field": "inputs",
-            "description": "<p>An array of input objects. We currently only support one input object.</p>"
-          },
-          {
-            "group": "Request",
-            "type": "object",
-            "optional": false,
-            "field": "inputs.input",
-            "description": "<p>An object describing an input PSD file.Current support is for files less than 1000MB.</p>"
-          },
-          {
-            "group": "Request",
-            "type": "object",
-            "optional": true,
-            "field": "options",
-            "description": "<p>available options to apply to all input files</p>"
-          },
-          {
-            "group": "Request",
-            "type": "object",
-            "optional": false,
-            "field": "options.thumbnails",
-            "description": "<p>Include presigned GET URLs to small preview thumbnails for any renderable layer.</p>"
-          },
-          {
-            "group": "Request",
-            "type": "string",
-            "allowedValues": [
-              "\"image/jpeg\"",
-              "\"image/png\"",
-              "\"image/tiff\""
-            ],
-            "optional": false,
-            "field": "options.thumbnails.type",
-            "description": "<p>desired image format.</p>"
-          },
-          {
-            "group": "Request",
-            "type": "string",
-            "allowedValues": [
-              "\"adobe\"",
-              "\"external\"",
-              "\"azure\"",
-              "\"dropbox\""
-            ],
-            "optional": false,
-            "field": "inputs.input.storage",
-            "defaultValue": "adobe",
-            "description": "<p>storage platforms supported</p>"
-          },
-          {
-            "group": "Request",
-            "type": "string",
-            "optional": false,
-            "field": "inputs.input.href",
-            "description": "<p>Either a Creative Cloud assets path for storage=&quot;adobe&quot; OR a presignedGETURL.</p>  <ul>    <li>CC Storage path must be prepended with `/files` or `/cloud-content` or `/assets`       <li>The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li>       <li>The `/cloud-content` path directly corresponds to the root of your `Cloud documents` folder in CC</li>       <li>The `/assets` path directly corresponds to the specific sync-group section of CC storage</li>    </li>  </ul>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request: HTTP Templated",
-          "content": "POST https://image.adobe.io/pie/psdService/layers HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"inputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\":\"<storage>\"\n    }\n  ],\n  \"options\": {\n    \"thumbnails\": {\n      \"type\":\"<type>\"\n    }\n  }\n}",
-          "type": "http"
-        },
-        {
-          "title": "HTTP External Example",
-          "content": "POST https://image.adobe.io/pie/psdService/layers HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n   \"inputs\":[\n      {\n         \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n         \"storage\":\"external\"\n      }\n   ],\n   \"options\":{\n      \"thumbnails\":{\n         \"type\":\"image/jpeg\"\n      }\n   }\n}",
-          "type": "http"
-        },
-        {
-          "title": "HTTP Dropbox Example",
-          "content": "POST https://image.adobe.io/pie/psdService/layers HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n   \"inputs\":[\n      {\n         \"href\":\"https://dl.dropboxusercontent.com/apitul/1/KYTECIO6d2EDlg\",\n         \"storage\":\"dropbox\"\n      }\n   ],\n   \"options\":{\n      \"thumbnails\":{\n         \"type\":\"image/jpeg\"\n      }\n   }\n}",
-          "type": "http"
-        },
-        {
-          "title": "HTTP Adobe Example",
-          "content": "POST https://image.adobe.io/pie/psdService/layers HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"inputs\": [\n    {\n      \"href\": \"/files/some_project/design.psd\",\n      \"storage\": \"adobe\"\n    }\n  ],\n  \"options\": {\n    \"thumbnails\": {\n      \"type\":\"image/png\"\n    }\n  }\n}",
-          "type": "http"
-        },
-        {
-          "title": "Request: CURL Templated",
-          "content": "curl -H \"Authorization: Bearer $token\" -H \"x-api-key: $api_key\" -X POST -d '{\"inputs\": [{\"href\":\"<href>\",\"storage\":\"<storage>\"}],\"options\":{}}' https://image.adobe.io/pie/psdService/documentManifest",
-          "type": "curl"
-        }
-      ]
-    },
-    "filename": "docs-src/pre-release/post-document-manifest.js",
-    "groupTitle": "Photoshop",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "authorization",
-            "description": "<p>Authorization value.</p>"
-          },
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "Content-Type",
-            "description": "<p>&quot;application/json&quot;</p>"
-          },
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "x-api-key",
-            "description": "<p>a client id</p>"
-          },
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": true,
-            "field": "x-gw-ims-org-id",
-            "defaultValue": "nil",
-            "description": "<p>x-gw-ims-org-id the IMS organization ID. This needs to be sent only if it is desirable to receive the job status through Adobe I/O Events</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 202": [
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "_links",
-            "description": "<p>any link the client follow, described by their relationship</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Response: Success Templated",
-          "content": "HTTP/1.1 202 ACCEPTED\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"_links\": {\n      \"self\" :{ \"href\" : \"https://image.adobe.io/pie/psdService/status/<:jobId>\" }\n  }\n}",
-          "type": "object"
-        },
-        {
-          "title": "Response: Success Example",
-          "content": "HTTP/1.1 202 ACCEPTED\nContent-Type: application/json\nContent-Length: 682\n{\n  \"_links\": {\n      \"self\" :{ \"href\" : \"https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\" }\n  }\n}",
-          "type": "object"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Errors": [
-          {
-            "group": "Errors",
-            "type": "string",
-            "optional": false,
-            "field": "type",
-            "description": "<p>a machine-readable error type</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "string",
-            "optional": false,
-            "field": "code",
-            "description": "<p>a machine-readable error code</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "string",
-            "optional": false,
-            "field": "title",
-            "description": "<p>short, human-readable summary of the problem</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "array",
-            "optional": false,
-            "field": "errorDetails",
-            "description": "<p>further descriptions of the exact errors where <code>errorDetail</code> is substituted for a specific issue.</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "details",
-            "optional": false,
-            "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Response: Error Templated",
-          "content": "// This is a templated example for when the call itself fails\n\nHTTP/1.1 <Status_Code> <Reason>\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"type\": \"<errorType>\",\n  \"code\": \"<errorCode>\",\n  \"title\": \"<errorDescription>\",\n  \"<errorDetails>\": [\n    {\n      \"name\":\"<paramName>\",\n      \"reason\":\"<error>\"\n    }\n  ]\n}",
-          "type": "object"
-        },
-        {
-          "title": "Response: Error Example",
-          "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
-          "type": "object"
-        }
-      ]
-    }
-  },
-  {
-    "type": "get",
-    "url": "https://image.adobe.io/pie/psdService/status/<:jobId>",
-    "title": "document manifest status",
-    "description": "<p>Returns status and layer info for a psd file created by POST /psdService/status. Will return 202 as long as there are child jobs still running and 200 once all children are complete</p>",
-    "version": "1.0.0",
-    "name": "document-manifest-status",
-    "group": "Photoshop",
-    "success": {
-      "fields": {
-        "URL Param": [
-          {
-            "group": "URL Param",
-            "type": "string",
-            "optional": false,
-            "field": "jobId",
-            "description": "<p>The layers to get.</p>"
-          }
-        ],
-        "Success 202": [
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "jobId",
-            "description": "<p>the job's id requested</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "output[]",
-            "optional": false,
-            "field": "outputs",
-            "description": "<p>array of output objects</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "array",
-            "optional": false,
-            "field": "outputs.output",
-            "description": "<p>an output object</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.input",
-            "description": "<p>the original input file path</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.status",
-            "description": "<p>the child job status</p> <ul>   <li>pending - request has been accepted and is waiting to start</li>   <li>running - the child job is running</li>   <li>uploading - files have been generated and are uploading to destination</li>   <li>succeeded - the child job has succeeded</li>   <li>failed - the child job has failed</li> </ul>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.created",
-            "description": "<p>&quot;YYYY-DD-MMThh:mm:ss.mmmmmZ&quot; created timestamp of the job</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.modified",
-            "description": "<p>&quot;YYYY-DD-MMThh:mm:ss.mmmmmZ&quot;  modified timestamp of the job</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "outputs.output.document",
-            "description": "<p>information about the psd file</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.document.name",
-            "description": "<p>name of the input file</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": false,
-            "field": "outputs.output.document.height",
-            "description": "<p>in pixels</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": false,
-            "field": "outputs.output.document.width",
-            "description": "<p>in pixels</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.document.photoshopBuild",
-            "description": "<p>the name of the application that created the PSD</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "allowedValues": [
-              "\"bitmap\"",
-              "\"greyscale\"",
-              "\"indexed\"",
-              "\"rgb\"",
-              "\"cmyk\"",
-              "\"hsl\"",
-              "\"hsb\"",
-              "\"multichannel\"",
-              "\"duotone\"",
-              "\"lab\"",
-              "\"xyz\""
-            ],
-            "optional": false,
-            "field": "outputs.output.document.imageMode",
-            "description": "<p>the document's image mode.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "8",
-              "16",
-              "32"
-            ],
-            "optional": false,
-            "field": "outputs.output.document.bitDepth",
-            "description": "<p>the document's bit/channel depth.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "layer[]",
-            "optional": false,
-            "field": "outputs.output.layers",
-            "description": "<p>a tree of layer objects representing the PSD layer structure extracted from the psd document</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "array",
-            "optional": false,
-            "field": "outputs.output.layers.layer",
-            "description": "<p>a layer object</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": false,
-            "field": "outputs.output.layers.layer.id",
-            "description": "<p>the layer id. Note an id of -1 is valid and indicates a PSD that only contains a background image and no layers</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": false,
-            "field": "outputs.output.layers.layer.index",
-            "description": "<p>the layer index</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": true,
-            "field": "outputs.output.layers.layer.thumbnail",
-            "description": "<p>If thumbnails were requested, a presigned GET URL to the thumbnail</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "layer[]",
-            "optional": false,
-            "field": "outputs.output.layers.layer.children",
-            "description": "<p>an array of nested layer objects. Only layerSections (group layers) can include children</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "allowedValues": [
-              "\"layer\"",
-              "\"textLayer\"",
-              "\"adjustmentLayer\"",
-              "\"smartObject\"",
-              "\"fillLayer\"",
-              "\"backgroundLayer\""
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.type",
-            "description": "<p>the layer type.</p> <ul>   <li>layer - a pixel layer</li>   <li>textLayer - a text layer</li>   <li>adjustmentLayer - an adjustment layer</li>   <li>layerSection - a grouping layer</li>   <li>smartObject - a smart object</li>   <li>backgroundLayer - a background layer</li>   <li>fillLayer - a fill layer</li> </ul>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.layers.layer.name",
-            "description": "<p>the layer name.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "bool",
-            "optional": false,
-            "field": "outputs.output.layers.layer.locked",
-            "description": "<p>is the layer locked</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "bool",
-            "optional": false,
-            "field": "outputs.output.layers.layer.visible",
-            "description": "<p>is the layer visible</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.adjustments",
-            "description": "<p>adjustment layer info</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.adjustments.brightnessContrast",
-            "description": "<p>brightness and contrast settings</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "-150...150"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.brightnessContrast.brightness",
-            "description": "<p>the adjustmentLayer's brightness:</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "-150...150"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.brightnessContrast.contrast",
-            "description": "<p>the adjustmentLayer's contrast:</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.adjustments.exposure",
-            "description": "<p>exposure settings</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "-20.0...20.0"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.exposure.exposure",
-            "description": "<p>the layer's exposure. Defaults to 0.0</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "-0.5...0.5"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.exposure.offset",
-            "description": "<p>the layer's offset. Defaults to 0.0</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0.01...9.99"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.exposure.gammaCorrection",
-            "description": "<p>the layer's gammaCorrection. Defaults to 1.0</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.adjustments.hueSaturation",
-            "description": "<p>hue and saturation settings</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "bool",
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.hueSaturation.colorize",
-            "description": "<p>colorize</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "array",
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.hueSaturation.channels",
-            "description": "<p>an array of hashes representing the 'master' channel (the remaining five channels of 'magentas', 'yellows', 'greens', etc are not yet supported)</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "allowedValues": [
-              "\"master\""
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.hueSaturation.channels.channel",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "-180...180"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.hueSaturation.channels.hue",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "-100...100"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.hueSaturation.channels.saturation",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "-100...100"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.hueSaturation.channels.lightness",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.adjustments.colorBalance",
-            "description": "<p>color balance settings</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "bool",
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.colorBalance.preserveLuminosity",
-            "description": "<p>preserveLuminosity</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "array",
-            "allowedValues": [
-              "-100...100"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.colorBalance.shadowLevels",
-            "description": "<p>array of 3 ints</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "array",
-            "allowedValues": [
-              "-100...100"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.colorBalance.midtoneLevels",
-            "description": "<p>array of 3 ints</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "array",
-            "allowedValues": [
-              "-100...100"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.adjustments.colorBalance.highlightLevels",
-            "description": "<p>array of 3 ints</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "outputs.output.layers.layer.bounds",
-            "description": "<p>the bounds of the layer. applicable for the following layer types</p> <ul>   <li>layer - a pixel layer</li>   <li>adjustmentLayer - an adjustment layer</li>   <li>textLayer - a text layer</li>   <li>layerSection - a grouping layer</li>   <li>smartObject - a smart object</li>   <li>fillLayer - a fill layer</li> </ul>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": false,
-            "field": "outputs.output.layers.layer.bounds.top",
-            "description": "<p>in pixels</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": false,
-            "field": "outputs.output.layers.layer.bounds.left",
-            "description": "<p>in pixels</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "float",
-            "optional": false,
-            "field": "outputs.output.layers.layer.bounds.width",
-            "description": "<p>in pixels</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "float",
-            "optional": false,
-            "field": "outputs.output.layers.layer.bounds.height",
-            "description": "<p>in pixels</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.blendOptions",
-            "description": "<p>Blend options of a layer, including opacity and blend mode</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": false,
-            "field": "outputs.output.layers.layer.blendOptions.opacity",
-            "description": "<p>Indicates the opacity value of a layer</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.layers.layer.blendOptions.blendMode",
-            "description": "<p>Blend mode of a layer</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.mask",
-            "description": "<p>An object describing the input mask added or replaced to the layer.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "bool",
-            "optional": false,
-            "field": "outputs.output.layers.layer.mask.clip",
-            "description": "<p>Indicates if this is a clipped layer.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "bool",
-            "optional": false,
-            "field": "outputs.output.layers.layer.mask.enabled",
-            "description": "<p>Indicates a mask is enabled on that layer or not.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "bool",
-            "optional": false,
-            "field": "outputs.output.layers.layer.mask.linked",
-            "description": "<p>Indicates a mask is linked to the layer or not.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "outputs.output.layers.layer.mask.offset",
-            "description": "<p>An object to specify mask offset on the layer.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "integer",
-            "optional": false,
-            "field": "outputs.output.layers.layer.mask.offset.x",
-            "description": "<p>Offset to indicate horizontal move of the mask.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "integer",
-            "optional": false,
-            "field": "outputs.output.layers.layer.mask.offset.y",
-            "description": "<p>Offset to indicate vertical move of the mask.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.smartObject",
-            "description": "<p>An object describing the attributes specific to creating or editing a smartObject layer.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.layers.layer.smartObject.type",
-            "description": "<p>Desired image format for the smart object.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "bool",
-            "optional": false,
-            "field": "outputs.output.layers.layer.smartObject.linked",
-            "defaultValue": "false",
-            "description": "<p>Indicates if this Smart Object is linked. Currently we support Embedded Smart Object only which means &quot;linked = false&quot;.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.layers.layer.smartObject.name",
-            "description": "<p>Name of the embedded or linked smart object. Currently we support Embedded Smart Object only.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.layers.layer.smartObject.path",
-            "description": "<p>Attribute for only Linked Smart Object. Indicates the relative path for the Linked Smart Object.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.fill",
-            "description": "<p>An object describing the attributes specific to creating or editing a fill layer.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "outputs.output.layers.layer.fill.solidColor",
-            "description": "<p>An object describing the solid color type for this fill layer. Currently supported mode is RGB only.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "outputs.output.layers.layer.fill.solidColor.rgb",
-            "description": "<p>An object describing the rgb color format in 8 bits for this fill layer.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "integer",
-            "allowedValues": [
-              "0..255"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.fill.solidColor.color.rgb.red",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "integer",
-            "allowedValues": [
-              "0..255"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.fill.solidColor.color.rgb.green",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "integer",
-            "allowedValues": [
-              "0..255"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.fill.solidColor.color.rgb.blue",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.text",
-            "description": "<p>text settings</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.content",
-            "description": "<p>the text string</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "characterStyle[]",
-            "optional": true,
-            "field": "outputs.output.layers.layer.text.characterStyles",
-            "description": "<p>characterStyle settings. If the same supported attributes apply to all characters in the layer than this will be an array of one item, otherwise each characterStyle object will have a 'from' and 'to' value indicating the range of characters that the style applies to.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": true,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.from",
-            "description": "<p>The beginning of the range of characters that this characterStyle applies to. Based on initial index of 0. For example a style applied to only the first two characters would be from=0 and to=1</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": true,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.to",
-            "description": "<p>The ending of the range of characters that this characterStyle applies to. Based on initial index of 0. For example a style applied to only the first two characters would be from=0 and to=1</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "float",
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontSize",
-            "description": "<p>in points</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontName",
-            "description": "<p>the font's postscript name.  The list of supported fonts is at https://github.com/AdobeDocs/photoshop-api-docs/blob/master/SupportedFonts.md</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontAvailable",
-            "description": "<p>is the font missing.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "allowedValues": [
-              "\"horizontal\"",
-              "\"vertical\""
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.orientation",
-            "description": "<p>the text orientation</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor",
-            "description": "<p>the font color settings.It can be in one of the formats</p> <ul>   <li>rgb</li>   <li>cmyk</li>   <li>gray</li>   <li>lab</li> </ul>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.rgb",
-            "description": "<p>the font color settings for rgb mode in 16bit repesentation</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0..32768"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.rgb.red",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0..32768"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.rgb.green",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0..32768"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.rgb.blue",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.cmyk",
-            "description": "<p>the font color settings for cmyk mode in 16bit repesentation.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0..32768"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.cmyk.cyan",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0..32768"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.cmyk.magenta",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0..32768"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.cmyk.yellowColor",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0..32768"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.cmyk.black",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.gray",
-            "description": "<p>the font color settings for gray mode in 16bit repesentation.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0..32768"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.gray.gray",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.lab",
-            "description": "<p>the font color settings for lab mode in 16bit repesentation.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0..32768"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.lab.luminance",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0..32768"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.lab.a",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "allowedValues": [
-              "0..32768"
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.lab.b",
-            "description": ""
-          },
-          {
-            "group": "Success 202",
-            "type": "paragraphStyle[]",
-            "optional": true,
-            "field": "outputs.output.layers.layer.text.paragrapStyles",
-            "description": "<p>paragrapStyles settings. If the same supported attributes apply to all characters in the layer than this will be an array of one item, otherwise each paragraphStyle object will have a 'from' and 'to' value indicating the range of characters that the style applies to.</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": true,
-            "field": "outputs.output.layers.layer.text.paragrapStyles.paragraphStyle",
-            "description": "<p>paragraph style settings</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": true,
-            "field": "outputs.output.layers.layer.text.paragrapStyles.paragraphStyle.from",
-            "description": "<p>The beginning of the range of characters that this paragraphStyle applies to. Based on initial index of 0. For example a style applied to only the first two characters would be from=0 and to=1</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "int",
-            "optional": true,
-            "field": "outputs.output.layers.layer.text.paragrapStyles.paragraphStyle.to",
-            "description": "<p>The ending of the range of characters that this paragraphStyle applies to. Based on initial index of 0. For example a style applied to only the first two characters would be from=0 and to=1</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "allowedValues": [
-              "\"left\"",
-              "\"center\"",
-              "\"right\"",
-              "\"justify\"",
-              "\"justifyLeft\"",
-              "\"justifyCenter\"",
-              "\"justifyRight\""
-            ],
-            "optional": false,
-            "field": "outputs.output.layers.layer.text.paragrapStyles.paragraphStyle.alignment",
-            "description": "<p>the paragraph alignment</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "object",
-            "optional": false,
-            "field": "outputs.output.errors",
-            "description": "<p>any errors reported requested output</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.errors.type",
-            "description": "<p>a machine readable error type</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.errors.code",
-            "description": "<p>a machine readable error code</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "string",
-            "optional": false,
-            "field": "outputs.output.errors.title",
-            "description": "<p>a short human readable error summary</p>"
-          },
-          {
-            "group": "Success 202",
-            "type": "array",
-            "optional": true,
-            "field": "outputs.output.errors.errorDetails",
-            "description": "<p>further descriptions of the exact errors where <code>errorDetail</code> is substituted for a specific issue</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Response: Success Templated",
-          "content": "HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: {xsd:nonNegativeInteger}\nLocation: \"https://image.adobe.io/pie/psdService/status/<:jobId>\"\n{\n    \"jobId\":\"<:jobId>\",\n    \"outputs\":[\n        {\n            \"input\":\"<input>\",\n            \"status\":\"<status>\",\n            \"created\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n            \"modified\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n            \"document\":{\n                \"name\":\"<filename>\",\n                \"height\":<height>,\n                \"width\":<width>,\n                \"imageMode\":\"<imageMode>\",\n                \"photoshopBuild\": \"<string>\"\n            },\n            \"layers\":[\n                {\n                    \"id\":<layerd>,\n                    \"index\":<index>,\n                    \"name\":\"<name>\",\n                    \"type\":\"<type>\",\n                    \"locked\":<bool>,\n                    \"visible\":<bool>,\n                    \"thumbnail\":\"<href_thumbnail>\",\n                    \"mask\":{\n                        \"enabled\":<bool>,\n                        \"linked\":<bool>,\n                        \"offset\":{\n                            \"x\":<int>,\n                            \"y\":<int>\n                        },\n                        \"clip\":<bool>\n                    },\n                    \"smartObject\":{\n                      \"type\":<image_type>,\n                      \"linked\":<bool>,\n                      \"name\" : <name>,\n                      \"path\":<relative path for a linked smart object>\n                    },\n                    \"fill\":{\n                      \"solidColor\":{\n                        \"rgb\" : {\n                          \"red\":<8 bit int>,\n                          \"green\":<8 bit int>,\n                          \"blue\":<8 bit int>\n                        }\n                      }\n                    },\n                    \"children\":[\n\n                    ],\n                    \"bounds\":{\n                        \"top\":<top>,\n                        \"left\":<left>,\n                        \"width\":<width>,\n                        \"height\":<height>\n                    },\n                    \"blendOptions\": {\n                       \"blendMode\": <blendMode>,\n                       \"opacity\": <opacity>\n                    },\n                    \"text\":{\n                        \"content\":\"<text contents>\",\n                        \"characterStyles\":[\n                            {\n                                \"from\":<int>,\n                                \"to\":<int>,\n                                \"text\":\"<text>\",\n                                \"fontSize\":<fontSize>,\n                                \"fontName\":\"<fontName>\",\n                                \"fontAvailable\":<bool>,\n                                \"orientation\":\"<orientation>\",\n                                \"fontColor\":{\n                                    \"rgb\":{\n                                        \"red\":<16 bit integer>,\n                                        \"green\":<16 bit integer>,\n                                        \"blue\":<16 bit integer>\n                                    }\n                                }\n                            }\n                        ],\n                        \"paragraphStyles\":[\n                            {\n                                \"alignment\":\"<alignment>\",\n                                \"from\":<int>,\n                                \"to\":<int>\n                            }\n                        ]\n                    },\n                    \"adjustements\":{\n                        \"brightnessContrast\":{\n                            \"brightness\":<-150..150>,\n                            \"contrast\":<-150..150>\n                        },\n                        \"exposure\":{\n                            \"exposure\":<-20...20>,\n                            \"offset\":<-0.5...0.5>,\n                            \"gammaCorrection\":<0.01...9.99>\n                        },\n                        \"colorBalance\":{\n                            \"preserveLuminosity\":true,\n                            \"shadowLevels\":[\n                                <-100...100>,\n                                <-100...100>,\n                                <-100...100>\n                            ],\n                            \"midtoneLevels\":[\n                                <-100...100>,\n                                <-100...100>,\n                                <-100...100>\n                            ],\n                            \"highlightLevels\":[\n                                <-100...100>,\n                                <-100...100>,\n                                <-100...100>\n                            ]\n                        },\n                        \"hueSaturation\":{\n                            \"channels\":[\n                                {\n                                    \"channel\":\"master\",\n                                    \"hue\":<180...180>,\n                                    \"saturation\":<-100...100>,\n                                    \"lightness\":<-100...100>\n                                }\n                            ],\n                            \"colorize\":false\n                        }\n                    }\n                }\n            ]\n        },\n        {\n            \"input\":\"<href>\",\n            \"status\":\"<status>\",\n            \"created\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n            \"modified\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n            \"errors\":{\n                \"type\":\"<errorType>\",\n                \"title\":\"<errorDescription>\",\n                \"code\":\"<errorCode>\",\n                \"<errorDetails>\":[\n                    {\n                        \"name\":\"<paramName>\",\n                        \"reason\":\"<error>\"\n                    }\n                ]\n            }\n        }\n    ],\n    \"_links\":{\n        \"self\":{\n            \"href\":\"https://image.adobe.io/pie/psdService/status/<:jobId>\"\n        }\n    }\n}",
-          "type": "object"
-        },
-        {
-          "title": "Response: Success Example",
-          "content": "HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: 2509\nLocation: \"https://image.adobe.io/pie/psdService/status/<:jobId>\"\n{\n\t\"jobId\": \"5b0ac5d9-5b1a-4f1c-ac69-22fe8a40a037\",\n\t\"outputs\": [{\n\t\t\"input\": \"/files/some_project/design.psd\",\n\t\t\"status\": \"succeeded\",\n\t\t\"created\": \"2018-01-04T12:57:15.12345Z\",\n\t\t\"modified\": \"2018-01-04T12:58:36.12345Z\",\n\t\t\"document\": {\n\t\t\t\"name\": \"design.psd\",\n\t\t\t\"height\": 2100,\n\t\t\t\"width\": 1500,\n\t\t\t\"imageMode\": \"rgb\"\n\t\t},\n\t\t\"layers\": [{\n\t\t\t\t\"id\": 44,\n\t\t\t\t\"index\": 12,\n\t\t\t\t\"type\": \"adjustmentLayer\",\n\t\t\t\t\"name\": \"AdjustmentLayer\",\n\t\t\t\t\"locked\": true,\n\t\t\t\t\"visible\": true,\n\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\"bounds\": {\n\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\"width\": \"0\",\n\t\t\t\t\t\"height\": \"0\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": 38,\n\t\t\t\t\"locked\": false,\n\t\t\t\t\"name\": \"SO Layer\",\n\t\t\t\t\"type\": \"smartObject\",\n\t\t\t\t\"visible\": true,\n\t\t\t\t\"add\": {\n\t\t\t\t\t\"insertTop\": true\n\t\t\t\t},\n\t\t\t\t\"smartObject\": {\n\t\t\t\t\t\"type\": \"image/jpeg\",\n\t\t\t\t\t\"linked\": false,\n                                        \"name\" : \"Puppy.jpg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": 34,\n\t\t\t\t\"index\": 11,\n\t\t\t\t\"type\": \"layer\",\n\t\t\t\t\"name\": \"TopLayer\",\n\t\t\t\t\"locked\": false,\n\t\t\t\t\"visible\": true,\n\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\"bounds\": {\n\t\t\t\t\t\"top\": \"140\",\n\t\t\t\t\t\"left\": \"1330\",\n\t\t\t\t\t\"width\": \"677\",\n\t\t\t\t\t\"height\": \"632\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": 32,\n\t\t\t\t\"index\": 10,\n\t\t\t\t\"type\": \"layerSection\",\n\t\t\t\t\"name\": \"GroupLayer\",\n\t\t\t\t\"locked\": true,\n\t\t\t\t\"visible\": true,\n\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\"bounds\": {\n\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\"width\": \"0\",\n\t\t\t\t\t\"height\": \"0\"\n\t\t\t\t},\n\t\t\t\t\"children\": [{\n\t\t\t\t\t\t\"id\": 64,\n\t\t\t\t\t\t\"index\": 9,\n\t\t\t\t\t\t\"type\": \"fillLayer\",\n\t\t\t\t\t\t\"name\": \"FillLayer\",\n\t\t\t\t\t\t\"locked\": false,\n\t\t\t\t\t\t\"visible\": false,\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\t\t\"width\": \"0\",\n\t\t\t\t\t\t\t\"height\": \"0\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"fill\": {\n\t\t\t\t\t\t\t\"solidColor\": {\n\t\t\t\t\t\t\t\t\"rgb\": {\n\t\t\t\t\t\t\t\t\t\"red\": 0,\n\t\t\t\t\t\t\t\t\t\"green\": 255,\n\t\t\t\t\t\t\t\t\t\"blue\": 255\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"blendOptions\": {\n\t\t\t\t\t\t\t\"opacity\": 90,\n\t\t\t\t\t\t\t\"blendMode\": \"normal\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\": 44,\n\t\t\t\t\t\t\"index\": 9,\n\t\t\t\t\t\t\"type\": \"smartObject\",\n\t\t\t\t\t\t\"name\": \"SDK_PSD\",\n\t\t\t\t\t\t\"locked\": false,\n\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"1169\",\n\t\t\t\t\t\t\t\"left\": \"1757\",\n\t\t\t\t\t\t\t\"width\": \"343\",\n\t\t\t\t\t\t\t\"height\": \"331\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\": 60,\n\t\t\t\t\t\t\"index\": 8,\n\t\t\t\t\t\t\"type\": \"layer\",\n\t\t\t\t\t\t\"name\": \"HiddenLayer\",\n\t\t\t\t\t\t\"locked\": false,\n\t\t\t\t\t\t\"visible\": false,\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\t\t\"width\": \"0\",\n\t\t\t\t\t\t\t\"height\": \"0\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\": 66,\n\t\t\t\t\t\t\"index\": 7,\n\t\t\t\t\t\t\"type\": \"layerSection\",\n\t\t\t\t\t\t\"name\": \"NestedGroup\",\n\t\t\t\t\t\t\"locked\": true,\n\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\"mask\": {\n\t\t\t\t\t\t\t\"enabled\": false,\n\t\t\t\t\t\t\t\"linked\": true,\n\t\t\t\t\t\t\t\"offset\": {\n\t\t\t\t\t\t\t\t\"x\": 70,\n\t\t\t\t\t\t\t\t\"y\": 50\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\"clip\": true\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\t\t\"width\": \"0\",\n\t\t\t\t\t\t\t\"height\": \"0\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"children\": [{\n\t\t\t\t\t\t\t\t\"id\": 53,\n\t\t\t\t\t\t\t\t\"index\": 6,\n\t\t\t\t\t\t\t\t\"type\": \"textLayer\",\n\t\t\t\t\t\t\t\t\"name\": \"AreaTextLayer\",\n\t\t\t\t\t\t\t\t\"locked\": true,\n\t\t\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\t\t\"top\": \"265\",\n\t\t\t\t\t\t\t\t\t\"left\": \"155\",\n\t\t\t\t\t\t\t\t\t\"width\": \"470\",\n\t\t\t\t\t\t\t\t\t\"height\": \"317\"\n\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\"text\": {\n\t\t\t\t\t\t\t\t\t\"content\": \"My Text String\",\n\t\t\t\t\t\t\t\t\t\"characterStyles\": [{\n\t\t\t\t\t\t\t\t\t\t\"fontSize\": 12.5,\n\t\t\t\t\t\t\t\t\t\t\"fontName\": \"Arial\",\n\t\t\t\t\t\t\t\t\t\t\"fontAvailable\": true,\n\t\t\t\t\t\t\t\t\t\t\"orientation\": \"horizontal\",\n\t\t\t\t\t\t\t\t\t\t\"fontColor\": {\n\t\t\t\t\t\t\t\t\t\t\t\"rgb\": {\n\t\t\t\t\t\t\t\t\t\t\t\t\"red\": 26086,\n\t\t\t\t\t\t\t\t\t\t\t\t\"green\": 23002,\n\t\t\t\t\t\t\t\t\t\t\t\t\"blue\": 8224\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t}],\n\t\t\t\t\t\t\t\t\t\"paragraphStyles\": [{\n\t\t\t\t\t\t\t\t\t\t\"alignment\": \"justify\"\n\t\t\t\t\t\t\t\t\t}]\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\"id\": 6,\n\t\t\t\t\t\t\t\t\"index\": 5,\n\t\t\t\t\t\t\t\t\"type\": \"textLayer\",\n\t\t\t\t\t\t\t\t\"name\": \"PointTextLayer\",\n\t\t\t\t\t\t\t\t\"locked\": true,\n\t\t\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\t\t\"top\": \"55\",\n\t\t\t\t\t\t\t\t\t\"left\": \"158\",\n\t\t\t\t\t\t\t\t\t\"width\": \"154\",\n\t\t\t\t\t\t\t\t\t\"height\": \"50\"\n\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\"text\": {\n\t\t\t\t\t\t\t\t\t\"content\": \"My Text String\",\n\t\t\t\t\t\t\t\t\t\"characterStyles\": [{\n\t\t\t\t\t\t\t\t\t\t\t\"from\": 0,\n\t\t\t\t\t\t\t\t\t\t\t\"to\": 5,\n\t\t\t\t\t\t\t\t\t\t\t\"fontSize\": 8,\n\t\t\t\t\t\t\t\t\t\t\t\"fontName\": \"Helvetica\",\n\t\t\t\t\t\t\t\t\t\t\t\"fontAvailable\": true,\n\t\t\t\t\t\t\t\t\t\t\t\"orientation\": \"horizontal\"\n\t\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\t\"from\": 6,\n\t\t\t\t\t\t\t\t\t\t\t\"to\": 13,\n\t\t\t\t\t\t\t\t\t\t\t\"fontSize\": 10,\n\t\t\t\t\t\t\t\t\t\t\t\"fontName\": \"Helvetica-bold\",\n\t\t\t\t\t\t\t\t\t\t\t\"fontAvailable\": true,\n\t\t\t\t\t\t\t\t\t\t\t\"orientation\": \"horizontal\"\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\t\t\"paragraphStyles\": [{\n\t\t\t\t\t\t\t\t\t\t\t\"from\": 0,\n\t\t\t\t\t\t\t\t\t\t\t\"to\": 5,\n\t\t\t\t\t\t\t\t\t\t\t\"alignment\": \"right\"\n\t\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\t\"from\": 6,\n\t\t\t\t\t\t\t\t\t\t\t\"to\": 13,\n\t\t\t\t\t\t\t\t\t\t\t\"alignment\": \"center\"\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t]\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\": 39,\n\t\t\t\t\t\t\"index\": 3,\n\t\t\t\t\t\t\"type\": \"contentLayer\",\n\t\t\t\t\t\t\"name\": \"ShapeLayer\",\n\t\t\t\t\t\t\"locked\": false,\n\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"727\",\n\t\t\t\t\t\t\t\"left\": \"91\",\n\t\t\t\t\t\t\t\"width\": \"473\",\n\t\t\t\t\t\t\t\"height\": \"380\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\": 2,\n\t\t\t\t\t\t\"index\": 2,\n\t\t\t\t\t\t\"type\": \"layer\",\n\t\t\t\t\t\t\"name\": \"ImageLayer\",\n\t\t\t\t\t\t\"locked\": true,\n\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"316\",\n\t\t\t\t\t\t\t\"left\": \"702\",\n\t\t\t\t\t\t\t\"width\": \"639\",\n\t\t\t\t\t\t\t\"height\": \"791\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": 1,\n\t\t\t\t\"index\": 0,\n\t\t\t\t\"type\": \"backgroundLayer\",\n\t\t\t\t\"name\": \"Background\",\n\t\t\t\t\"locked\": false,\n\t\t\t\t\"visible\": true,\n\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\"bounds\": {\n\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\"width\": \"2100\",\n\t\t\t\t\t\"height\": \"1500\"\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t}],\n\t\"_links\": {\n\t\t\"self\": {\n\t\t\t\"href\": \"https://image.adobe.io/pie/psdService/status/5b0ac5d9-5b1a-4f1c-ac69-22fe8a40a037\"\n\t\t}\n\t}\n}",
-          "type": "object"
-        },
-        {
-          "title": "Request: HTTP Example",
-          "content": "GET /psdService/status/<:jobId> HTTP/1.1\nHost: image.adobe.io\nAuthorization: Bearer $token\nX-Api-Key: $api_key",
-          "type": "http"
-        },
-        {
-          "title": "Request: CURL Templated",
-          "content": "curl -H \"Authorization: Bearer $token\" -H \"x-api-key: $api_key\" -X GET https://image.adobe.io/pie/psdService/status/<:jobId>",
-          "type": "curl"
-        }
-      ]
-    },
-    "filename": "docs-src/pre-release/get-document-manifest.js",
-    "groupTitle": "Photoshop",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "authorization",
-            "description": "<p>Authorization value.</p>"
-          },
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "Content-Type",
-            "description": "<p>&quot;application/json&quot;</p>"
-          },
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "x-api-key",
-            "description": "<p>a client id</p>"
-          },
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": true,
-            "field": "x-gw-ims-org-id",
-            "defaultValue": "nil",
-            "description": "<p>x-gw-ims-org-id the IMS organization ID. This needs to be sent only if it is desirable to receive the job status through Adobe I/O Events</p>"
-          }
-        ]
-      }
-    },
-    "error": {
-      "fields": {
-        "Errors": [
-          {
-            "group": "Errors",
-            "type": "string",
-            "optional": false,
-            "field": "type",
-            "description": "<p>a machine-readable error type</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "string",
-            "optional": false,
-            "field": "code",
-            "description": "<p>a machine-readable error code</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "string",
-            "optional": false,
-            "field": "title",
-            "description": "<p>short, human-readable summary of the problem</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "array",
-            "optional": false,
-            "field": "errorDetails",
-            "description": "<p>further descriptions of the exact errors where <code>errorDetail</code> is substituted for a specific issue.</p>"
-          },
-          {
-            "group": "Errors",
-            "type": "details",
-            "optional": false,
-            "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response-Inline Templated",
-          "content": "// This is a templated example for when a requested job has failed\n\nHTTP/1.1 <Status_Code> <Reason>\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"jobId\": \"<jobID\",\n  \"outputs\":[\n      {\n        \"input\":\"<href>\",\n        \"status\":\"<status>\",\n        \"created\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n        \"modified\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n        \"errors\":{\n          \"type\":\"<errorType>\",\n          \"title\":\"<errorDescription>\",\n          \"code\": \"\"<errorCode>\",\n          \"<errorDetails>\":[\n            {\n              \"name\":\"<paramName>\",\n              \"reason\":\"<error>\"\n            }\n          ]\n        }\n      }\n   ]\n}",
-          "type": "object"
-        },
-        {
-          "title": "Error-Response-Inline Example",
-          "content": " // In this example the GET call to /status succeeds but one of the initiated jobs has failed\n\n HTTP/1.1 200 OK\n Content-Type: application/json\n Content-Length: {xsd:nonNegativeInteger}\n Location: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n {\n   \"jobId\":\"f54e0fcb-260b-47c3-b520-de0d17dc2b67\",\n   \"outputs\":[\n      {\n         \"input\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n         \"status\":\"failed\",\n         \"created\":\"2018-01-04T12:57:15.12345Z\",\n         \"modified\":\"2018-01-04T12:58:36.12345Z\",\n         \"error\":{\n            \"type\":\"FileExistsError\",\n            \"title\":\"input file does not exist\",\n            \"code\":\"400\"\n         }\n      }\n   ]\n}",
-          "type": "object"
-        },
-        {
-          "title": "Response: Error Templated",
-          "content": "// This is a templated example for when the call itself fails\n\nHTTP/1.1 <Status_Code> <Reason>\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"type\": \"<errorType>\",\n  \"code\": \"<errorCode>\",\n  \"title\": \"<errorDescription>\",\n  \"<errorDetails>\": [\n    {\n      \"name\":\"<paramName>\",\n      \"reason\":\"<error>\"\n    }\n  ]\n}",
-          "type": "object"
-        },
-        {
-          "title": "Response: Error Example",
-          "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
-          "type": "object"
-        }
-      ]
-    }
-  },
-  {
-    "type": "post",
     "url": "https://image.adobe.io/pie/psdService/documentCreate",
     "title": "document create",
     "description": "<p>Initiates an asynchronous job to create a new psd, optionaly with layers, and then generate renditions and/or save as a psd</p>",
@@ -4591,6 +3367,26 @@ define({ "api": [
             "optional": false,
             "field": "options",
             "description": "<p>available options to apply to all input files</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"useDefault\"",
+              "\"fail\""
+            ],
+            "optional": false,
+            "field": "options.manageMissingFonts",
+            "defaultValue": "useDefault",
+            "description": "<p>action to take if there are one or more missing fonts in the document</p> <ul>   <li>fail - The job will not succeed and the status will be set to \"failed\", with the details of the error provided in the \"details\" section in the status</li>   <li>useDefault - The job will succeed, however, by default all the missing fonts will be replaced with this font: LiberationSansNarrow-Italic</li> </ul>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "optional": true,
+            "field": "options.globalFont",
+            "defaultValue": "nil",
+            "description": "<p>options.globalFont The full postscript name of the font to be used as the global default for the document. This font will be used for any text layer which has a missing font and no other font has been specifically provided for that layer.<br/>If this font itself is missing, the option specified for <code>manageMissingFonts</code> from above will take effect.</p>"
           },
           {
             "group": "Request",
@@ -5678,12 +4474,12 @@ define({ "api": [
       "examples": [
         {
           "title": "Request: HTTP Templated",
-          "content": "POST https://image.adobe.io/pie/psdService/documentCreate HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"options\":{\n      \"document\":{\n        \"height\": <int>,\n        \"width\": <int>,\n        \"resolution\": <72...300>,\n        \"mode\": <mode>,\n        \"fill\": <fill>,\n        \"depth\": <8,16,32>\n      },\n      \"layers\":[\n          {\n              \"type\":\"<type>\",\n              \"name\":\"<name>\",\n              \"locked\":<bool>,\n              \"visible\":<bool>,\n              \"input\":{\n                  \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n                  \"storage\":\"<storage>\"\n              },\n              \"mask\":{\n                  \"input\":{\n                      \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n                      \"storage\":\"<storage>\"\n                  },\n                  \"enabled\":<bool>,\n                  \"linked\":<bool>,\n                  \"offset\":{\n                      \"x\":<int>,\n                      \"y\":<int>\n                  },\n                  \"clip\":<bool>\n              },\n              \"smartObject\":{\n                \"linked\":<bool>\n              }\n              \"bounds\":{\n                  \"top\":<top>,\n                  \"left\":<left>,\n                  \"width\":<width>,\n                  \"height\":<height>\n              },\n              \"fill\":{\n                \"solidColor\":{\n                  \"rgb\" : {\n                    \"red\":<8 bit int>,\n                    \"green\":<8 bit int>,\n                    \"blue\":<8 bit int>\n                  }\n                }\n              },\n              \"text\":{\n                  \"content\":\"<text>\",\n                  \"characterStyles\":[\n                      {\n                          \"from\":<int>,\n                          \"to\":<int>,\n                          \"fontSize\":<fontSize>,\n                          \"fontName\":\"<fontName>\",\n                          \"orientation\":\"<orientation>\",\n                          \"fontColor\":{\n                              \"rgb\":{\n                                  \"red\":<16 bit integer>,\n                                  \"green\":<16 bit integer>,\n                                  \"blue\":<16 bit integer>\n                              }\n                          }\n                      }\n                  ],\n                  \"paragraphStyles\":[\n                      {\n                          \"from\":<int>,\n                          \"to\":<int>,\n                          \"alignment\":\"<alignment>\"\n                      }\n                  ]\n              },\n              \"adjustments\":{\n                  \"brightnessContrast\":{\n                      \"brightness\":<-150..150>,\n                      \"contrast\":<-150..150>\n                  },\n                  \"exposure\":{\n                      \"exposure\":<-20...20>,\n                      \"offset\":<-0.5...0.5>,\n                      \"gammaCorrection\":<0.01...9.99>\n                  },\n                  \"colorBalance\":{\n                      \"preserveLuminosity\":true,\n                      \"shadowLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ],\n                      \"midtoneLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ],\n                      \"highlightLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ]\n                  },\n                  \"hueSaturation\":{\n                      \"channels\":[\n                          {\n                              \"channel\":\"master\",\n                              \"hue\":<180...180>,\n                              \"saturation\":<-100...100>,\n                              \"lightness\":<-100...100>\n                          }\n                      ],\n                      \"colorize\":false\n                  }\n              },\n              \"blendOptions\": {\n                  \"opacity\":<int>,\n                  \"blendMode\": \"<blendMode>\"\n              }\n          }\n      ]\n  },\n  \"outputs\":[\n      {\n        \"href\":\"<cc_storage_location>\",\n        \"storage\":\"adobe\",\n        \"type\":\"<type>\",\n        \"width\":<width>,\n        \"overwrite\":<bool>,\n        \"trimToCanvas\":<bool>,\n        \"layers\":[\n            {\n                \"id\":<id>,\n                \"name\":<name>\n            }\n        ]\n      },\n      {\n        \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n        \"storage\":\"external\",\n        \"type\":\"image/vnd.adobe.photoshop\",\n        \"overwrite\":false\n      }\n  ]\n}",
+          "content": "POST https://image.adobe.io/pie/psdService/documentCreate HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"options\":{\n      \"document\":{\n        \"height\": <int>,\n        \"width\": <int>,\n        \"resolution\": <72...300>,\n        \"mode\": <mode>,\n        \"fill\": <fill>,\n        \"depth\": <8,16,32>\n      },\n      \"manageMissingFonts\": \"<fail> or <useDefault>\",\n      \"globalFont\": \"<global_font_postscript_name>\",\n      \"fonts\": [\n        {\n          \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n          \"storage\":\"<storage>\"\n        }\n      ],\n      \"layers\":[\n          {\n              \"type\":\"<type>\",\n              \"name\":\"<name>\",\n              \"locked\":<bool>,\n              \"visible\":<bool>,\n              \"input\":{\n                  \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n                  \"storage\":\"<storage>\"\n              },\n              \"mask\":{\n                  \"input\":{\n                      \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n                      \"storage\":\"<storage>\"\n                  },\n                  \"enabled\":<bool>,\n                  \"linked\":<bool>,\n                  \"offset\":{\n                      \"x\":<int>,\n                      \"y\":<int>\n                  },\n                  \"clip\":<bool>\n              },\n              \"smartObject\":{\n                \"linked\":<bool>\n              }\n              \"bounds\":{\n                  \"top\":<top>,\n                  \"left\":<left>,\n                  \"width\":<width>,\n                  \"height\":<height>\n              },\n              \"fill\":{\n                \"solidColor\":{\n                  \"rgb\" : {\n                    \"red\":<8 bit int>,\n                    \"green\":<8 bit int>,\n                    \"blue\":<8 bit int>\n                  }\n                }\n              },\n              \"text\":{\n                  \"content\":\"<text>\",\n                  \"characterStyles\":[\n                      {\n                          \"from\":<int>,\n                          \"to\":<int>,\n                          \"fontSize\":<fontSize>,\n                          \"fontName\":\"<fontName>\",\n                          \"orientation\":\"<orientation>\",\n                          \"fontColor\":{\n                              \"rgb\":{\n                                  \"red\":<16 bit integer>,\n                                  \"green\":<16 bit integer>,\n                                  \"blue\":<16 bit integer>\n                              }\n                          }\n                      }\n                  ],\n                  \"paragraphStyles\":[\n                      {\n                          \"from\":<int>,\n                          \"to\":<int>,\n                          \"alignment\":\"<alignment>\"\n                      }\n                  ]\n              },\n              \"adjustments\":{\n                  \"brightnessContrast\":{\n                      \"brightness\":<-150..150>,\n                      \"contrast\":<-150..150>\n                  },\n                  \"exposure\":{\n                      \"exposure\":<-20...20>,\n                      \"offset\":<-0.5...0.5>,\n                      \"gammaCorrection\":<0.01...9.99>\n                  },\n                  \"colorBalance\":{\n                      \"preserveLuminosity\":true,\n                      \"shadowLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ],\n                      \"midtoneLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ],\n                      \"highlightLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ]\n                  },\n                  \"hueSaturation\":{\n                      \"channels\":[\n                          {\n                              \"channel\":\"master\",\n                              \"hue\":<180...180>,\n                              \"saturation\":<-100...100>,\n                              \"lightness\":<-100...100>\n                          }\n                      ],\n                      \"colorize\":false\n                  }\n              },\n              \"blendOptions\": {\n                  \"opacity\":<int>,\n                  \"blendMode\": \"<blendMode>\"\n              }\n          }\n      ]\n  },\n  \"outputs\":[\n      {\n        \"href\":\"<cc_storage_location>\",\n        \"storage\":\"adobe\",\n        \"type\":\"<type>\",\n        \"width\":<width>,\n        \"overwrite\":<bool>,\n        \"trimToCanvas\":<bool>,\n        \"layers\":[\n            {\n                \"id\":<id>,\n                \"name\":<name>\n            }\n        ]\n      },\n      {\n        \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n        \"storage\":\"external\",\n        \"type\":\"image/vnd.adobe.photoshop\",\n        \"overwrite\":false\n      }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "Request: HTTP Example",
-          "content": "POST https://image.adobe.io/pie/psdService/documentCreate HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n   \"options\":{\n      \"document\":{\n        \"height\": 1000,\n        \"width\": 1000,\n        \"resolution\": 72,\n        \"mode\": \"rgb\",\n        \"fill\": \"transparent\",\n        \"depth\": 16\n      },\n      \"layers\":[\n         {\n            \"name\":\"new adjustment layer\",\n            \"type\":\"adjustmentLayer\",\n            \"visible\":true,\n            \"adjustments\":{\n               \"brightnessContrast\":{\n                  \"brightness\":-23,\n                  \"contrast\":15\n               }\n            }\n         },\n         {\n           \"name\":\"new content layer\",\n           \"type\":\"fillLayer\",\n           \"visible\":true,\n           \"fill\":{\n             \"solidColor\":{\n               \"rgb\" : {\n                 \"red\":0,\n                 \"green\":255,\n                 \"blue\":255\n               }\n             }\n           },\n           \"blendOptions\":{\n             \"opacity\":90,\n             \"blendMode\":\"normal\"\n           }\n         },\n         {\n            \"locked\":false,\n            \"name\":\"SO Layer\",\n            \"type\":\"smartObject\",\n            \"visible\":true,\n            \"input\":{\n               \"href\":\"files/input/Simple.psd\",\n               \"storage\":\"adobe\"\n            },\n            \"smartObject\":{\n               \"linked\":false\n            }\n         },\n         {\n            \"type\":\"textLayer\",\n            \"name\":\"my text layer\",\n            \"locked\":true,\n            \"visible\":true,\n            \"bounds\":{\n               \"top\":50,\n               \"left\":100,\n               \"width\":500,\n               \"height\":450\n            },\n            \"text\":{\n               \"content\":\"NEW TEXT CHANGES\",\n               \"characterStyles\":[\n                  {\n                     \"fontSize\":12.5,\n                     \"fontName\":\"Arial-BoldMT\",\n                     \"orientation\":\"horizontal\",\n                     \"fontColor\":{\n                        \"rgb\":{\n                           \"red\":26086,\n                           \"green\":23002,\n                           \"blue\":8224\n                        }\n                     }\n                  }\n               ],\n               \"paragraphStyles\":[\n                  {\n                     \"alignment\":\"left\"\n                  }\n               ]\n            },\n            \"blendOptions\":{\n               \"opacity\":90,\n               \"blendMode\":\"normal\"\n            }\n         },\n         {\n            \"name\":\"New Exposure Layer\",\n            \"type\":\"adjustmentLayer\",\n            \"locked\":false,\n            \"visible\":true,\n            \"adjustments\":{\n               \"exposure\":{\n                  \"exposure\":0.25,\n                  \"offset\":0.0049,\n                  \"gammaCorrection\":1.38\n               }\n            }\n         },\n         {\n            \"type\":\"adjustmentLayer\",\n            \"name\":\"Color Balance\",\n            \"locked\":false,\n            \"visible\":true,\n            \"mask\":{\n               \"input\":{\n                  \"href\":\"files/abc.psd\",\n                  \"storage\":\"adobe\"\n               },\n               \"enabled\":false,\n               \"linked\":true,\n               \"offset\":{\n                  \"x\":70,\n                  \"y\":50\n               },\n               \"clip\":true\n            },\n            \"adjustments\":{\n               \"colorBalance\":{\n                  \"shadowLevels\":[\n                     0,\n                     10,\n                     20\n                  ],\n                  \"preserveLuminosity\":true,\n                  \"midtoneLevels\":[\n                     30,\n                     40,\n                     50\n                  ],\n                  \"highlightLevels\":[\n                     60,\n                     70,\n                     80\n                  ]\n               }\n            }\n         },\n         {\n            \"name\":\"new Image layer\",\n            \"type\":\"layer\",\n            \"visible\":true,\n            \"input\":{\n               \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n               \"storage\":\"external\"\n            }\n         },\n         {\n            \"type\":\"adjustmentLayer\",\n            \"name\":\"Hue Saturation\",\n            \"locked\":false,\n            \"visible\":true,\n            \"adjustements\":{\n               \"hueSaturation\":{\n                  \"channels\":[\n                     {\n                        \"channel\":\"master\",\n                        \"hue\":-5,\n                        \"saturation\":20,\n                        \"lightness\":0\n                     }\n                  ],\n                  \"colorize\":false\n               }\n            }\n         },\n         {\n            \"type\":\"backgroundLayer\",\n            \"locked\":true,\n            \"visible\":true,\n            \"name\":\"Background\"\n         }\n      ]\n   },\n   \"outputs\":[\n      {\n         \"href\":\"/files/some_project/output/design_$ReqID_$FileName.psd\",\n         \"storage\":\"adobe\",\n         \"type\":\"image/jpeg\",\n         \"width\":500,\n         \"overwrite\":true,\n         \"trimToCanvas\":false,\n         \"layers\":[\n            {\n               \"id\":77\n            }\n         ]\n      },\n      {\n         \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n         \"storage\":\"external\",\n         \"type\":\"image/vnd.adobe.photoshop\",\n         \"overwrite\":false\n      }\n   ]\n}",
+          "content": "POST https://image.adobe.io/pie/psdService/documentCreate HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n   \"options\":{\n      \"document\":{\n        \"height\": 1000,\n        \"width\": 1000,\n        \"resolution\": 72,\n        \"mode\": \"rgb\",\n        \"fill\": \"transparent\",\n        \"depth\": 16\n      },\n      \"manageMissingFonts\": \"useDefault\",\n      \"globalFont\": \"MyriadPro-Bold\",\n      \"fonts\": [\n        {\n           \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n           \"storage\":\"external\"\n        }\n      ],\n      \"layers\":[\n         {\n            \"name\":\"new adjustment layer\",\n            \"type\":\"adjustmentLayer\",\n            \"visible\":true,\n            \"adjustments\":{\n               \"brightnessContrast\":{\n                  \"brightness\":-23,\n                  \"contrast\":15\n               }\n            }\n         },\n         {\n           \"name\":\"new content layer\",\n           \"type\":\"fillLayer\",\n           \"visible\":true,\n           \"fill\":{\n             \"solidColor\":{\n               \"rgb\" : {\n                 \"red\":0,\n                 \"green\":255,\n                 \"blue\":255\n               }\n             }\n           },\n           \"blendOptions\":{\n             \"opacity\":90,\n             \"blendMode\":\"normal\"\n           }\n         },\n         {\n            \"locked\":false,\n            \"name\":\"SO Layer\",\n            \"type\":\"smartObject\",\n            \"visible\":true,\n            \"input\":{\n               \"href\":\"files/input/Simple.psd\",\n               \"storage\":\"adobe\"\n            },\n            \"smartObject\":{\n               \"linked\":false\n            }\n         },\n         {\n            \"type\":\"textLayer\",\n            \"name\":\"my text layer\",\n            \"locked\":true,\n            \"visible\":true,\n            \"bounds\":{\n               \"top\":50,\n               \"left\":100,\n               \"width\":500,\n               \"height\":450\n            },\n            \"text\":{\n               \"content\":\"NEW TEXT CHANGES\",\n               \"characterStyles\":[\n                  {\n                     \"fontSize\":12.5,\n                     \"fontName\":\"Arial-BoldMT\",\n                     \"orientation\":\"horizontal\",\n                     \"fontColor\":{\n                        \"rgb\":{\n                           \"red\":26086,\n                           \"green\":23002,\n                           \"blue\":8224\n                        }\n                     }\n                  }\n               ],\n               \"paragraphStyles\":[\n                  {\n                     \"alignment\":\"left\"\n                  }\n               ]\n            },\n            \"blendOptions\":{\n               \"opacity\":90,\n               \"blendMode\":\"normal\"\n            }\n         },\n         {\n            \"name\":\"New Exposure Layer\",\n            \"type\":\"adjustmentLayer\",\n            \"locked\":false,\n            \"visible\":true,\n            \"adjustments\":{\n               \"exposure\":{\n                  \"exposure\":0.25,\n                  \"offset\":0.0049,\n                  \"gammaCorrection\":1.38\n               }\n            }\n         },\n         {\n            \"type\":\"adjustmentLayer\",\n            \"name\":\"Color Balance\",\n            \"locked\":false,\n            \"visible\":true,\n            \"mask\":{\n               \"input\":{\n                  \"href\":\"files/abc.psd\",\n                  \"storage\":\"adobe\"\n               },\n               \"enabled\":false,\n               \"linked\":true,\n               \"offset\":{\n                  \"x\":70,\n                  \"y\":50\n               },\n               \"clip\":true\n            },\n            \"adjustments\":{\n               \"colorBalance\":{\n                  \"shadowLevels\":[\n                     0,\n                     10,\n                     20\n                  ],\n                  \"preserveLuminosity\":true,\n                  \"midtoneLevels\":[\n                     30,\n                     40,\n                     50\n                  ],\n                  \"highlightLevels\":[\n                     60,\n                     70,\n                     80\n                  ]\n               }\n            }\n         },\n         {\n            \"name\":\"new Image layer\",\n            \"type\":\"layer\",\n            \"visible\":true,\n            \"input\":{\n               \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n               \"storage\":\"external\"\n            }\n         },\n         {\n            \"type\":\"adjustmentLayer\",\n            \"name\":\"Hue Saturation\",\n            \"locked\":false,\n            \"visible\":true,\n            \"adjustements\":{\n               \"hueSaturation\":{\n                  \"channels\":[\n                     {\n                        \"channel\":\"master\",\n                        \"hue\":-5,\n                        \"saturation\":20,\n                        \"lightness\":0\n                     }\n                  ],\n                  \"colorize\":false\n               }\n            }\n         },\n         {\n            \"type\":\"backgroundLayer\",\n            \"locked\":true,\n            \"visible\":true,\n            \"name\":\"Background\"\n         }\n      ]\n   },\n   \"outputs\":[\n      {\n         \"href\":\"/files/some_project/output/design_$ReqID_$FileName.psd\",\n         \"storage\":\"adobe\",\n         \"type\":\"image/jpeg\",\n         \"width\":500,\n         \"overwrite\":true,\n         \"trimToCanvas\":false,\n         \"layers\":[\n            {\n               \"id\":77\n            }\n         ]\n      },\n      {\n         \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n         \"storage\":\"external\",\n         \"type\":\"image/vnd.adobe.photoshop\",\n         \"overwrite\":false\n      }\n   ]\n}",
           "type": "http"
         },
         {
@@ -5818,6 +4614,1230 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "https://image.adobe.io/pie/psdService/documentManifest",
+    "title": "document manifest",
+    "description": "<p>Initiates an asynchronous job to extract and return a psd file's layer information</p>",
+    "version": "1.0.0",
+    "name": "document_manifest",
+    "group": "Photoshop",
+    "parameter": {
+      "fields": {
+        "Request": [
+          {
+            "group": "Request",
+            "type": "input[]",
+            "optional": false,
+            "field": "inputs",
+            "description": "<p>An array of input objects. We currently only support one input object.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": false,
+            "field": "inputs.input",
+            "description": "<p>An object describing an input PSD file.Current support is for files less than 1000MB.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": true,
+            "field": "options",
+            "description": "<p>available options to apply to all input files</p>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": false,
+            "field": "options.thumbnails",
+            "description": "<p>Include presigned GET URLs to small preview thumbnails for any renderable layer.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"image/jpeg\"",
+              "\"image/png\"",
+              "\"image/tiff\""
+            ],
+            "optional": false,
+            "field": "options.thumbnails.type",
+            "description": "<p>desired image format.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"adobe\"",
+              "\"external\"",
+              "\"azure\"",
+              "\"dropbox\""
+            ],
+            "optional": false,
+            "field": "inputs.input.storage",
+            "defaultValue": "adobe",
+            "description": "<p>storage platforms supported</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "optional": false,
+            "field": "inputs.input.href",
+            "description": "<p>Either a Creative Cloud assets path for storage=&quot;adobe&quot; OR a presignedGETURL.</p>  <ul>    <li>CC Storage path must be prepended with `/files` or `/cloud-content` or `/assets`       <li>The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li>       <li>The `/cloud-content` path directly corresponds to the root of your `Cloud documents` folder in CC</li>       <li>The `/assets` path directly corresponds to the specific sync-group section of CC storage</li>    </li>  </ul>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request: HTTP Templated",
+          "content": "POST https://image.adobe.io/pie/psdService/layers HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"inputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\":\"<storage>\"\n    }\n  ],\n  \"options\": {\n    \"thumbnails\": {\n      \"type\":\"<type>\"\n    }\n  }\n}",
+          "type": "http"
+        },
+        {
+          "title": "HTTP External Example",
+          "content": "POST https://image.adobe.io/pie/psdService/layers HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n   \"inputs\":[\n      {\n         \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n         \"storage\":\"external\"\n      }\n   ],\n   \"options\":{\n      \"thumbnails\":{\n         \"type\":\"image/jpeg\"\n      }\n   }\n}",
+          "type": "http"
+        },
+        {
+          "title": "HTTP Dropbox Example",
+          "content": "POST https://image.adobe.io/pie/psdService/layers HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n   \"inputs\":[\n      {\n         \"href\":\"https://dl.dropboxusercontent.com/apitul/1/KYTECIO6d2EDlg\",\n         \"storage\":\"dropbox\"\n      }\n   ],\n   \"options\":{\n      \"thumbnails\":{\n         \"type\":\"image/jpeg\"\n      }\n   }\n}",
+          "type": "http"
+        },
+        {
+          "title": "HTTP Adobe Example",
+          "content": "POST https://image.adobe.io/pie/psdService/layers HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"inputs\": [\n    {\n      \"href\": \"/files/some_project/design.psd\",\n      \"storage\": \"adobe\"\n    }\n  ],\n  \"options\": {\n    \"thumbnails\": {\n      \"type\":\"image/png\"\n    }\n  }\n}",
+          "type": "http"
+        },
+        {
+          "title": "Request: CURL Templated",
+          "content": "curl -H \"Authorization: Bearer $token\" -H \"x-api-key: $api_key\" -X POST -d '{\"inputs\": [{\"href\":\"<href>\",\"storage\":\"<storage>\"}],\"options\":{}}' https://image.adobe.io/pie/psdService/documentManifest",
+          "type": "curl"
+        }
+      ]
+    },
+    "filename": "docs-src/pre-release/post-document-manifest.js",
+    "groupTitle": "Photoshop",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Authorization value.</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "Content-Type",
+            "description": "<p>&quot;application/json&quot;</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>a client id</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": true,
+            "field": "x-gw-ims-org-id",
+            "defaultValue": "nil",
+            "description": "<p>x-gw-ims-org-id the IMS organization ID. This needs to be sent only if it is desirable to receive the job status through Adobe I/O Events</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 202": [
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "_links",
+            "description": "<p>any link the client follow, described by their relationship</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Success Templated",
+          "content": "HTTP/1.1 202 ACCEPTED\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"_links\": {\n      \"self\" :{ \"href\" : \"https://image.adobe.io/pie/psdService/status/<:jobId>\" }\n  }\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Success Example",
+          "content": "HTTP/1.1 202 ACCEPTED\nContent-Type: application/json\nContent-Length: 682\n{\n  \"_links\": {\n      \"self\" :{ \"href\" : \"https://image.adobe.io/pie/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\" }\n  }\n}",
+          "type": "object"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Errors": [
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>a machine-readable error type</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "code",
+            "description": "<p>a machine-readable error code</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>short, human-readable summary of the problem</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "array",
+            "optional": false,
+            "field": "errorDetails",
+            "description": "<p>further descriptions of the exact errors where <code>errorDetail</code> is substituted for a specific issue.</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "details",
+            "optional": false,
+            "field": "errorCodes",
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Error Templated",
+          "content": "// This is a templated example for when the call itself fails\n\nHTTP/1.1 <Status_Code> <Reason>\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"type\": \"<errorType>\",\n  \"code\": \"<errorCode>\",\n  \"title\": \"<errorDescription>\",\n  \"<errorDetails>\": [\n    {\n      \"name\":\"<paramName>\",\n      \"reason\":\"<error>\"\n    }\n  ]\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Error Example",
+          "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "https://image.adobe.io/pie/psdService/status/<:jobId>",
+    "title": "document manifest status",
+    "description": "<p>Returns status and layer info for a psd file created by POST /psdService/status. Will return 202 as long as there are child jobs still running and 200 once all children are complete</p>",
+    "version": "1.0.0",
+    "name": "document_manifest_status",
+    "group": "Photoshop",
+    "success": {
+      "fields": {
+        "URL Param": [
+          {
+            "group": "URL Param",
+            "type": "string",
+            "optional": false,
+            "field": "jobId",
+            "description": "<p>The layers to get.</p>"
+          }
+        ],
+        "Success 202": [
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "jobId",
+            "description": "<p>the job's id requested</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "output[]",
+            "optional": false,
+            "field": "outputs",
+            "description": "<p>array of output objects</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "array",
+            "optional": false,
+            "field": "outputs.output",
+            "description": "<p>an output object</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.input",
+            "description": "<p>the original input file path</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.status",
+            "description": "<p>the child job status</p> <ul>   <li>pending - request has been accepted and is waiting to start</li>   <li>running - the child job is running</li>   <li>uploading - files have been generated and are uploading to destination</li>   <li>succeeded - the child job has succeeded</li>   <li>failed - the child job has failed</li> </ul>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.created",
+            "description": "<p>&quot;YYYY-DD-MMThh:mm:ss.mmmmmZ&quot; created timestamp of the job</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.modified",
+            "description": "<p>&quot;YYYY-DD-MMThh:mm:ss.mmmmmZ&quot;  modified timestamp of the job</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.document",
+            "description": "<p>information about the psd file</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.document.name",
+            "description": "<p>name of the input file</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": false,
+            "field": "outputs.output.document.height",
+            "description": "<p>in pixels</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": false,
+            "field": "outputs.output.document.width",
+            "description": "<p>in pixels</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.document.photoshopBuild",
+            "description": "<p>the name of the application that created the PSD</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "allowedValues": [
+              "\"bitmap\"",
+              "\"greyscale\"",
+              "\"indexed\"",
+              "\"rgb\"",
+              "\"cmyk\"",
+              "\"hsl\"",
+              "\"hsb\"",
+              "\"multichannel\"",
+              "\"duotone\"",
+              "\"lab\"",
+              "\"xyz\""
+            ],
+            "optional": false,
+            "field": "outputs.output.document.imageMode",
+            "description": "<p>the document's image mode.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "8",
+              "16",
+              "32"
+            ],
+            "optional": false,
+            "field": "outputs.output.document.bitDepth",
+            "description": "<p>the document's bit/channel depth.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "layer[]",
+            "optional": false,
+            "field": "outputs.output.layers",
+            "description": "<p>a tree of layer objects representing the PSD layer structure extracted from the psd document</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "array",
+            "optional": false,
+            "field": "outputs.output.layers.layer",
+            "description": "<p>a layer object</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": false,
+            "field": "outputs.output.layers.layer.id",
+            "description": "<p>the layer id. Note an id of -1 is valid and indicates a PSD that only contains a background image and no layers</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": false,
+            "field": "outputs.output.layers.layer.index",
+            "description": "<p>the layer index</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.output.layers.layer.thumbnail",
+            "description": "<p>If thumbnails were requested, a presigned GET URL to the thumbnail</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "layer[]",
+            "optional": false,
+            "field": "outputs.output.layers.layer.children",
+            "description": "<p>an array of nested layer objects. Only layerSections (group layers) can include children</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "allowedValues": [
+              "\"layer\"",
+              "\"textLayer\"",
+              "\"adjustmentLayer\"",
+              "\"smartObject\"",
+              "\"fillLayer\"",
+              "\"backgroundLayer\""
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.type",
+            "description": "<p>the layer type.</p> <ul>   <li>layer - a pixel layer</li>   <li>textLayer - a text layer</li>   <li>adjustmentLayer - an adjustment layer</li>   <li>layerSection - a grouping layer</li>   <li>smartObject - a smart object</li>   <li>backgroundLayer - a background layer</li>   <li>fillLayer - a fill layer</li> </ul>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.layers.layer.name",
+            "description": "<p>the layer name.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "bool",
+            "optional": false,
+            "field": "outputs.output.layers.layer.locked",
+            "description": "<p>is the layer locked</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "bool",
+            "optional": false,
+            "field": "outputs.output.layers.layer.visible",
+            "description": "<p>is the layer visible</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.adjustments",
+            "description": "<p>adjustment layer info</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.adjustments.brightnessContrast",
+            "description": "<p>brightness and contrast settings</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "-150...150"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.brightnessContrast.brightness",
+            "description": "<p>the adjustmentLayer's brightness:</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "-150...150"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.brightnessContrast.contrast",
+            "description": "<p>the adjustmentLayer's contrast:</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.adjustments.exposure",
+            "description": "<p>exposure settings</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "-20.0...20.0"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.exposure.exposure",
+            "description": "<p>the layer's exposure. Defaults to 0.0</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "-0.5...0.5"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.exposure.offset",
+            "description": "<p>the layer's offset. Defaults to 0.0</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0.01...9.99"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.exposure.gammaCorrection",
+            "description": "<p>the layer's gammaCorrection. Defaults to 1.0</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.adjustments.hueSaturation",
+            "description": "<p>hue and saturation settings</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "bool",
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.hueSaturation.colorize",
+            "description": "<p>colorize</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "array",
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.hueSaturation.channels",
+            "description": "<p>an array of hashes representing the 'master' channel (the remaining five channels of 'magentas', 'yellows', 'greens', etc are not yet supported)</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "allowedValues": [
+              "\"master\""
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.hueSaturation.channels.channel",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "-180...180"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.hueSaturation.channels.hue",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "-100...100"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.hueSaturation.channels.saturation",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "-100...100"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.hueSaturation.channels.lightness",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.adjustments.colorBalance",
+            "description": "<p>color balance settings</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "bool",
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.colorBalance.preserveLuminosity",
+            "description": "<p>preserveLuminosity</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "array",
+            "allowedValues": [
+              "-100...100"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.colorBalance.shadowLevels",
+            "description": "<p>array of 3 ints</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "array",
+            "allowedValues": [
+              "-100...100"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.colorBalance.midtoneLevels",
+            "description": "<p>array of 3 ints</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "array",
+            "allowedValues": [
+              "-100...100"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.adjustments.colorBalance.highlightLevels",
+            "description": "<p>array of 3 ints</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.layers.layer.bounds",
+            "description": "<p>the bounds of the layer. applicable for the following layer types</p> <ul>   <li>layer - a pixel layer</li>   <li>adjustmentLayer - an adjustment layer</li>   <li>textLayer - a text layer</li>   <li>layerSection - a grouping layer</li>   <li>smartObject - a smart object</li>   <li>fillLayer - a fill layer</li> </ul>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": false,
+            "field": "outputs.output.layers.layer.bounds.top",
+            "description": "<p>in pixels</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": false,
+            "field": "outputs.output.layers.layer.bounds.left",
+            "description": "<p>in pixels</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "float",
+            "optional": false,
+            "field": "outputs.output.layers.layer.bounds.width",
+            "description": "<p>in pixels</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "float",
+            "optional": false,
+            "field": "outputs.output.layers.layer.bounds.height",
+            "description": "<p>in pixels</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.blendOptions",
+            "description": "<p>Blend options of a layer, including opacity and blend mode</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": false,
+            "field": "outputs.output.layers.layer.blendOptions.opacity",
+            "description": "<p>Indicates the opacity value of a layer</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.layers.layer.blendOptions.blendMode",
+            "description": "<p>Blend mode of a layer</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.mask",
+            "description": "<p>An object describing the input mask added or replaced to the layer.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "bool",
+            "optional": false,
+            "field": "outputs.output.layers.layer.mask.clip",
+            "description": "<p>Indicates if this is a clipped layer.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "bool",
+            "optional": false,
+            "field": "outputs.output.layers.layer.mask.enabled",
+            "description": "<p>Indicates a mask is enabled on that layer or not.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "bool",
+            "optional": false,
+            "field": "outputs.output.layers.layer.mask.linked",
+            "description": "<p>Indicates a mask is linked to the layer or not.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.layers.layer.mask.offset",
+            "description": "<p>An object to specify mask offset on the layer.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "integer",
+            "optional": false,
+            "field": "outputs.output.layers.layer.mask.offset.x",
+            "description": "<p>Offset to indicate horizontal move of the mask.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "integer",
+            "optional": false,
+            "field": "outputs.output.layers.layer.mask.offset.y",
+            "description": "<p>Offset to indicate vertical move of the mask.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.smartObject",
+            "description": "<p>An object describing the attributes specific to creating or editing a smartObject layer.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.layers.layer.smartObject.type",
+            "description": "<p>Desired image format for the smart object.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "bool",
+            "optional": false,
+            "field": "outputs.output.layers.layer.smartObject.linked",
+            "defaultValue": "false",
+            "description": "<p>Indicates if this Smart Object is linked. Currently we support Embedded Smart Object only which means &quot;linked = false&quot;.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.layers.layer.smartObject.name",
+            "description": "<p>Name of the embedded or linked smart object. Currently we support Embedded Smart Object only.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.layers.layer.smartObject.path",
+            "description": "<p>Attribute for only Linked Smart Object. Indicates the relative path for the Linked Smart Object.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.fill",
+            "description": "<p>An object describing the attributes specific to creating or editing a fill layer.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.layers.layer.fill.solidColor",
+            "description": "<p>An object describing the solid color type for this fill layer. Currently supported mode is RGB only.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.layers.layer.fill.solidColor.rgb",
+            "description": "<p>An object describing the rgb color format in 8 bits for this fill layer.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "integer",
+            "allowedValues": [
+              "0..255"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.fill.solidColor.color.rgb.red",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "integer",
+            "allowedValues": [
+              "0..255"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.fill.solidColor.color.rgb.green",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "integer",
+            "allowedValues": [
+              "0..255"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.fill.solidColor.color.rgb.blue",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.text",
+            "description": "<p>text settings</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.content",
+            "description": "<p>the text string</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "characterStyle[]",
+            "optional": true,
+            "field": "outputs.output.layers.layer.text.characterStyles",
+            "description": "<p>characterStyle settings. If the same supported attributes apply to all characters in the layer than this will be an array of one item, otherwise each characterStyle object will have a 'from' and 'to' value indicating the range of characters that the style applies to.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.from",
+            "description": "<p>The beginning of the range of characters that this characterStyle applies to. Based on initial index of 0. For example a style applied to only the first two characters would be from=0 and to=1</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.to",
+            "description": "<p>The ending of the range of characters that this characterStyle applies to. Based on initial index of 0. For example a style applied to only the first two characters would be from=0 and to=1</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "float",
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontSize",
+            "description": "<p>in points</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontName",
+            "description": "<p>the font's postscript name.  The list of supported fonts is at https://github.com/AdobeDocs/photoshop-api-docs/blob/master/SupportedFonts.md</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontAvailable",
+            "description": "<p>is the font missing.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "allowedValues": [
+              "\"horizontal\"",
+              "\"vertical\""
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.orientation",
+            "description": "<p>the text orientation</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor",
+            "description": "<p>the font color settings.It can be in one of the formats</p> <ul>   <li>rgb</li>   <li>cmyk</li>   <li>gray</li>   <li>lab</li> </ul>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.rgb",
+            "description": "<p>the font color settings for rgb mode in 16bit repesentation</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0..32768"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.rgb.red",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0..32768"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.rgb.green",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0..32768"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.rgb.blue",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.cmyk",
+            "description": "<p>the font color settings for cmyk mode in 16bit repesentation.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0..32768"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.cmyk.cyan",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0..32768"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.cmyk.magenta",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0..32768"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.cmyk.yellowColor",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0..32768"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.cmyk.black",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.gray",
+            "description": "<p>the font color settings for gray mode in 16bit repesentation.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0..32768"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.gray.gray",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.lab",
+            "description": "<p>the font color settings for lab mode in 16bit repesentation.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0..32768"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.lab.luminance",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0..32768"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.lab.a",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "allowedValues": [
+              "0..32768"
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.characterStyles.characterStyle.fontColor.lab.b",
+            "description": ""
+          },
+          {
+            "group": "Success 202",
+            "type": "paragraphStyle[]",
+            "optional": true,
+            "field": "outputs.output.layers.layer.text.paragrapStyles",
+            "description": "<p>paragrapStyles settings. If the same supported attributes apply to all characters in the layer than this will be an array of one item, otherwise each paragraphStyle object will have a 'from' and 'to' value indicating the range of characters that the style applies to.</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": true,
+            "field": "outputs.output.layers.layer.text.paragrapStyles.paragraphStyle",
+            "description": "<p>paragraph style settings</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.output.layers.layer.text.paragrapStyles.paragraphStyle.from",
+            "description": "<p>The beginning of the range of characters that this paragraphStyle applies to. Based on initial index of 0. For example a style applied to only the first two characters would be from=0 and to=1</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.output.layers.layer.text.paragrapStyles.paragraphStyle.to",
+            "description": "<p>The ending of the range of characters that this paragraphStyle applies to. Based on initial index of 0. For example a style applied to only the first two characters would be from=0 and to=1</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "allowedValues": [
+              "\"left\"",
+              "\"center\"",
+              "\"right\"",
+              "\"justify\"",
+              "\"justifyLeft\"",
+              "\"justifyCenter\"",
+              "\"justifyRight\""
+            ],
+            "optional": false,
+            "field": "outputs.output.layers.layer.text.paragrapStyles.paragraphStyle.alignment",
+            "description": "<p>the paragraph alignment</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "object",
+            "optional": false,
+            "field": "outputs.output.errors",
+            "description": "<p>any errors reported requested output</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.errors.type",
+            "description": "<p>a machine readable error type</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.errors.code",
+            "description": "<p>a machine readable error code</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "string",
+            "optional": false,
+            "field": "outputs.output.errors.title",
+            "description": "<p>a short human readable error summary</p>"
+          },
+          {
+            "group": "Success 202",
+            "type": "array",
+            "optional": true,
+            "field": "outputs.output.errors.errorDetails",
+            "description": "<p>further descriptions of the exact errors where <code>errorDetail</code> is substituted for a specific issue</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Success Templated",
+          "content": "HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: {xsd:nonNegativeInteger}\nLocation: \"https://image.adobe.io/pie/psdService/status/<:jobId>\"\n{\n    \"jobId\":\"<:jobId>\",\n    \"outputs\":[\n        {\n            \"input\":\"<input>\",\n            \"status\":\"<status>\",\n            \"created\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n            \"modified\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n            \"document\":{\n                \"name\":\"<filename>\",\n                \"height\":<height>,\n                \"width\":<width>,\n                \"imageMode\":\"<imageMode>\",\n                \"photoshopBuild\": \"<string>\"\n            },\n            \"layers\":[\n                {\n                    \"id\":<layerd>,\n                    \"index\":<index>,\n                    \"name\":\"<name>\",\n                    \"type\":\"<type>\",\n                    \"locked\":<bool>,\n                    \"visible\":<bool>,\n                    \"thumbnail\":\"<href_thumbnail>\",\n                    \"mask\":{\n                        \"enabled\":<bool>,\n                        \"linked\":<bool>,\n                        \"offset\":{\n                            \"x\":<int>,\n                            \"y\":<int>\n                        },\n                        \"clip\":<bool>\n                    },\n                    \"smartObject\":{\n                      \"type\":<image_type>,\n                      \"linked\":<bool>,\n                      \"name\" : <name>,\n                      \"path\":<relative path for a linked smart object>\n                    },\n                    \"fill\":{\n                      \"solidColor\":{\n                        \"rgb\" : {\n                          \"red\":<8 bit int>,\n                          \"green\":<8 bit int>,\n                          \"blue\":<8 bit int>\n                        }\n                      }\n                    },\n                    \"children\":[\n\n                    ],\n                    \"bounds\":{\n                        \"top\":<top>,\n                        \"left\":<left>,\n                        \"width\":<width>,\n                        \"height\":<height>\n                    },\n                    \"blendOptions\": {\n                       \"blendMode\": <blendMode>,\n                       \"opacity\": <opacity>\n                    },\n                    \"text\":{\n                        \"content\":\"<text contents>\",\n                        \"characterStyles\":[\n                            {\n                                \"from\":<int>,\n                                \"to\":<int>,\n                                \"text\":\"<text>\",\n                                \"fontSize\":<fontSize>,\n                                \"fontName\":\"<fontName>\",\n                                \"fontAvailable\":<bool>,\n                                \"orientation\":\"<orientation>\",\n                                \"fontColor\":{\n                                    \"rgb\":{\n                                        \"red\":<16 bit integer>,\n                                        \"green\":<16 bit integer>,\n                                        \"blue\":<16 bit integer>\n                                    }\n                                }\n                            }\n                        ],\n                        \"paragraphStyles\":[\n                            {\n                                \"alignment\":\"<alignment>\",\n                                \"from\":<int>,\n                                \"to\":<int>\n                            }\n                        ]\n                    },\n                    \"adjustements\":{\n                        \"brightnessContrast\":{\n                            \"brightness\":<-150..150>,\n                            \"contrast\":<-150..150>\n                        },\n                        \"exposure\":{\n                            \"exposure\":<-20...20>,\n                            \"offset\":<-0.5...0.5>,\n                            \"gammaCorrection\":<0.01...9.99>\n                        },\n                        \"colorBalance\":{\n                            \"preserveLuminosity\":true,\n                            \"shadowLevels\":[\n                                <-100...100>,\n                                <-100...100>,\n                                <-100...100>\n                            ],\n                            \"midtoneLevels\":[\n                                <-100...100>,\n                                <-100...100>,\n                                <-100...100>\n                            ],\n                            \"highlightLevels\":[\n                                <-100...100>,\n                                <-100...100>,\n                                <-100...100>\n                            ]\n                        },\n                        \"hueSaturation\":{\n                            \"channels\":[\n                                {\n                                    \"channel\":\"master\",\n                                    \"hue\":<180...180>,\n                                    \"saturation\":<-100...100>,\n                                    \"lightness\":<-100...100>\n                                }\n                            ],\n                            \"colorize\":false\n                        }\n                    }\n                }\n            ]\n        },\n        {\n            \"input\":\"<href>\",\n            \"status\":\"<status>\",\n            \"created\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n            \"modified\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n            \"errors\":{\n                \"type\":\"<errorType>\",\n                \"title\":\"<errorDescription>\",\n                \"code\":\"<errorCode>\",\n                \"<errorDetails>\":[\n                    {\n                        \"name\":\"<paramName>\",\n                        \"reason\":\"<error>\"\n                    }\n                ]\n            }\n        }\n    ],\n    \"_links\":{\n        \"self\":{\n            \"href\":\"https://image.adobe.io/pie/psdService/status/<:jobId>\"\n        }\n    }\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Success Example",
+          "content": "HTTP/1.1 200 OK\nContent-Type: application/json\nContent-Length: 2509\nLocation: \"https://image.adobe.io/pie/psdService/status/<:jobId>\"\n{\n\t\"jobId\": \"5b0ac5d9-5b1a-4f1c-ac69-22fe8a40a037\",\n\t\"outputs\": [{\n\t\t\"input\": \"/files/some_project/design.psd\",\n\t\t\"status\": \"succeeded\",\n\t\t\"created\": \"2018-01-04T12:57:15.12345Z\",\n\t\t\"modified\": \"2018-01-04T12:58:36.12345Z\",\n\t\t\"document\": {\n\t\t\t\"name\": \"design.psd\",\n\t\t\t\"height\": 2100,\n\t\t\t\"width\": 1500,\n\t\t\t\"imageMode\": \"rgb\"\n\t\t},\n\t\t\"layers\": [{\n\t\t\t\t\"id\": 44,\n\t\t\t\t\"index\": 12,\n\t\t\t\t\"type\": \"adjustmentLayer\",\n\t\t\t\t\"name\": \"AdjustmentLayer\",\n\t\t\t\t\"locked\": true,\n\t\t\t\t\"visible\": true,\n\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\"bounds\": {\n\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\"width\": \"0\",\n\t\t\t\t\t\"height\": \"0\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": 38,\n\t\t\t\t\"locked\": false,\n\t\t\t\t\"name\": \"SO Layer\",\n\t\t\t\t\"type\": \"smartObject\",\n\t\t\t\t\"visible\": true,\n\t\t\t\t\"add\": {\n\t\t\t\t\t\"insertTop\": true\n\t\t\t\t},\n\t\t\t\t\"smartObject\": {\n\t\t\t\t\t\"type\": \"image/jpeg\",\n\t\t\t\t\t\"linked\": false,\n                                        \"name\" : \"Puppy.jpg\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": 34,\n\t\t\t\t\"index\": 11,\n\t\t\t\t\"type\": \"layer\",\n\t\t\t\t\"name\": \"TopLayer\",\n\t\t\t\t\"locked\": false,\n\t\t\t\t\"visible\": true,\n\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\"bounds\": {\n\t\t\t\t\t\"top\": \"140\",\n\t\t\t\t\t\"left\": \"1330\",\n\t\t\t\t\t\"width\": \"677\",\n\t\t\t\t\t\"height\": \"632\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": 32,\n\t\t\t\t\"index\": 10,\n\t\t\t\t\"type\": \"layerSection\",\n\t\t\t\t\"name\": \"GroupLayer\",\n\t\t\t\t\"locked\": true,\n\t\t\t\t\"visible\": true,\n\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\"bounds\": {\n\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\"width\": \"0\",\n\t\t\t\t\t\"height\": \"0\"\n\t\t\t\t},\n\t\t\t\t\"children\": [{\n\t\t\t\t\t\t\"id\": 64,\n\t\t\t\t\t\t\"index\": 9,\n\t\t\t\t\t\t\"type\": \"fillLayer\",\n\t\t\t\t\t\t\"name\": \"FillLayer\",\n\t\t\t\t\t\t\"locked\": false,\n\t\t\t\t\t\t\"visible\": false,\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\t\t\"width\": \"0\",\n\t\t\t\t\t\t\t\"height\": \"0\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"fill\": {\n\t\t\t\t\t\t\t\"solidColor\": {\n\t\t\t\t\t\t\t\t\"rgb\": {\n\t\t\t\t\t\t\t\t\t\"red\": 0,\n\t\t\t\t\t\t\t\t\t\"green\": 255,\n\t\t\t\t\t\t\t\t\t\"blue\": 255\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"blendOptions\": {\n\t\t\t\t\t\t\t\"opacity\": 90,\n\t\t\t\t\t\t\t\"blendMode\": \"normal\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\": 44,\n\t\t\t\t\t\t\"index\": 9,\n\t\t\t\t\t\t\"type\": \"smartObject\",\n\t\t\t\t\t\t\"name\": \"SDK_PSD\",\n\t\t\t\t\t\t\"locked\": false,\n\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"1169\",\n\t\t\t\t\t\t\t\"left\": \"1757\",\n\t\t\t\t\t\t\t\"width\": \"343\",\n\t\t\t\t\t\t\t\"height\": \"331\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\": 60,\n\t\t\t\t\t\t\"index\": 8,\n\t\t\t\t\t\t\"type\": \"layer\",\n\t\t\t\t\t\t\"name\": \"HiddenLayer\",\n\t\t\t\t\t\t\"locked\": false,\n\t\t\t\t\t\t\"visible\": false,\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\t\t\"width\": \"0\",\n\t\t\t\t\t\t\t\"height\": \"0\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\": 66,\n\t\t\t\t\t\t\"index\": 7,\n\t\t\t\t\t\t\"type\": \"layerSection\",\n\t\t\t\t\t\t\"name\": \"NestedGroup\",\n\t\t\t\t\t\t\"locked\": true,\n\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\"mask\": {\n\t\t\t\t\t\t\t\"enabled\": false,\n\t\t\t\t\t\t\t\"linked\": true,\n\t\t\t\t\t\t\t\"offset\": {\n\t\t\t\t\t\t\t\t\"x\": 70,\n\t\t\t\t\t\t\t\t\"y\": 50\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\"clip\": true\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\t\t\"width\": \"0\",\n\t\t\t\t\t\t\t\"height\": \"0\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t\"children\": [{\n\t\t\t\t\t\t\t\t\"id\": 53,\n\t\t\t\t\t\t\t\t\"index\": 6,\n\t\t\t\t\t\t\t\t\"type\": \"textLayer\",\n\t\t\t\t\t\t\t\t\"name\": \"AreaTextLayer\",\n\t\t\t\t\t\t\t\t\"locked\": true,\n\t\t\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\t\t\"top\": \"265\",\n\t\t\t\t\t\t\t\t\t\"left\": \"155\",\n\t\t\t\t\t\t\t\t\t\"width\": \"470\",\n\t\t\t\t\t\t\t\t\t\"height\": \"317\"\n\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\"text\": {\n\t\t\t\t\t\t\t\t\t\"content\": \"My Text String\",\n\t\t\t\t\t\t\t\t\t\"characterStyles\": [{\n\t\t\t\t\t\t\t\t\t\t\"fontSize\": 12.5,\n\t\t\t\t\t\t\t\t\t\t\"fontName\": \"Arial\",\n\t\t\t\t\t\t\t\t\t\t\"fontAvailable\": true,\n\t\t\t\t\t\t\t\t\t\t\"orientation\": \"horizontal\",\n\t\t\t\t\t\t\t\t\t\t\"fontColor\": {\n\t\t\t\t\t\t\t\t\t\t\t\"rgb\": {\n\t\t\t\t\t\t\t\t\t\t\t\t\"red\": 26086,\n\t\t\t\t\t\t\t\t\t\t\t\t\"green\": 23002,\n\t\t\t\t\t\t\t\t\t\t\t\t\"blue\": 8224\n\t\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t}],\n\t\t\t\t\t\t\t\t\t\"paragraphStyles\": [{\n\t\t\t\t\t\t\t\t\t\t\"alignment\": \"justify\"\n\t\t\t\t\t\t\t\t\t}]\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\"id\": 6,\n\t\t\t\t\t\t\t\t\"index\": 5,\n\t\t\t\t\t\t\t\t\"type\": \"textLayer\",\n\t\t\t\t\t\t\t\t\"name\": \"PointTextLayer\",\n\t\t\t\t\t\t\t\t\"locked\": true,\n\t\t\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\t\t\"top\": \"55\",\n\t\t\t\t\t\t\t\t\t\"left\": \"158\",\n\t\t\t\t\t\t\t\t\t\"width\": \"154\",\n\t\t\t\t\t\t\t\t\t\"height\": \"50\"\n\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\"text\": {\n\t\t\t\t\t\t\t\t\t\"content\": \"My Text String\",\n\t\t\t\t\t\t\t\t\t\"characterStyles\": [{\n\t\t\t\t\t\t\t\t\t\t\t\"from\": 0,\n\t\t\t\t\t\t\t\t\t\t\t\"to\": 5,\n\t\t\t\t\t\t\t\t\t\t\t\"fontSize\": 8,\n\t\t\t\t\t\t\t\t\t\t\t\"fontName\": \"Helvetica\",\n\t\t\t\t\t\t\t\t\t\t\t\"fontAvailable\": true,\n\t\t\t\t\t\t\t\t\t\t\t\"orientation\": \"horizontal\"\n\t\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\t\"from\": 6,\n\t\t\t\t\t\t\t\t\t\t\t\"to\": 13,\n\t\t\t\t\t\t\t\t\t\t\t\"fontSize\": 10,\n\t\t\t\t\t\t\t\t\t\t\t\"fontName\": \"Helvetica-bold\",\n\t\t\t\t\t\t\t\t\t\t\t\"fontAvailable\": true,\n\t\t\t\t\t\t\t\t\t\t\t\"orientation\": \"horizontal\"\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\t\t\"paragraphStyles\": [{\n\t\t\t\t\t\t\t\t\t\t\t\"from\": 0,\n\t\t\t\t\t\t\t\t\t\t\t\"to\": 5,\n\t\t\t\t\t\t\t\t\t\t\t\"alignment\": \"right\"\n\t\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\t\t\"from\": 6,\n\t\t\t\t\t\t\t\t\t\t\t\"to\": 13,\n\t\t\t\t\t\t\t\t\t\t\t\"alignment\": \"center\"\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t]\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\": 39,\n\t\t\t\t\t\t\"index\": 3,\n\t\t\t\t\t\t\"type\": \"contentLayer\",\n\t\t\t\t\t\t\"name\": \"ShapeLayer\",\n\t\t\t\t\t\t\"locked\": false,\n\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"727\",\n\t\t\t\t\t\t\t\"left\": \"91\",\n\t\t\t\t\t\t\t\"width\": \"473\",\n\t\t\t\t\t\t\t\"height\": \"380\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\t{\n\t\t\t\t\t\t\"id\": 2,\n\t\t\t\t\t\t\"index\": 2,\n\t\t\t\t\t\t\"type\": \"layer\",\n\t\t\t\t\t\t\"name\": \"ImageLayer\",\n\t\t\t\t\t\t\"locked\": true,\n\t\t\t\t\t\t\"visible\": true,\n\t\t\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\t\t\"bounds\": {\n\t\t\t\t\t\t\t\"top\": \"316\",\n\t\t\t\t\t\t\t\"left\": \"702\",\n\t\t\t\t\t\t\t\"width\": \"639\",\n\t\t\t\t\t\t\t\"height\": \"791\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t]\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": 1,\n\t\t\t\t\"index\": 0,\n\t\t\t\t\"type\": \"backgroundLayer\",\n\t\t\t\t\"name\": \"Background\",\n\t\t\t\t\"locked\": false,\n\t\t\t\t\"visible\": true,\n\t\t\t\t\"thumbnail\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n\t\t\t\t\"bounds\": {\n\t\t\t\t\t\"top\": \"0\",\n\t\t\t\t\t\"left\": \"0\",\n\t\t\t\t\t\"width\": \"2100\",\n\t\t\t\t\t\"height\": \"1500\"\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t}],\n\t\"_links\": {\n\t\t\"self\": {\n\t\t\t\"href\": \"https://image.adobe.io/pie/psdService/status/5b0ac5d9-5b1a-4f1c-ac69-22fe8a40a037\"\n\t\t}\n\t}\n}",
+          "type": "object"
+        },
+        {
+          "title": "Request: HTTP Example",
+          "content": "GET /psdService/status/<:jobId> HTTP/1.1\nHost: image.adobe.io\nAuthorization: Bearer $token\nX-Api-Key: $api_key",
+          "type": "http"
+        },
+        {
+          "title": "Request: CURL Templated",
+          "content": "curl -H \"Authorization: Bearer $token\" -H \"x-api-key: $api_key\" -X GET https://image.adobe.io/pie/psdService/status/<:jobId>",
+          "type": "curl"
+        }
+      ]
+    },
+    "filename": "docs-src/pre-release/get-document-manifest.js",
+    "groupTitle": "Photoshop",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Authorization value.</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "Content-Type",
+            "description": "<p>&quot;application/json&quot;</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": false,
+            "field": "x-api-key",
+            "description": "<p>a client id</p>"
+          },
+          {
+            "group": "Header",
+            "type": "string",
+            "optional": true,
+            "field": "x-gw-ims-org-id",
+            "defaultValue": "nil",
+            "description": "<p>x-gw-ims-org-id the IMS organization ID. This needs to be sent only if it is desirable to receive the job status through Adobe I/O Events</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Errors": [
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>a machine-readable error type</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "code",
+            "description": "<p>a machine-readable error code</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>short, human-readable summary of the problem</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "array",
+            "optional": false,
+            "field": "errorDetails",
+            "description": "<p>further descriptions of the exact errors where <code>errorDetail</code> is substituted for a specific issue.</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "details",
+            "optional": false,
+            "field": "errorCodes",
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response-Inline Templated",
+          "content": "// This is a templated example for when a requested job has failed\n\nHTTP/1.1 <Status_Code> <Reason>\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"jobId\": \"<jobID\",\n  \"outputs\":[\n      {\n        \"input\":\"<href>\",\n        \"status\":\"<status>\",\n        \"created\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n        \"modified\":\"<YYYY-DD-MMThh:mm:ss.mmmmmZ>\",\n        \"errors\":{\n          \"type\":\"<errorType>\",\n          \"title\":\"<errorDescription>\",\n          \"code\": \"\"<errorCode>\",\n          \"<errorDetails>\":[\n            {\n              \"name\":\"<paramName>\",\n              \"reason\":\"<error>\"\n            }\n          ]\n        }\n      }\n   ]\n}",
+          "type": "object"
+        },
+        {
+          "title": "Error-Response-Inline Example",
+          "content": " // In this example the GET call to /status succeeds but one of the initiated jobs has failed\n\n HTTP/1.1 200 OK\n Content-Type: application/json\n Content-Length: {xsd:nonNegativeInteger}\n Location: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n {\n   \"jobId\":\"f54e0fcb-260b-47c3-b520-de0d17dc2b67\",\n   \"outputs\":[\n      {\n         \"input\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n         \"status\":\"failed\",\n         \"created\":\"2018-01-04T12:57:15.12345Z\",\n         \"modified\":\"2018-01-04T12:58:36.12345Z\",\n         \"error\":{\n            \"type\":\"FileExistsError\",\n            \"title\":\"input file does not exist\",\n            \"code\":\"400\"\n         }\n      }\n   ]\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Error Templated",
+          "content": "// This is a templated example for when the call itself fails\n\nHTTP/1.1 <Status_Code> <Reason>\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"type\": \"<errorType>\",\n  \"code\": \"<errorCode>\",\n  \"title\": \"<errorDescription>\",\n  \"<errorDetails>\": [\n    {\n      \"name\":\"<paramName>\",\n      \"reason\":\"<error>\"\n    }\n  ]\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Error Example",
+          "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
     "url": "https://image.adobe.io/pie/psdService/documentOperations",
     "title": "document operations",
     "description": "<p>Initiates an asynchronous job to apply (optional) psd edits and then generate renditions and/or save a new psd</p>",
@@ -5847,6 +5867,26 @@ define({ "api": [
             "optional": false,
             "field": "options",
             "description": "<p>available options to apply to all input files</p>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"useDefault\"",
+              "\"fail\""
+            ],
+            "optional": false,
+            "field": "options.manageMissingFonts",
+            "defaultValue": "useDefault",
+            "description": "<p>action to take if there are one or more missing fonts in the document</p> <ul>   <li>fail - The job will not succeed and the status will be set to \"failed\", with the details of the error provided in the \"details\" section in the status</li>   <li>useDefault - The job will succeed, however, by default all the missing fonts will be replaced with this font: LiberationSansNarrow-Italic</li> </ul>"
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "optional": true,
+            "field": "options.globalFont",
+            "defaultValue": "nil",
+            "description": "<p>options.globalFont The full postscript name of the font to be used as the global default for the document. This font will be used for any text layer which has a missing font and no other font has been specifically provided for that layer.<br/>If this font itself is missing, the option specified for <code>manageMissingFonts</code> from above will take effect.</p>"
           },
           {
             "group": "Request",
@@ -7181,12 +7221,12 @@ define({ "api": [
       "examples": [
         {
           "title": "Request: HTTP Templated",
-          "content": "POST https://image.adobe.io/pie/psdService/documentOperations HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"inputs\":[\n    {\n      \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\":\"<storage>\"\n    }\n  ],\n  \"options\":{\n      \"document\":{\n          \"canvasSize\":{\n            \"bounds\" : {\n              \"top\":<top>,\n              \"left\":<left>,\n              \"bottom\":<bottom>,\n              \"right\":<right>\n            }\n          },\n          \"imageSize\":{\n              \"height\":<height>,\n              \"width\":<width>\n          },\n          \"trim\": {\n              \"basedOn\":\"transparentPixels\"\n          }\n      },\n      \"layers\":[\n          {\n              \"id\":<layerId>,\n              \"index\":<index>,\n              \"type\":\"<type>\",\n              \"name\":\"<name>\",\n              \"locked\":<bool>,\n              \"visible\":<bool>,\n              \"children\":[\n\n              ],\n              \"edit\":{},\n              \"add\":{\n                  \"insertAbove\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertBelow\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertInto\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertTop\":<bool>,\n                  \"insertBottom\":<bool>\n              },\n              \"move\":{\n                  \"includeChildren\":<bool>,\n                  \"insertAbove\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertBelow\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertInto\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertTop\":<bool>,\n                  \"insertBottom\":<bool>\n              },\n              \"delete\":{\n                  \"includeChildren\":<bool>\n              },\n              \"input\":{\n                  \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n                  \"storage\":\"<storage>\"\n              },\n              \"mask\":{\n                  \"input\":{\n                      \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n                      \"storage\":\"<storage>\"\n                  },\n                  \"enabled\":<bool>,\n                  \"linked\":<bool>,\n                  \"offset\":{\n                      \"x\":<int>,\n                      \"y\":<int>\n                  },\n                  \"clip\":<bool>\n              },\n              \"smartObject\":{\n                \"linked\":<bool>\n              }\n              \"bounds\":{\n                  \"top\":<top>,\n                  \"left\":<left>,\n                  \"width\":<width>,\n                  \"height\":<height>\n              },\n              \"fill\":{\n                \"solidColor\":{\n                  \"rgb\" : {\n                    \"red\":<8 bit int>,\n                    \"green\":<8 bit int>,\n                    \"blue\":<8 bit int>\n                  }\n                }\n              },\n              \"text\":{\n                  \"content\":\"<text>\",\n                  \"characterStyles\":[\n                      {\n                          \"from\":<int>,\n                          \"to\":<int>,\n                          \"fontSize\":<fontSize>,\n                          \"fontName\":\"<fontName>\",\n                          \"orientation\":\"<orientation>\",\n                          \"fontColor\":{\n                              \"rgb\":{\n                                  \"red\":<16 bit integer>,\n                                  \"green\":<16 bit integer>,\n                                  \"blue\":<16 bit integer>\n                              }\n                          }\n                      }\n                  ],\n                  \"paragraphStyles\":[\n                      {\n                          \"from\":<int>,\n                          \"to\":<int>,\n                          \"alignment\":\"<alignment>\"\n                      }\n                  ]\n              },\n              \"adjustments\":{\n                  \"brightnessContrast\":{\n                      \"brightness\":<-150..150>,\n                      \"contrast\":<-150..150>\n                  },\n                  \"exposure\":{\n                      \"exposure\":<-20...20>,\n                      \"offset\":<-0.5...0.5>,\n                      \"gammaCorrection\":<0.01...9.99>\n                  },\n                  \"colorBalance\":{\n                      \"preserveLuminosity\":true,\n                      \"shadowLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ],\n                      \"midtoneLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ],\n                      \"highlightLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ]\n                  },\n                  \"hueSaturation\":{\n                      \"channels\":[\n                          {\n                              \"channel\":\"master\",\n                              \"hue\":<180...180>,\n                              \"saturation\":<-100...100>,\n                              \"lightness\":<-100...100>\n                          }\n                      ],\n                      \"colorize\":false\n                  }\n              },\n              \"blendOptions\": {\n                  \"opacity\":<int>,\n                  \"blendMode\": \"<blendMode>\"\n              }\n          }\n      ]\n  },\n  \"outputs\":[\n      {\n        \"href\":\"<cc_storage_location>\",\n        \"storage\":\"adobe\",\n        \"type\":\"<type>\",\n        \"width\":<width>,\n        \"overwrite\":<bool>,\n        \"trimToCanvas\":<bool>,\n        \"layers\":[\n            {\n                \"id\":<id>,\n                \"name\":<name>\n            }\n        ]\n      },\n      {\n        \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n        \"storage\":\"external\",\n        \"type\":\"image/vnd.adobe.photoshop\",\n        \"overwrite\":false\n      }\n  ]\n}",
+          "content": "POST https://image.adobe.io/pie/psdService/documentOperations HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n  \"inputs\":[\n    {\n      \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\":\"<storage>\"\n    }\n  ],\n  \"options\":{\n      \"manageMissingFonts\": \"<fail> or <useDefault>\",\n      \"globalFont\": \"<global_font_postscript_name>\",\n      \"fonts\": [\n        {\n          \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n          \"storage\":\"<storage>\"\n        }\n      ],\n      \"document\":{\n          \"canvasSize\":{\n            \"bounds\" : {\n              \"top\":<top>,\n              \"left\":<left>,\n              \"bottom\":<bottom>,\n              \"right\":<right>\n            }\n          },\n          \"imageSize\":{\n              \"height\":<height>,\n              \"width\":<width>\n          },\n          \"trim\": {\n              \"basedOn\":\"transparentPixels\"\n          }\n      },\n      \"layers\":[\n          {\n              \"id\":<layerId>,\n              \"index\":<index>,\n              \"type\":\"<type>\",\n              \"name\":\"<name>\",\n              \"locked\":<bool>,\n              \"visible\":<bool>,\n              \"children\":[\n\n              ],\n              \"edit\":{},\n              \"add\":{\n                  \"insertAbove\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertBelow\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertInto\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertTop\":<bool>,\n                  \"insertBottom\":<bool>\n              },\n              \"move\":{\n                  \"includeChildren\":<bool>,\n                  \"insertAbove\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertBelow\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertInto\":{\n                      \"id\":<id>,\n                      \"name\":\"<name>\"\n                  },\n                  \"insertTop\":<bool>,\n                  \"insertBottom\":<bool>\n              },\n              \"delete\":{\n                  \"includeChildren\":<bool>\n              },\n              \"input\":{\n                  \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n                  \"storage\":\"<storage>\"\n              },\n              \"mask\":{\n                  \"input\":{\n                      \"href\":\"<presigned_getURL> or <cc_storage_location>\",\n                      \"storage\":\"<storage>\"\n                  },\n                  \"enabled\":<bool>,\n                  \"linked\":<bool>,\n                  \"offset\":{\n                      \"x\":<int>,\n                      \"y\":<int>\n                  },\n                  \"clip\":<bool>\n              },\n              \"smartObject\":{\n                \"linked\":<bool>\n              }\n              \"bounds\":{\n                  \"top\":<top>,\n                  \"left\":<left>,\n                  \"width\":<width>,\n                  \"height\":<height>\n              },\n              \"fill\":{\n                \"solidColor\":{\n                  \"rgb\" : {\n                    \"red\":<8 bit int>,\n                    \"green\":<8 bit int>,\n                    \"blue\":<8 bit int>\n                  }\n                }\n              },\n              \"text\":{\n                  \"content\":\"<text>\",\n                  \"characterStyles\":[\n                      {\n                          \"from\":<int>,\n                          \"to\":<int>,\n                          \"fontSize\":<fontSize>,\n                          \"fontName\":\"<fontName>\",\n                          \"orientation\":\"<orientation>\",\n                          \"fontColor\":{\n                              \"rgb\":{\n                                  \"red\":<16 bit integer>,\n                                  \"green\":<16 bit integer>,\n                                  \"blue\":<16 bit integer>\n                              }\n                          }\n                      }\n                  ],\n                  \"paragraphStyles\":[\n                      {\n                          \"from\":<int>,\n                          \"to\":<int>,\n                          \"alignment\":\"<alignment>\"\n                      }\n                  ]\n              },\n              \"adjustments\":{\n                  \"brightnessContrast\":{\n                      \"brightness\":<-150..150>,\n                      \"contrast\":<-150..150>\n                  },\n                  \"exposure\":{\n                      \"exposure\":<-20...20>,\n                      \"offset\":<-0.5...0.5>,\n                      \"gammaCorrection\":<0.01...9.99>\n                  },\n                  \"colorBalance\":{\n                      \"preserveLuminosity\":true,\n                      \"shadowLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ],\n                      \"midtoneLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ],\n                      \"highlightLevels\":[\n                          <-100...100>,\n                          <-100...100>,\n                          <-100...100>\n                      ]\n                  },\n                  \"hueSaturation\":{\n                      \"channels\":[\n                          {\n                              \"channel\":\"master\",\n                              \"hue\":<180...180>,\n                              \"saturation\":<-100...100>,\n                              \"lightness\":<-100...100>\n                          }\n                      ],\n                      \"colorize\":false\n                  }\n              },\n              \"blendOptions\": {\n                  \"opacity\":<int>,\n                  \"blendMode\": \"<blendMode>\"\n              }\n          }\n      ]\n  },\n  \"outputs\":[\n      {\n        \"href\":\"<cc_storage_location>\",\n        \"storage\":\"adobe\",\n        \"type\":\"<type>\",\n        \"width\":<width>,\n        \"overwrite\":<bool>,\n        \"trimToCanvas\":<bool>,\n        \"layers\":[\n            {\n                \"id\":<id>,\n                \"name\":<name>\n            }\n        ]\n      },\n      {\n        \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n        \"storage\":\"external\",\n        \"type\":\"image/vnd.adobe.photoshop\",\n        \"overwrite\":false\n      }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "Request: HTTP Example",
-          "content": "POST https://image.adobe.io/pie/psdService/documentOperations HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n   \"inputs\":[\n      {\n         \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n         \"storage\":\"external\"\n      }\n   ],\n   \"options\":{\n      \"document\":{\n         \"canvasSize\":{\n           \"bounds\" : {\n             \"top\":200,\n             \"left\":200,\n             \"bottom\":500,\n             \"right\":500\n           }\n         },\n         \"imageSize\":{\n            \"height\":100,\n            \"width\":100\n         },\n         \"trim\":{\n            \"basedOn\":\"transparentPixels\"\n         }\n      },\n      \"layers\":[\n         {\n            \"add\":{\n               \"insertTop\":true\n            },\n            \"name\":\"new adjustment layer\",\n            \"type\":\"adjustmentLayer\",\n            \"visible\":true,\n            \"adjustments\":{\n               \"brightnessContrast\":{\n                  \"brightness\":-23,\n                  \"contrast\":15\n               }\n            }\n         },\n         {\n           \"add\":{\n             \"insertBottom\":true\n           },\n           \"name\":\"new content layer\",\n           \"type\":\"fillLayer\",\n           \"visible\":true,\n           \"fill\":{\n             \"solidColor\":{\n               \"rgb\" : {\n                 \"red\":0,\n                 \"green\":255,\n                 \"blue\":255\n               }\n             }\n           },\n           \"blendOptions\":{\n             \"opacity\":90,\n             \"blendMode\":\"normal\"\n           }\n         },\n         {\n            \"index\":8,\n            \"locked\":false,\n            \"name\":\"SO Layer\",\n            \"type\":\"smartObject\",\n            \"visible\":true,\n            \"add\":{\n               \"insertTop\":true\n            },\n            \"input\":{\n               \"href\":\"files/input/Simple.psd\",\n               \"storage\":\"adobe\"\n            },\n            \"smartObject\":{\n               \"linked\":false\n            }\n         },\n         {\n            \"id\":33,\n            \"edit\":{\n\n            },\n            \"index\":6,\n            \"type\":\"textLayer\",\n            \"name\":\"my text layer\",\n            \"locked\":true,\n            \"visible\":true,\n            \"bounds\":{\n               \"top\":50,\n               \"left\":100,\n               \"width\":500,\n               \"height\":450\n            },\n            \"text\":{\n               \"content\":\"NEW TEXT CHANGES\",\n               \"characterStyles\":[\n                  {\n                     \"fontSize\":12.5,\n                     \"fontName\":\"Arial-BoldMT\",\n                     \"orientation\":\"horizontal\",\n                     \"fontColor\":{\n                        \"rgb\":{\n                           \"red\":26086,\n                           \"green\":23002,\n                           \"blue\":8224\n                        }\n                     }\n                  }\n               ],\n               \"paragraphStyles\":[\n                  {\n                     \"alignment\":\"left\"\n                  }\n               ]\n            },\n            \"blendOptions\":{\n               \"opacity\":90,\n               \"blendMode\":\"normal\"\n            }\n         },\n         {\n            \"add\":{\n               \"insertAbove\":{\n                  \"id\":53\n               }\n            },\n            \"name\":\"New Exposure Layer\",\n            \"type\":\"adjustmentLayer\",\n            \"locked\":false,\n            \"visible\":true,\n            \"adjustments\":{\n               \"exposure\":{\n                  \"exposure\":0.25,\n                  \"offset\":0.0049,\n                  \"gammaCorrection\":1.38\n               }\n            }\n         },\n         {\n            \"edit\":{\n\n            },\n            \"id\":78,\n            \"index\":2,\n            \"type\":\"adjustmentLayer\",\n            \"name\":\"Color Balance\",\n            \"locked\":false,\n            \"visible\":true,\n            \"mask\":{\n               \"input\":{\n                  \"href\":\"files/abc.psd\",\n                  \"storage\":\"adobe\"\n               },\n               \"enabled\":false,\n               \"linked\":true,\n               \"offset\":{\n                  \"x\":70,\n                  \"y\":50\n               },\n               \"clip\":true\n            },\n            \"adjustments\":{\n               \"colorBalance\":{\n                  \"shadowLevels\":[\n                     0,\n                     10,\n                     20\n                  ],\n                  \"preserveLuminosity\":true,\n                  \"midtoneLevels\":[\n                     30,\n                     40,\n                     50\n                  ],\n                  \"highlightLevels\":[\n                     60,\n                     70,\n                     80\n                  ]\n               }\n            }\n         },\n         {\n            \"move\":{\n               \"insertAbove\":{\n                  \"name\":\"Hue Saturation\"\n               }\n            },\n            \"name\":\"new Image layer\",\n            \"type\":\"layer\",\n            \"visible\":true,\n            \"input\":{\n               \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n               \"storage\":\"external\"\n            }\n         },\n         {\n            \"edit\":{\n\n            },\n            \"id\":77,\n            \"index\":1,\n            \"type\":\"adjustmentLayer\",\n            \"name\":\"Hue Saturation\",\n            \"locked\":false,\n            \"visible\":true,\n            \"adjustements\":{\n               \"hueSaturation\":{\n                  \"channels\":[\n                     {\n                        \"channel\":\"master\",\n                        \"hue\":-5,\n                        \"saturation\":20,\n                        \"lightness\":0\n                     }\n                  ],\n                  \"colorize\":false\n               }\n            }\n         },\n         {\n            \"type\":\"backgroundLayer\",\n            \"index\":0,\n            \"locked\":true,\n            \"id\":1,\n            \"visible\":true,\n            \"name\":\"Background\"\n         }\n      ]\n   },\n   \"outputs\":[\n      {\n         \"href\":\"/files/some_project/output/design_$ReqID_$FileName.psd\",\n         \"storage\":\"adobe\",\n         \"type\":\"image/jpeg\",\n         \"width\":500,\n         \"overwrite\":true,\n         \"trimToCanvas\":false,\n         \"layers\":[\n            {\n               \"id\":77\n            }\n         ]\n      },\n      {\n         \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n         \"storage\":\"external\",\n         \"type\":\"image/vnd.adobe.photoshop\",\n         \"overwrite\":false\n      }\n   ]\n}",
+          "content": "POST https://image.adobe.io/pie/psdService/documentOperations HTTP/1.1\nHost: image.adobe.io\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nAuthorization: Bearer $token\nX-Api-Key: $api_key\n{\n   \"inputs\":[\n      {\n         \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n         \"storage\":\"external\"\n      }\n   ],\n   \"options\":{\n      \"manageMissingFonts\": \"useDefault\",\n      \"globalFont\": \"MyriadPro-Bold\",\n      \"fonts\": [\n        {\n           \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n           \"storage\":\"external\"\n        }\n      ],\n      \"document\":{\n         \"canvasSize\":{\n           \"bounds\" : {\n             \"top\":200,\n             \"left\":200,\n             \"bottom\":500,\n             \"right\":500\n           }\n         },\n         \"imageSize\":{\n            \"height\":100,\n            \"width\":100\n         },\n         \"trim\":{\n            \"basedOn\":\"transparentPixels\"\n         }\n      },\n      \"layers\":[\n         {\n            \"add\":{\n               \"insertTop\":true\n            },\n            \"name\":\"new adjustment layer\",\n            \"type\":\"adjustmentLayer\",\n            \"visible\":true,\n            \"adjustments\":{\n               \"brightnessContrast\":{\n                  \"brightness\":-23,\n                  \"contrast\":15\n               }\n            }\n         },\n         {\n           \"add\":{\n             \"insertBottom\":true\n           },\n           \"name\":\"new content layer\",\n           \"type\":\"fillLayer\",\n           \"visible\":true,\n           \"fill\":{\n             \"solidColor\":{\n               \"rgb\" : {\n                 \"red\":0,\n                 \"green\":255,\n                 \"blue\":255\n               }\n             }\n           },\n           \"blendOptions\":{\n             \"opacity\":90,\n             \"blendMode\":\"normal\"\n           }\n         },\n         {\n            \"index\":8,\n            \"locked\":false,\n            \"name\":\"SO Layer\",\n            \"type\":\"smartObject\",\n            \"visible\":true,\n            \"add\":{\n               \"insertTop\":true\n            },\n            \"input\":{\n               \"href\":\"files/input/Simple.psd\",\n               \"storage\":\"adobe\"\n            },\n            \"smartObject\":{\n               \"linked\":false\n            }\n         },\n         {\n            \"id\":33,\n            \"edit\":{\n\n            },\n            \"index\":6,\n            \"type\":\"textLayer\",\n            \"name\":\"my text layer\",\n            \"locked\":true,\n            \"visible\":true,\n            \"bounds\":{\n               \"top\":50,\n               \"left\":100,\n               \"width\":500,\n               \"height\":450\n            },\n            \"text\":{\n               \"content\":\"NEW TEXT CHANGES\",\n               \"characterStyles\":[\n                  {\n                     \"fontSize\":12.5,\n                     \"fontName\":\"Arial-BoldMT\",\n                     \"orientation\":\"horizontal\",\n                     \"fontColor\":{\n                        \"rgb\":{\n                           \"red\":26086,\n                           \"green\":23002,\n                           \"blue\":8224\n                        }\n                     }\n                  }\n               ],\n               \"paragraphStyles\":[\n                  {\n                     \"alignment\":\"left\"\n                  }\n               ]\n            },\n            \"blendOptions\":{\n               \"opacity\":90,\n               \"blendMode\":\"normal\"\n            }\n         },\n         {\n            \"add\":{\n               \"insertAbove\":{\n                  \"id\":53\n               }\n            },\n            \"name\":\"New Exposure Layer\",\n            \"type\":\"adjustmentLayer\",\n            \"locked\":false,\n            \"visible\":true,\n            \"adjustments\":{\n               \"exposure\":{\n                  \"exposure\":0.25,\n                  \"offset\":0.0049,\n                  \"gammaCorrection\":1.38\n               }\n            }\n         },\n         {\n            \"edit\":{\n\n            },\n            \"id\":78,\n            \"index\":2,\n            \"type\":\"adjustmentLayer\",\n            \"name\":\"Color Balance\",\n            \"locked\":false,\n            \"visible\":true,\n            \"mask\":{\n               \"input\":{\n                  \"href\":\"files/abc.psd\",\n                  \"storage\":\"adobe\"\n               },\n               \"enabled\":false,\n               \"linked\":true,\n               \"offset\":{\n                  \"x\":70,\n                  \"y\":50\n               },\n               \"clip\":true\n            },\n            \"adjustments\":{\n               \"colorBalance\":{\n                  \"shadowLevels\":[\n                     0,\n                     10,\n                     20\n                  ],\n                  \"preserveLuminosity\":true,\n                  \"midtoneLevels\":[\n                     30,\n                     40,\n                     50\n                  ],\n                  \"highlightLevels\":[\n                     60,\n                     70,\n                     80\n                  ]\n               }\n            }\n         },\n         {\n            \"move\":{\n               \"insertAbove\":{\n                  \"name\":\"Hue Saturation\"\n               }\n            },\n            \"name\":\"new Image layer\",\n            \"type\":\"layer\",\n            \"visible\":true,\n            \"input\":{\n               \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n               \"storage\":\"external\"\n            }\n         },\n         {\n            \"edit\":{\n\n            },\n            \"id\":77,\n            \"index\":1,\n            \"type\":\"adjustmentLayer\",\n            \"name\":\"Hue Saturation\",\n            \"locked\":false,\n            \"visible\":true,\n            \"adjustements\":{\n               \"hueSaturation\":{\n                  \"channels\":[\n                     {\n                        \"channel\":\"master\",\n                        \"hue\":-5,\n                        \"saturation\":20,\n                        \"lightness\":0\n                     }\n                  ],\n                  \"colorize\":false\n               }\n            }\n         },\n         {\n            \"type\":\"backgroundLayer\",\n            \"index\":0,\n            \"locked\":true,\n            \"id\":1,\n            \"visible\":true,\n            \"name\":\"Background\"\n         }\n      ]\n   },\n   \"outputs\":[\n      {\n         \"href\":\"/files/some_project/output/design_$ReqID_$FileName.psd\",\n         \"storage\":\"adobe\",\n         \"type\":\"image/jpeg\",\n         \"width\":500,\n         \"overwrite\":true,\n         \"trimToCanvas\":false,\n         \"layers\":[\n            {\n               \"id\":77\n            }\n         ]\n      },\n      {\n         \"href\":\"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n         \"storage\":\"external\",\n         \"type\":\"image/vnd.adobe.photoshop\",\n         \"overwrite\":false\n      }\n   ]\n}",
           "type": "http"
         },
         {
@@ -7325,7 +7365,7 @@ define({ "api": [
     "title": "document create status",
     "description": "<p>Returns the status of a File job. Will return 202 as long as there are child jobs still running and 200 once all children are complete</p>",
     "version": "1.0.0",
-    "name": "get-document-create-job-status",
+    "name": "get_document_create_job_status",
     "group": "Photoshop",
     "parameter": {
       "fields": {
@@ -7640,7 +7680,7 @@ define({ "api": [
     "title": "document operations status",
     "description": "<p>Returns the status of a File job. Will return 202 as long as there are child jobs still running and 200 once all children are complete</p>",
     "version": "1.0.0",
-    "name": "get-document-operations-job-status",
+    "name": "get_document_operations_job_status",
     "group": "Photoshop",
     "parameter": {
       "fields": {
@@ -7967,7 +8007,7 @@ define({ "api": [
     "title": "smart object status",
     "description": "<p>Returns the status of a smart object create or edit job. Will return 202 as long as there are child jobs still running and 200 once all children are complete</p>",
     "version": "1.0.0",
-    "name": "get-smart-object-job-status",
+    "name": "get_smart_object_job_status",
     "group": "Photoshop",
     "parameter": {
       "fields": {
@@ -8294,7 +8334,7 @@ define({ "api": [
     "title": "rendition create status",
     "description": "<p>Returns the status of a create rendition job. Will return 202 as long as there are child jobs still running and 200 once all children are complete</p>",
     "version": "1.0.0",
-    "name": "rendition-create-status",
+    "name": "rendition_create_status",
     "group": "Photoshop",
     "parameter": {
       "fields": {
@@ -9222,7 +9262,7 @@ define({ "api": [
     "title": "cutout status",
     "description": "<p>Get the status for an asynchronous cutout/mask job</p>",
     "version": "1.0.0",
-    "name": "get-cutout-job-status",
+    "name": "get_cutout_job_status",
     "group": "Sensei",
     "success": {
       "fields": {
@@ -9399,7 +9439,7 @@ define({ "api": [
     "title": "mask status",
     "description": "<p>Get the status for an asynchronous cutout/mask job</p>",
     "version": "1.0.0",
-    "name": "get-mask-job-status",
+    "name": "get_mask_job_status",
     "group": "Sensei",
     "success": {
       "fields": {
