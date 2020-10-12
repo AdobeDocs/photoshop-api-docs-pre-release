@@ -25,7 +25,8 @@
       - [Font handling](#font-handling)
       - [Handle missing fonts in the document.](#handle-missing-fonts-in-the-document)
       - [Limitations](#limitations)
-    - [Execute Photoshop Actions (`New!`)](#execute-photoshop-actions-new)
+    - [Photoshop Actions](#photoshop-actions)
+      - [Execute Photoshop Actions (`New!`)](#execute-photoshop-actions-new)
       - [Usage Recommendations](#usage-recommendations)
       - [Known Limitations](#known-limitations)
     - [Rendering / Conversions](#rendering--conversions)
@@ -342,7 +343,8 @@ Here is an example usage of `manageMissingFonts` and `globalFont`
 #### Limitations
 - Most of the text attributes retain their respective original values. There are some attributes however that do not retain their original values. For example (and not limited to): tracking, leading, kerning
 
-### Execute Photoshop Actions (`New!`)
+### Photoshop Actions
+#### Execute Photoshop Actions (`New!`)
 
 Adobe Photoshop APIs supports playing back Photoshop Actions recorded from Photoshop.  <a href="https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop-photoshopActions" target="_blank">Click here to see API documentation</a>
 
