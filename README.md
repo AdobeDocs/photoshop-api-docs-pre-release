@@ -202,7 +202,7 @@ Enterprise users will not have access to assets stored in the Creative Cloud so 
 
 1. Reach out to psdservices@adobe.com and request a JWT integration.
 2. Create a JSON Web Token (JWT) and exchange it for an access token
-Take the information from the email, and follow the instructions at 
+Take the information from the email, and follow the instructions at
     - [JWT Instructions for Python](https://www.datanalyst.info/python/adobe-io-user-management/adobe-io-jwt-authentication-with-python/)
     - [JWT Instructions for Node](https://www.npmjs.com/package/@adobe/jwt-auth)
 
@@ -938,7 +938,7 @@ A call to this API initiates an asynchronous job and returns a response containi
 
 ### Example 5: /documentManifest (Retrieving a PSD manifest)
 
-The `/documentManifest` api can take one or more input PSD's to generate JSON manifest files from. The JSON manifest is the tree representation of all of the layer objects contained in the PSD document. 
+The `/documentManifest` api can take one or more input PSD's to generate JSON manifest files from. The JSON manifest is the tree representation of all of the layer objects contained in the PSD document.
 
 #### Sample 5.1: Initiate a job to retrieve a PSD's JSON manifest
 
@@ -961,7 +961,7 @@ curl -X POST \
 ```
 A call to this API initiates an asynchronous job and returns a response containing an href. Use the value in the href to poll for the status of the job and the same response will also contain the JSON manifest. This is illustrated in [Example 6](#example-6-fetch-the-status-of-the-job-after-successfully-submitting-a-request) below.
 
-###  Example 6: Fetch the status of the job after successfully submitting a request 
+###  Example 6: Fetch the status of the job after successfully submitting a request
 Each of our Photoshop APIs, when invoked, initiates an asynchronous job and returns a response body that contains the href to poll for status of the job.
 
 ```json
@@ -1153,7 +1153,7 @@ Once your job completes successfully (no errors/failures reported), the status r
 ```
 #### Sample 6.2 Poll for job status and get the results of all other APIs
 
-Once your job completes successfully (no errors/failures reported), this will return a response body containing the job status for each requested output. For the `/renditionCreate` API call in Example 4 in Sample 4.1 as illustrated above, a sample response containing the job status is as shown below: 
+Once your job completes successfully (no errors/failures reported), this will return a response body containing the job status for each requested output. For the `/renditionCreate` API call in Example 4 in Sample 4.1 as illustrated above, a sample response containing the job status is as shown below:
 
 ```json
 {
