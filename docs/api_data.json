@@ -9856,7 +9856,7 @@
             "type": "string",
             "optional": false,
             "field": "input.href",
-            "description": "<p>Either an href to a single Creative Cloud asset for storage='adobe' OR a presignedGETURL for other external services.  Only png and jpg files are supported</p> <ul>    <li>CC Storage path must be prepended with `/files` or `/cloud-content` or `/assets`       <li>The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li>       <li>The `/cloud-content` path directly corresponds to the root of your `Cloud documents` folder in CC</li>       <li>The `/assets` path directly corresponds to the specific sync-group section of CC storage</li>    </li> </ul>"
+            "description": "<p>Either an href to a single Creative Cloud asset for storage='adobe' OR a presignedGETURL for other external services. Supported input file types include png, jpg and tif.</p> <ul>    <li>CC Storage path must be prepended with `/files` or `/cloud-content` or `/assets`       <li>The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li>       <li>The `/cloud-content` path directly corresponds to the root of your `Cloud documents` folder in CC</li>       <li>The `/assets` path directly corresponds to the specific sync-group section of CC storage</li>    </li> </ul>"
           },
           {
             "group": "Request",
@@ -10379,7 +10379,7 @@
             "type": "string",
             "optional": false,
             "field": "input.href",
-            "description": "<p>Either an href to a single Creative Cloud asset for storage='adobe' OR a presignedGETURL for other external services.  Only png and jpg files are supported</p> <li>CC Storage path must be prepended with `/files` or `/cloud-content` or `/assets`    <li>The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li>    <li>The `/cloud-content` path directly corresponds to the root of your `Cloud documents` folder in CC</li>    <li>The `/assets` path directly corresponds to the specific sync-group section of CC storage</li> </li>"
+            "description": "<p>Either an href to a single Creative Cloud asset for storage='adobe' OR a presignedGETURL for other external services. Supported input file types include png, jpg and tif.</p> <li>CC Storage path must be prepended with `/files` or `/cloud-content` or `/assets`    <li>The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li>    <li>The `/cloud-content` path directly corresponds to the root of your `Cloud documents` folder in CC</li>    <li>The `/assets` path directly corresponds to the specific sync-group section of CC storage</li> </li>"
           },
           {
             "group": "Request",
