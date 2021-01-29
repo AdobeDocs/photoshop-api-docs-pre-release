@@ -1,7 +1,7 @@
 define({ "api": [
   {
     "type": "get",
-    "url": "/status/<:jobId>",
+    "url": "https://image.adobe.io/lrService/status/<:jobId>",
     "title": "autostraighten status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
@@ -22,7 +22,7 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP Usage Template:",
-          "content": "GET /status/<:jobId>  HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key",
+          "content": "GET https://image.adobe.io/lrService/status/<:jobId>  HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key",
           "type": "http"
         },
         {
@@ -204,7 +204,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/autoStraighten",
+    "url": "https://image.adobe.io/lrService/autoStraighten",
     "title": "autostraighten",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to auto straighten an image</p>",
@@ -214,22 +214,22 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP Usage Templated:",
-          "content": "POST /autoStraighten HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n    \"storage\": \"<storage>\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location\",\n      \"storage\": \"<storage>\",\n      \"type\": \"<type>\",\n      \"overwrite\":<overwrite>\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/autoStraighten HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n    \"storage\": \"<storage>\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location\",\n      \"storage\": \"<storage>\",\n      \"type\": \"<type>\",\n      \"quality\": \"<quality>\",\n      \"overwrite\": <overwrite>\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "HTTP Example(CC Asset):",
-          "content": "POST /autoStraighten HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"/files/input.jpg\",\n    \"storage\": \"adobe\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"/files/output.jpg\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/autoStraighten HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"/files/input.jpg\",\n    \"storage\": \"adobe\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"/files/output.jpg\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"quality\": 10,\n      \"overwrite\": true\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "HTTP Example(External Asset):",
-          "content": "POST /autoStraighten HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n    \"storage\": \"external\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n      \"storage\": \"external\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/autoStraighten HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n    \"storage\": \"external\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n      \"storage\": \"external\",\n      \"type\": \"image/jpeg\",\n      \"quality\": 10,\n      \"overwrite\": true\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "Curl Usage:",
-          "content": "curl -H \"authorization: Bearer $token\" -H \"Content-Type:application/json\" -H \"x-api-key:$x-api-key\" -X POST -d '{\"inputs\":{\"href\":\"<href>\",\"storage\":\"<storage>\"},\"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\",\"type\":\"<type>\"}]}' https://image.adobe.io/lrService/autoStraighten",
+          "content": "curl -H \"authorization: Bearer $token\" -H \"Content-Type:application/json\" -H \"x-api-key:$x-api-key\" -X POST -d '{\"inputs\":{\"href\":\"<href>\",\"storage\":\"<storage>\"},\"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\",\"type\":\"<type>\",\"quality\": \"<quality>\",\"overwrite\": <overwrite>}]}' https://image.adobe.io/lrService/autoStraighten",
           "type": "curl"
         }
       ],
@@ -311,6 +311,14 @@ define({ "api": [
             "field": "outputs.overwrite",
             "defaultValue": "true",
             "description": "<p>If the file already exists, indicates if the output file should be overwritten. Will eventually support eTags. Only applies to CC Storage</p>"
+          },
+          {
+            "group": "Request",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.quality",
+            "defaultValue": "12",
+            "description": "<p>Quality of the JPEG outputs (will be ignored for other output types). Ranges from 0 to 12, with 12 as the highest quality.</p>"
           }
         ]
       }
@@ -434,7 +442,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/status/<:jobId>",
+    "url": "https://image.adobe.io/lrService/status/<:jobId>",
     "title": "autotone status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
@@ -455,7 +463,7 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP Usage Template:",
-          "content": "GET /status/<:jobId>  HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key",
+          "content": "GET https://image.adobe.io/lrService/status/<:jobId>  HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key",
           "type": "http"
         },
         {
@@ -637,7 +645,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/autoTone",
+    "url": "https://image.adobe.io/lrService/autoTone",
     "title": "autotone",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to auto tone an image</p>",
@@ -647,22 +655,22 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP Usage Templated:",
-          "content": "POST /autoTone HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n    \"storage\": \"<storage>\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location\",\n      \"storage\": \"<storage>\",\n      \"type\": \"<type>\",\n      \"overwrite\":<overwrite>\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/autoTone HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n    \"storage\": \"<storage>\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location\",\n      \"storage\": \"<storage>\",\n      \"type\": \"<type>\",\n      \"quality\": \"<quality>\",\n      \"overwrite\": <overwrite>\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "HTTP Example(CC Asset):",
-          "content": "POST /autoTone HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"/files/input.jpg\",\n    \"storage\": \"adobe\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"/files/output.jpg\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/autoTone HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"/files/input.jpg\",\n    \"storage\": \"adobe\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"/files/output.jpg\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"quality\": 10,\n      \"overwrite\": true\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "HTTP Example(External Asset):",
-          "content": "POST /autoTone HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n    \"storage\": \"external\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n      \"storage\": \"external\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/autoTone HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n    \"storage\": \"external\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n      \"storage\": \"external\",\n      \"type\": \"image/jpeg\",\n      \"quality\": 10,\n      \"overwrite\": true\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "Curl Usage:",
-          "content": "curl -H \"authorization: Bearer $token\" -H \"Content-Type:application/json\" -H \"x-api-key:$x-api-key\" -X POST -d '{\"inputs\":{\"href\":\"<href>\",\"storage\":\"<storage>\"},\"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\",\"type\":\"<type>\"}]}' https://image.adobe.io/lrService/autoTone",
+          "content": "curl -H \"authorization: Bearer $token\" -H \"Content-Type:application/json\" -H \"x-api-key:$x-api-key\" -X POST -d '{\"inputs\":{\"href\":\"<href>\",\"storage\":\"<storage>\"},\"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\",\"type\":\"<type>\",\"quality\": \"<quality>\",\"overwrite\": <overwrite>}]}' https://image.adobe.io/lrService/autoTone",
           "type": "curl"
         }
       ],
@@ -744,6 +752,14 @@ define({ "api": [
             "field": "outputs.overwrite",
             "defaultValue": "true",
             "description": "<p>If the file already exists, indicates if the output file should be overwritten. Will eventually support eTags. Only applies to CC Storage</p>"
+          },
+          {
+            "group": "Request",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.quality",
+            "defaultValue": "12",
+            "description": "<p>Quality of the JPEG outputs (will be ignored for other output types). Ranges from 0 to 12, with 12 as the highest quality.</p>"
           }
         ]
       }
@@ -867,7 +883,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/status/<:jobId>",
+    "url": "https://image.adobe.io/lrService/status/<:jobId>",
     "title": "edit status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
@@ -888,7 +904,7 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP Usage Template:",
-          "content": "GET /status/<:jobId>  HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key",
+          "content": "GET https://image.adobe.io/lrService/status/<:jobId>  HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key",
           "type": "http"
         },
         {
@@ -1070,7 +1086,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/edit",
+    "url": "https://image.adobe.io/lrService/edit",
     "title": "edit",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply a set of edit parameters on an image</p>",
@@ -1367,28 +1383,36 @@ define({ "api": [
             "field": "outputs.overwrite",
             "defaultValue": "true",
             "description": "<p>If the file already exists, indicates if the output file should be overwritten. Will eventually support eTags. Only applies to CC Storage</p>"
+          },
+          {
+            "group": "Request",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.quality",
+            "defaultValue": "12",
+            "description": "<p>Quality of the JPEG outputs (will be ignored for other output types). Ranges from 0 to 12, with 12 as the highest quality.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "HTTP Usage Templated:",
-          "content": "POST /edit HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"/files/input.jpg\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"options\": {\n    \"Brightness\": <-100 to 100>,\n    \"Exposure\": <-5.00 to 5.00>,\n    \"Contrast\": <-100 to 100>,\n    \"WhiteBalance\": <\"As Shot\", \"Auto\", \"Cloudy\", \"Custom\", \"Daylight\", \"Flash\", \"Fluorescent\", \"Shade\", \"Tungsten\">,\n    \"Saturation\": <-100 to 100>,\n    \"Sharpness\": <0 to 150>,\n    \"ColorNoiseReduction\": <0 to 100>,\n    \"NoiseReduction\": <0 to 100>,\n    \"VignetteAmount\": <-100 to 100>,\n    \"Vibrance\": <-100 to 100>,\n    \"Highlights\": <-100 to 100>,\n    \"Shadows\": <-100 to 100>,\n    \"Whites\": <-100 to 100>,\n    \"Blacks\": <-100 to 100>,\n    \"Clarity\": <-100 to 100>,\n    \"Dehaze\": <-100 to 100>,\n    \"SharpenRadius\": <0.5 to 3.0>,\n    \"SharpenDetail\": <0 to 100>,\n    \"SharpenEdgeMasking\": <0 to 10>\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location\",\n      \"storage\": \"<storage>\",\n      \"type\": \"<type>\",\n      \"overwrite\":<overwrite>\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/edit HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"/files/input.jpg\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"options\": {\n    \"Brightness\": <-100 to 100>,\n    \"Exposure\": <-5.00 to 5.00>,\n    \"Contrast\": <-100 to 100>,\n    \"WhiteBalance\": <\"As Shot\", \"Auto\", \"Cloudy\", \"Custom\", \"Daylight\", \"Flash\", \"Fluorescent\", \"Shade\", \"Tungsten\">,\n    \"Saturation\": <-100 to 100>,\n    \"Sharpness\": <0 to 150>,\n    \"ColorNoiseReduction\": <0 to 100>,\n    \"NoiseReduction\": <0 to 100>,\n    \"VignetteAmount\": <-100 to 100>,\n    \"Vibrance\": <-100 to 100>,\n    \"Highlights\": <-100 to 100>,\n    \"Shadows\": <-100 to 100>,\n    \"Whites\": <-100 to 100>,\n    \"Blacks\": <-100 to 100>,\n    \"Clarity\": <-100 to 100>,\n    \"Dehaze\": <-100 to 100>,\n    \"SharpenRadius\": <0.5 to 3.0>,\n    \"SharpenDetail\": <0 to 100>,\n    \"SharpenEdgeMasking\": <0 to 10>\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location\",\n      \"storage\": \"<storage>\",\n      \"type\": \"<type>\",\n      \"quality\": \"<quality>\",\n      \"overwrite\":<overwrite>\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "HTTP Example(CC Asset):",
-          "content": "POST /edit HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"/files/input.jpg\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"options\": {\n    \"Exposure\": -5.00,\n    \"Contrast\": -100,\n    \"Sharpness\": 10,\n    \"WhiteBalance\": \"As Shot\",\n    \"Saturation\": -100,\n    \"Sharpness\": 20,\n    \"ColorNoiseReduction\": 15,\n    \"NoiseReduction\": 15,\n    \"VignetteAmount\": -100,\n    \"Vibrance\": -100,\n    \"Highlights\": -100,\n    \"Shadows\": -100,\n    \"Whites\": -100,\n    \"Blacks\": -100,\n    \"Clarity\": -100,\n    \"Dehaze\": -100,\n    \"SharpenRadius\": 1.1,\n    \"SharpenDetail\": 0,\n    \"SharpenEdgeMasking\": 0\n  },\n  \"outputs\": [\n    {\n      \"href\": \"/files/output.jpg\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/edit HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"/files/input.jpg\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"options\": {\n    \"Exposure\": -5.00,\n    \"Contrast\": -100,\n    \"Sharpness\": 10,\n    \"WhiteBalance\": \"As Shot\",\n    \"Saturation\": -100,\n    \"Sharpness\": 20,\n    \"ColorNoiseReduction\": 15,\n    \"NoiseReduction\": 15,\n    \"VignetteAmount\": -100,\n    \"Vibrance\": -100,\n    \"Highlights\": -100,\n    \"Shadows\": -100,\n    \"Whites\": -100,\n    \"Blacks\": -100,\n    \"Clarity\": -100,\n    \"Dehaze\": -100,\n    \"SharpenRadius\": 1.1,\n    \"SharpenDetail\": 0,\n    \"SharpenEdgeMasking\": 0\n  },\n  \"outputs\": [\n    {\n      \"href\": \"/files/output.jpg\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"quality\": 6,\n      \"overwrite\": true\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "HTTP Example(External Asset):",
-          "content": "POST /edit HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n      \"storage\": \"external\"\n    }\n  },\n  \"options\": {\n    \"Exposure\": -5.00,\n    \"Contrast\": -100,\n    \"Sharpness\": 10,\n    \"WhiteBalance\": \"As Shot\",\n    \"Saturation\": -100,\n    \"Sharpness\": 20,\n    \"ColorNoiseReduction\": 15,\n    \"NoiseReduction\": 15,\n    \"VignetteAmount\": -100,\n    \"Vibrance\": -100,\n    \"Highlights\": -100,\n    \"Shadows\": -100,\n    \"Whites\": -100,\n    \"Blacks\": -100,\n    \"Clarity\": -100,\n    \"Dehaze\": -100,\n    \"SharpenRadius\": 1.1,\n    \"SharpenDetail\": 0,\n    \"SharpenEdgeMasking\": 0\n  },\n  \"outputs\": [\n    {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n      \"storage\": \"external\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/edit HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n      \"storage\": \"external\"\n    }\n  },\n  \"options\": {\n    \"Exposure\": -5.00,\n    \"Contrast\": -100,\n    \"Sharpness\": 10,\n    \"WhiteBalance\": \"As Shot\",\n    \"Saturation\": -100,\n    \"Sharpness\": 20,\n    \"ColorNoiseReduction\": 15,\n    \"NoiseReduction\": 15,\n    \"VignetteAmount\": -100,\n    \"Vibrance\": -100,\n    \"Highlights\": -100,\n    \"Shadows\": -100,\n    \"Whites\": -100,\n    \"Blacks\": -100,\n    \"Clarity\": -100,\n    \"Dehaze\": -100,\n    \"SharpenRadius\": 1.1,\n    \"SharpenDetail\": 0,\n    \"SharpenEdgeMasking\": 0\n  },\n  \"outputs\": [\n    {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n      \"storage\": \"external\",\n      \"type\": \"image/jpeg\",\n      \"quality\": 6,\n      \"overwrite\": true\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "Curl Usage:",
-          "content": "curl -H \"authorization: Bearer $token\" -H \"Content-Type:application/json\" -H \"x-api-key:$x-api-key\" -X POST -d '{\"inputs\":{\"href\":\"<href>\",\"storage\":\"<storage>\"}, \"options\": \"<options>\", \"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\",\"type\":\"<type>\"}]}' https://image.adobe.io/lrService/edit",
+          "content": "curl -H \"authorization: Bearer $token\" -H \"Content-Type:application/json\" -H \"x-api-key:$x-api-key\" -X POST -d '{\"inputs\":{\"href\":\"<href>\",\"storage\":\"<storage>\"}, \"options\": \"<options>\", \"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\",\"type\":\"<type>\",\"quality\": \"<quality>\",\"overwrite\":<overwrite>}]}' https://image.adobe.io/lrService/edit",
           "type": "curl"
         }
       ]
@@ -1512,7 +1536,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/status/<:jobId>",
+    "url": "https://image.adobe.io/lrService/status/<:jobId>",
     "title": "presets status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
@@ -1533,7 +1557,7 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP Usage Template:",
-          "content": "GET /status/<:jobId>  HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key",
+          "content": "GET https://image.adobe.io/lrService/status/<:jobId>  HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key",
           "type": "http"
         },
         {
@@ -1715,7 +1739,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/presets",
+    "url": "https://image.adobe.io/lrService/presets",
     "title": "presets",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply a preset on an image</p>",
@@ -1835,28 +1859,36 @@ define({ "api": [
             "field": "outputs.overwrite",
             "defaultValue": "true",
             "description": "<p>If the file already exists, indicates if the output file should be overwritten. Will eventually support eTags. Only applies to CC Storage</p>"
+          },
+          {
+            "group": "Request",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.quality",
+            "defaultValue": "12",
+            "description": "<p>Quality of the JPEG outputs (will be ignored for other output types). Ranges from 0 to 12, with 12 as the highest quality.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "HTTP Usage Templated:",
-          "content": "POST /presets HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\": \"<storage>\"\n    },\n    \"presets\": [\n      {\n        \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n        \"storage\": \"<storage>\"\n      }\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location\",\n      \"storage\": \"<storage>\",\n      \"type\": \"<type>\",\n      \"overwrite\":<overwrite>\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/presets HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\": \"<storage>\"\n    },\n    \"presets\": [\n      {\n        \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n        \"storage\": \"<storage>\"\n      }\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location\",\n      \"storage\": \"<storage>\",\n      \"type\": \"<type>\",\n      \"quality\": \"<quality>\",\n      \"overwrite\": <overwrite>\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "HTTP Example(CC Asset):",
-          "content": "POST /presets HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"/files/input.jpg\",\n      \"storage\": \"adobe\"\n    },\n    \"presets\": [\n      {\n        \"href\": \"files/acr/preset.xmp\",\n        \"storage\": \"adobe\"\n      }\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"/files/output.jpg\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/presets HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"/files/input.jpg\",\n      \"storage\": \"adobe\"\n    },\n    \"presets\": [\n      {\n        \"href\": \"files/acr/preset.xmp\",\n        \"storage\": \"adobe\"\n      }\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"/files/output.jpg\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"quality\": 6,\n      \"overwrite\": true\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "HTTP Example(External Asset):",
-          "content": "POST /presets HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n      \"storage\": \"external\"\n    },\n    \"presets\": [\n      {\n        \"href\":  \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n        \"storage\": \"external\"\n      }\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n      \"storage\": \"external\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/presets HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n      \"storage\": \"external\"\n    },\n    \"presets\": [\n      {\n        \"href\":  \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n        \"storage\": \"external\"\n      }\n    ]\n  },\n  \"outputs\": [\n    {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n      \"storage\": \"external\",\n      \"type\": \"image/jpeg\",\n      \"quality\": 6,\n      \"overwrite\": true\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "Curl Usage:",
-          "content": "curl -H \"authorization: Bearer $token\" -H \"Content-Type:application/json\" -H \"x-api-key:$x-api-key\" -X POST -d '{\"inputs\": {\"source\": {\"href\":\"<href>\",\"storage\":\"<storage>\"}, \"presets\": [{\"href\":\"<href>\",\"storage\":\"<storage>\"}]},\"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\",\"type\":\"<type>\"}]}' https://image.adobe.io/lrService/presets",
+          "content": "curl -H \"authorization: Bearer $token\" -H \"Content-Type:application/json\" -H \"x-api-key:$x-api-key\" -X POST -d '{\"inputs\": {\"source\": {\"href\":\"<href>\",\"storage\":\"<storage>\"}, \"presets\": [{\"href\":\"<href>\",\"storage\":\"<storage>\"}]},\"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\",\"type\":\"<type>\",\"quality\": \"<quality>\",\"overwrite\": <overwrite>}]}' https://image.adobe.io/lrService/presets",
           "type": "curl"
         }
       ]
@@ -1980,7 +2012,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/status/<:jobId>",
+    "url": "https://image.adobe.io/lrService/status/<:jobId>",
     "title": "xmp status",
     "version": "1.0.0",
     "description": "<p>Returns the status of a job.</p>",
@@ -2001,7 +2033,7 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP Usage Template:",
-          "content": "GET /status/<:jobId>  HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key",
+          "content": "GET https://image.adobe.io/lrService/status/<:jobId>  HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key",
           "type": "http"
         },
         {
@@ -2183,7 +2215,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/xmp",
+    "url": "https://image.adobe.io/lrService/xmp",
     "title": "xmp",
     "version": "1.0.0",
     "description": "<p>Initiates an asynchronous job to apply an XMP setting to an image</p>",
@@ -2289,28 +2321,36 @@ define({ "api": [
             "field": "outputs.overwrite",
             "defaultValue": "true",
             "description": "<p>If the file already exists, indicates if the output file should be overwritten. Will eventually support eTags. Only applies to CC Storage</p>"
+          },
+          {
+            "group": "Request",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.quality",
+            "defaultValue": "12",
+            "description": "<p>Quality of the JPEG outputs (will be ignored for other output types). Ranges from 0 to 12, with 12 as the highest quality.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "HTTP Usage Templated:",
-          "content": "POST /xmp HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\": \"<storage>\"\n    }\n  },\n  \"options\": {\n    \"xmp\": \"<xmp>\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location\",\n      \"storage\": \"<storage>\",\n      \"type\": \"<type>\",\n      \"overwrite\":<overwrite>\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/xmp HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"<presigned_getURL> or <cc_storage_location>\",\n      \"storage\": \"<storage>\"\n    }\n  },\n  \"options\": {\n    \"xmp\": \"<xmp>\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"<presigned_getURL> or <cc_storage_location\",\n      \"storage\": \"<storage>\",\n      \"type\": \"<type>\",\n      \"quality\": \"<quality>\",\n      \"overwrite\": <overwrite>\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "HTTP Example(CC Asset):",
-          "content": "POST /xmp HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"/files/input.jpg\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"options\": {\n    \"xmp\": \"<x:xmpmeta xmlns:x=\\\"adobe:ns:meta\\/\\\" x:xmptk=\\\"Adobe XMP Core 5.6-c140 79.160451, 2017\\/05\\/06-01:08:21        \\\"> <rdf:RDF xmlns:rdf=\\\"http:\\/\\/www.w3.org\\/1999\\/02\\/22-rdf-syntax-ns#\\\"> <rdf:Description rdf:about=\\\"\\\" xmlns:crs=\\\"http:\\/\\/ns.adobe.com\\/camera-raw-settings\\/1.0\\/\\\" crs:Version=\\\"11.4.1\\\" crs:ProcessVersion=\\\"11.0\\\" crs:WhiteBalance=\\\"Custom\\\" crs:IncrementalTemperature=\\\"+54\\\" crs:IncrementalTint=\\\"0\\\" crs:Saturation=\\\"+81\\\" crs:Sharpness=\\\"0\\\" crs:LuminanceSmoothing=\\\"0\\\" crs:ColorNoiseReduction=\\\"0\\\" crs:VignetteAmount=\\\"0\\\" crs:ShadowTint=\\\"0\\\" crs:RedHue=\\\"0\\\" crs:RedSaturation=\\\"0\\\" crs:GreenHue=\\\"0\\\" crs:GreenSaturation=\\\"0\\\" crs:BlueHue=\\\"0\\\" crs:BlueSaturation=\\\"0\\\" crs:Vibrance=\\\"+84\\\" crs:HueAdjustmentRed=\\\"0\\\" crs:HueAdjustmentOrange=\\\"0\\\" crs:HueAdjustmentYellow=\\\"0\\\" crs:HueAdjustmentGreen=\\\"0\\\" crs:HueAdjustmentAqua=\\\"0\\\" crs:HueAdjustmentBlue=\\\"0\\\" crs:HueAdjustmentPurple=\\\"0\\\" crs:HueAdjustmentMagenta=\\\"0\\\" crs:SaturationAdjustmentRed=\\\"0\\\" crs:SaturationAdjustmentOrange=\\\"0\\\" crs:SaturationAdjustmentYellow=\\\"0\\\" crs:SaturationAdjustmentGreen=\\\"0\\\" crs:SaturationAdjustmentAqua=\\\"0\\\" crs:SaturationAdjustmentBlue=\\\"0\\\" crs:SaturationAdjustmentPurple=\\\"0\\\" crs:SaturationAdjustmentMagenta=\\\"0\\\" crs:LuminanceAdjustmentRed=\\\"0\\\" crs:LuminanceAdjustmentOrange=\\\"0\\\" crs:LuminanceAdjustmentYellow=\\\"0\\\" crs:LuminanceAdjustmentGreen=\\\"0\\\" crs:LuminanceAdjustmentAqua=\\\"0\\\" crs:LuminanceAdjustmentBlue=\\\"0\\\" crs:LuminanceAdjustmentPurple=\\\"0\\\" crs:LuminanceAdjustmentMagenta=\\\"0\\\" crs:SplitToningShadowHue=\\\"0\\\" crs:SplitToningShadowSaturation=\\\"0\\\" crs:SplitToningHighlightHue=\\\"0\\\" crs:SplitToningHighlightSaturation=\\\"0\\\" crs:SplitToningBalance=\\\"0\\\" crs:ParametricShadows=\\\"0\\\" crs:ParametricDarks=\\\"0\\\" crs:ParametricLights=\\\"0\\\" crs:ParametricHighlights=\\\"0\\\" crs:ParametricShadowSplit=\\\"25\\\" crs:ParametricMidtoneSplit=\\\"50\\\" crs:ParametricHighlightSplit=\\\"75\\\" crs:SharpenRadius=\\\"+1.0\\\" crs:SharpenDetail=\\\"25\\\" crs:SharpenEdgeMasking=\\\"0\\\" crs:PostCropVignetteAmount=\\\"0\\\" crs:GrainAmount=\\\"0\\\" crs:LensProfileEnable=\\\"0\\\" crs:LensManualDistortionAmount=\\\"0\\\" crs:PerspectiveVertical=\\\"0\\\" crs:PerspectiveHorizontal=\\\"0\\\" crs:PerspectiveRotate=\\\"0.0\\\" crs:PerspectiveScale=\\\"100\\\" crs:PerspectiveAspect=\\\"0\\\" crs:PerspectiveUpright=\\\"5\\\" crs:PerspectiveX=\\\"0.00\\\" crs:PerspectiveY=\\\"0.00\\\" crs:AutoLateralCA=\\\"0\\\" crs:Exposure2012=\\\"0.00\\\" crs:Contrast2012=\\\"0\\\" crs:Highlights2012=\\\"0\\\" crs:Shadows2012=\\\"0\\\" crs:Whites2012=\\\"0\\\" crs:Blacks2012=\\\"0\\\" crs:Clarity2012=\\\"0\\\" crs:DefringePurpleAmount=\\\"0\\\" crs:DefringePurpleHueLo=\\\"30\\\" crs:DefringePurpleHueHi=\\\"70\\\" crs:DefringeGreenAmount=\\\"0\\\" crs:DefringeGreenHueLo=\\\"40\\\" crs:DefringeGreenHueHi=\\\"60\\\" crs:Dehaze=\\\"0\\\" crs:Texture=\\\"0\\\" crs:ToneMapStrength=\\\"0\\\" crs:ConvertToGrayscale=\\\"False\\\" crs:OverrideLookVignette=\\\"False\\\" crs:ToneCurveName=\\\"Linear\\\" crs:ToneCurveName2012=\\\"Linear\\\" crs:CameraProfile=\\\"Embedded\\\" crs:CameraProfileDigest=\\\"54650A341B5B5CCAE8442D0B43A92BCE\\\" crs:LensProfileSetup=\\\"LensDefaults\\\" crs:UprightVersion=\\\"151388160\\\" crs:UprightCenterMode=\\\"0\\\" crs:UprightCenterNormX=\\\"0.5\\\" crs:UprightCenterNormY=\\\"0.5\\\" crs:UprightFocalMode=\\\"0\\\" crs:UprightFocalLength35mm=\\\"35\\\" crs:UprightPreview=\\\"False\\\" crs:UprightGuidedDependentDigest=\\\"F7173540FD9FB419BD947A976070F4D2\\\" crs:UprightTransformCount=\\\"6\\\" crs:UprightTransform_5=\\\"1.039357088,-0.000108501,-0.003125183,-0.000018587,1.057735296,-0.010513773,0.001767865,0.034718470,1.000000000\\\" crs:UprightFourSegmentsCount=\\\"2\\\" crs:UprightFourSegments_0=\\\"0.216999993,0.850666642,0.808333337,0.851555586\\\" crs:UprightFourSegments_1=\\\"0.810999990,0.663111091,0.797666609,0.178666711\\\" crs:HasSettings=\\\"True\\\" crs:CropTop=\\\"0.019089\\\" crs:CropLeft=\\\"0.460746\\\" crs:CropBottom=\\\"0.694646\\\" crs:CropRight=\\\"0.591986\\\" crs:CropAngle=\\\"45\\\" crs:CropConstrainToWarp=\\\"0\\\" crs:HasCrop=\\\"True\\\"> <crs:ToneCurve> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurve> <crs:ToneCurveRed> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveRed> <crs:ToneCurveGreen> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveGreen> <crs:ToneCurveBlue> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveBlue> <crs:ToneCurvePV2012> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012> <crs:ToneCurvePV2012Red> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Red> <crs:ToneCurvePV2012Green> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Green> <crs:ToneCurvePV2012Blue> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Blue> <crs:Look crs:Name=\\\"\\\"\\/> <\\/rdf:Description> <\\/rdf:RDF> <\\/x:xmpmeta>\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"/files/output.jpg\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/xmp HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"/files/input.jpg\",\n      \"storage\": \"adobe\"\n    }\n  },\n  \"options\": {\n    \"xmp\": \"<x:xmpmeta xmlns:x=\\\"adobe:ns:meta\\/\\\" x:xmptk=\\\"Adobe XMP Core 5.6-c140 79.160451, 2017\\/05\\/06-01:08:21        \\\"> <rdf:RDF xmlns:rdf=\\\"http:\\/\\/www.w3.org\\/1999\\/02\\/22-rdf-syntax-ns#\\\"> <rdf:Description rdf:about=\\\"\\\" xmlns:crs=\\\"http:\\/\\/ns.adobe.com\\/camera-raw-settings\\/1.0\\/\\\" crs:Version=\\\"11.4.1\\\" crs:ProcessVersion=\\\"11.0\\\" crs:WhiteBalance=\\\"Custom\\\" crs:IncrementalTemperature=\\\"+54\\\" crs:IncrementalTint=\\\"0\\\" crs:Saturation=\\\"+81\\\" crs:Sharpness=\\\"0\\\" crs:LuminanceSmoothing=\\\"0\\\" crs:ColorNoiseReduction=\\\"0\\\" crs:VignetteAmount=\\\"0\\\" crs:ShadowTint=\\\"0\\\" crs:RedHue=\\\"0\\\" crs:RedSaturation=\\\"0\\\" crs:GreenHue=\\\"0\\\" crs:GreenSaturation=\\\"0\\\" crs:BlueHue=\\\"0\\\" crs:BlueSaturation=\\\"0\\\" crs:Vibrance=\\\"+84\\\" crs:HueAdjustmentRed=\\\"0\\\" crs:HueAdjustmentOrange=\\\"0\\\" crs:HueAdjustmentYellow=\\\"0\\\" crs:HueAdjustmentGreen=\\\"0\\\" crs:HueAdjustmentAqua=\\\"0\\\" crs:HueAdjustmentBlue=\\\"0\\\" crs:HueAdjustmentPurple=\\\"0\\\" crs:HueAdjustmentMagenta=\\\"0\\\" crs:SaturationAdjustmentRed=\\\"0\\\" crs:SaturationAdjustmentOrange=\\\"0\\\" crs:SaturationAdjustmentYellow=\\\"0\\\" crs:SaturationAdjustmentGreen=\\\"0\\\" crs:SaturationAdjustmentAqua=\\\"0\\\" crs:SaturationAdjustmentBlue=\\\"0\\\" crs:SaturationAdjustmentPurple=\\\"0\\\" crs:SaturationAdjustmentMagenta=\\\"0\\\" crs:LuminanceAdjustmentRed=\\\"0\\\" crs:LuminanceAdjustmentOrange=\\\"0\\\" crs:LuminanceAdjustmentYellow=\\\"0\\\" crs:LuminanceAdjustmentGreen=\\\"0\\\" crs:LuminanceAdjustmentAqua=\\\"0\\\" crs:LuminanceAdjustmentBlue=\\\"0\\\" crs:LuminanceAdjustmentPurple=\\\"0\\\" crs:LuminanceAdjustmentMagenta=\\\"0\\\" crs:SplitToningShadowHue=\\\"0\\\" crs:SplitToningShadowSaturation=\\\"0\\\" crs:SplitToningHighlightHue=\\\"0\\\" crs:SplitToningHighlightSaturation=\\\"0\\\" crs:SplitToningBalance=\\\"0\\\" crs:ParametricShadows=\\\"0\\\" crs:ParametricDarks=\\\"0\\\" crs:ParametricLights=\\\"0\\\" crs:ParametricHighlights=\\\"0\\\" crs:ParametricShadowSplit=\\\"25\\\" crs:ParametricMidtoneSplit=\\\"50\\\" crs:ParametricHighlightSplit=\\\"75\\\" crs:SharpenRadius=\\\"+1.0\\\" crs:SharpenDetail=\\\"25\\\" crs:SharpenEdgeMasking=\\\"0\\\" crs:PostCropVignetteAmount=\\\"0\\\" crs:GrainAmount=\\\"0\\\" crs:LensProfileEnable=\\\"0\\\" crs:LensManualDistortionAmount=\\\"0\\\" crs:PerspectiveVertical=\\\"0\\\" crs:PerspectiveHorizontal=\\\"0\\\" crs:PerspectiveRotate=\\\"0.0\\\" crs:PerspectiveScale=\\\"100\\\" crs:PerspectiveAspect=\\\"0\\\" crs:PerspectiveUpright=\\\"5\\\" crs:PerspectiveX=\\\"0.00\\\" crs:PerspectiveY=\\\"0.00\\\" crs:AutoLateralCA=\\\"0\\\" crs:Exposure2012=\\\"0.00\\\" crs:Contrast2012=\\\"0\\\" crs:Highlights2012=\\\"0\\\" crs:Shadows2012=\\\"0\\\" crs:Whites2012=\\\"0\\\" crs:Blacks2012=\\\"0\\\" crs:Clarity2012=\\\"0\\\" crs:DefringePurpleAmount=\\\"0\\\" crs:DefringePurpleHueLo=\\\"30\\\" crs:DefringePurpleHueHi=\\\"70\\\" crs:DefringeGreenAmount=\\\"0\\\" crs:DefringeGreenHueLo=\\\"40\\\" crs:DefringeGreenHueHi=\\\"60\\\" crs:Dehaze=\\\"0\\\" crs:Texture=\\\"0\\\" crs:ToneMapStrength=\\\"0\\\" crs:ConvertToGrayscale=\\\"False\\\" crs:OverrideLookVignette=\\\"False\\\" crs:ToneCurveName=\\\"Linear\\\" crs:ToneCurveName2012=\\\"Linear\\\" crs:CameraProfile=\\\"Embedded\\\" crs:CameraProfileDigest=\\\"54650A341B5B5CCAE8442D0B43A92BCE\\\" crs:LensProfileSetup=\\\"LensDefaults\\\" crs:UprightVersion=\\\"151388160\\\" crs:UprightCenterMode=\\\"0\\\" crs:UprightCenterNormX=\\\"0.5\\\" crs:UprightCenterNormY=\\\"0.5\\\" crs:UprightFocalMode=\\\"0\\\" crs:UprightFocalLength35mm=\\\"35\\\" crs:UprightPreview=\\\"False\\\" crs:UprightGuidedDependentDigest=\\\"F7173540FD9FB419BD947A976070F4D2\\\" crs:UprightTransformCount=\\\"6\\\" crs:UprightTransform_5=\\\"1.039357088,-0.000108501,-0.003125183,-0.000018587,1.057735296,-0.010513773,0.001767865,0.034718470,1.000000000\\\" crs:UprightFourSegmentsCount=\\\"2\\\" crs:UprightFourSegments_0=\\\"0.216999993,0.850666642,0.808333337,0.851555586\\\" crs:UprightFourSegments_1=\\\"0.810999990,0.663111091,0.797666609,0.178666711\\\" crs:HasSettings=\\\"True\\\" crs:CropTop=\\\"0.019089\\\" crs:CropLeft=\\\"0.460746\\\" crs:CropBottom=\\\"0.694646\\\" crs:CropRight=\\\"0.591986\\\" crs:CropAngle=\\\"45\\\" crs:CropConstrainToWarp=\\\"0\\\" crs:HasCrop=\\\"True\\\"> <crs:ToneCurve> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurve> <crs:ToneCurveRed> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveRed> <crs:ToneCurveGreen> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveGreen> <crs:ToneCurveBlue> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveBlue> <crs:ToneCurvePV2012> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012> <crs:ToneCurvePV2012Red> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Red> <crs:ToneCurvePV2012Green> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Green> <crs:ToneCurvePV2012Blue> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Blue> <crs:Look crs:Name=\\\"\\\"\\/> <\\/rdf:Description> <\\/rdf:RDF> <\\/x:xmpmeta>\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"/files/output.jpg\",\n      \"storage\": \"adobe\",\n      \"type\": \"image/jpeg\",\n      \"quality\": 10,\n      \"overwrite\": true\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "HTTP Example(External Asset):",
-          "content": "POST /xmp HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n      \"storage\": \"external\"\n    }\n  },\n  \"options\": {\n    \"xmp\": \"<x:xmpmeta xmlns:x=\\\"adobe:ns:meta\\/\\\" x:xmptk=\\\"Adobe XMP Core 5.6-c140 79.160451, 2017\\/05\\/06-01:08:21        \\\"> <rdf:RDF xmlns:rdf=\\\"http:\\/\\/www.w3.org\\/1999\\/02\\/22-rdf-syntax-ns#\\\"> <rdf:Description rdf:about=\\\"\\\" xmlns:crs=\\\"http:\\/\\/ns.adobe.com\\/camera-raw-settings\\/1.0\\/\\\" crs:Version=\\\"11.4.1\\\" crs:ProcessVersion=\\\"11.0\\\" crs:WhiteBalance=\\\"Custom\\\" crs:IncrementalTemperature=\\\"+54\\\" crs:IncrementalTint=\\\"0\\\" crs:Saturation=\\\"+81\\\" crs:Sharpness=\\\"0\\\" crs:LuminanceSmoothing=\\\"0\\\" crs:ColorNoiseReduction=\\\"0\\\" crs:VignetteAmount=\\\"0\\\" crs:ShadowTint=\\\"0\\\" crs:RedHue=\\\"0\\\" crs:RedSaturation=\\\"0\\\" crs:GreenHue=\\\"0\\\" crs:GreenSaturation=\\\"0\\\" crs:BlueHue=\\\"0\\\" crs:BlueSaturation=\\\"0\\\" crs:Vibrance=\\\"+84\\\" crs:HueAdjustmentRed=\\\"0\\\" crs:HueAdjustmentOrange=\\\"0\\\" crs:HueAdjustmentYellow=\\\"0\\\" crs:HueAdjustmentGreen=\\\"0\\\" crs:HueAdjustmentAqua=\\\"0\\\" crs:HueAdjustmentBlue=\\\"0\\\" crs:HueAdjustmentPurple=\\\"0\\\" crs:HueAdjustmentMagenta=\\\"0\\\" crs:SaturationAdjustmentRed=\\\"0\\\" crs:SaturationAdjustmentOrange=\\\"0\\\" crs:SaturationAdjustmentYellow=\\\"0\\\" crs:SaturationAdjustmentGreen=\\\"0\\\" crs:SaturationAdjustmentAqua=\\\"0\\\" crs:SaturationAdjustmentBlue=\\\"0\\\" crs:SaturationAdjustmentPurple=\\\"0\\\" crs:SaturationAdjustmentMagenta=\\\"0\\\" crs:LuminanceAdjustmentRed=\\\"0\\\" crs:LuminanceAdjustmentOrange=\\\"0\\\" crs:LuminanceAdjustmentYellow=\\\"0\\\" crs:LuminanceAdjustmentGreen=\\\"0\\\" crs:LuminanceAdjustmentAqua=\\\"0\\\" crs:LuminanceAdjustmentBlue=\\\"0\\\" crs:LuminanceAdjustmentPurple=\\\"0\\\" crs:LuminanceAdjustmentMagenta=\\\"0\\\" crs:SplitToningShadowHue=\\\"0\\\" crs:SplitToningShadowSaturation=\\\"0\\\" crs:SplitToningHighlightHue=\\\"0\\\" crs:SplitToningHighlightSaturation=\\\"0\\\" crs:SplitToningBalance=\\\"0\\\" crs:ParametricShadows=\\\"0\\\" crs:ParametricDarks=\\\"0\\\" crs:ParametricLights=\\\"0\\\" crs:ParametricHighlights=\\\"0\\\" crs:ParametricShadowSplit=\\\"25\\\" crs:ParametricMidtoneSplit=\\\"50\\\" crs:ParametricHighlightSplit=\\\"75\\\" crs:SharpenRadius=\\\"+1.0\\\" crs:SharpenDetail=\\\"25\\\" crs:SharpenEdgeMasking=\\\"0\\\" crs:PostCropVignetteAmount=\\\"0\\\" crs:GrainAmount=\\\"0\\\" crs:LensProfileEnable=\\\"0\\\" crs:LensManualDistortionAmount=\\\"0\\\" crs:PerspectiveVertical=\\\"0\\\" crs:PerspectiveHorizontal=\\\"0\\\" crs:PerspectiveRotate=\\\"0.0\\\" crs:PerspectiveScale=\\\"100\\\" crs:PerspectiveAspect=\\\"0\\\" crs:PerspectiveUpright=\\\"5\\\" crs:PerspectiveX=\\\"0.00\\\" crs:PerspectiveY=\\\"0.00\\\" crs:AutoLateralCA=\\\"0\\\" crs:Exposure2012=\\\"0.00\\\" crs:Contrast2012=\\\"0\\\" crs:Highlights2012=\\\"0\\\" crs:Shadows2012=\\\"0\\\" crs:Whites2012=\\\"0\\\" crs:Blacks2012=\\\"0\\\" crs:Clarity2012=\\\"0\\\" crs:DefringePurpleAmount=\\\"0\\\" crs:DefringePurpleHueLo=\\\"30\\\" crs:DefringePurpleHueHi=\\\"70\\\" crs:DefringeGreenAmount=\\\"0\\\" crs:DefringeGreenHueLo=\\\"40\\\" crs:DefringeGreenHueHi=\\\"60\\\" crs:Dehaze=\\\"0\\\" crs:Texture=\\\"0\\\" crs:ToneMapStrength=\\\"0\\\" crs:ConvertToGrayscale=\\\"False\\\" crs:OverrideLookVignette=\\\"False\\\" crs:ToneCurveName=\\\"Linear\\\" crs:ToneCurveName2012=\\\"Linear\\\" crs:CameraProfile=\\\"Embedded\\\" crs:CameraProfileDigest=\\\"54650A341B5B5CCAE8442D0B43A92BCE\\\" crs:LensProfileSetup=\\\"LensDefaults\\\" crs:UprightVersion=\\\"151388160\\\" crs:UprightCenterMode=\\\"0\\\" crs:UprightCenterNormX=\\\"0.5\\\" crs:UprightCenterNormY=\\\"0.5\\\" crs:UprightFocalMode=\\\"0\\\" crs:UprightFocalLength35mm=\\\"35\\\" crs:UprightPreview=\\\"False\\\" crs:UprightGuidedDependentDigest=\\\"F7173540FD9FB419BD947A976070F4D2\\\" crs:UprightTransformCount=\\\"6\\\" crs:UprightTransform_5=\\\"1.039357088,-0.000108501,-0.003125183,-0.000018587,1.057735296,-0.010513773,0.001767865,0.034718470,1.000000000\\\" crs:UprightFourSegmentsCount=\\\"2\\\" crs:UprightFourSegments_0=\\\"0.216999993,0.850666642,0.808333337,0.851555586\\\" crs:UprightFourSegments_1=\\\"0.810999990,0.663111091,0.797666609,0.178666711\\\" crs:HasSettings=\\\"True\\\" crs:CropTop=\\\"0.019089\\\" crs:CropLeft=\\\"0.460746\\\" crs:CropBottom=\\\"0.694646\\\" crs:CropRight=\\\"0.591986\\\" crs:CropAngle=\\\"45\\\" crs:CropConstrainToWarp=\\\"0\\\" crs:HasCrop=\\\"True\\\"> <crs:ToneCurve> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurve> <crs:ToneCurveRed> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveRed> <crs:ToneCurveGreen> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveGreen> <crs:ToneCurveBlue> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveBlue> <crs:ToneCurvePV2012> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012> <crs:ToneCurvePV2012Red> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Red> <crs:ToneCurvePV2012Green> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Green> <crs:ToneCurvePV2012Blue> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Blue> <crs:Look crs:Name=\\\"\\\"\\/> <\\/rdf:Description> <\\/rdf:RDF> <\\/x:xmpmeta>\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n      \"storage\": \"external\",\n      \"type\": \"image/jpeg\",\n      \"overwrite\": true\n    }\n  ]\n}",
+          "content": "POST https://image.adobe.io/lrService/xmp HTTP/1.1\nHost: image.adobe.io/lrService\nContent-Type: application/json\nauthorization: Bearer $token\nx-api-key: $x-api-key\n{\n  \"inputs\":{\n    \"source\": {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_getObject...\",\n      \"storage\": \"external\"\n    }\n  },\n  \"options\": {\n    \"xmp\": \"<x:xmpmeta xmlns:x=\\\"adobe:ns:meta\\/\\\" x:xmptk=\\\"Adobe XMP Core 5.6-c140 79.160451, 2017\\/05\\/06-01:08:21        \\\"> <rdf:RDF xmlns:rdf=\\\"http:\\/\\/www.w3.org\\/1999\\/02\\/22-rdf-syntax-ns#\\\"> <rdf:Description rdf:about=\\\"\\\" xmlns:crs=\\\"http:\\/\\/ns.adobe.com\\/camera-raw-settings\\/1.0\\/\\\" crs:Version=\\\"11.4.1\\\" crs:ProcessVersion=\\\"11.0\\\" crs:WhiteBalance=\\\"Custom\\\" crs:IncrementalTemperature=\\\"+54\\\" crs:IncrementalTint=\\\"0\\\" crs:Saturation=\\\"+81\\\" crs:Sharpness=\\\"0\\\" crs:LuminanceSmoothing=\\\"0\\\" crs:ColorNoiseReduction=\\\"0\\\" crs:VignetteAmount=\\\"0\\\" crs:ShadowTint=\\\"0\\\" crs:RedHue=\\\"0\\\" crs:RedSaturation=\\\"0\\\" crs:GreenHue=\\\"0\\\" crs:GreenSaturation=\\\"0\\\" crs:BlueHue=\\\"0\\\" crs:BlueSaturation=\\\"0\\\" crs:Vibrance=\\\"+84\\\" crs:HueAdjustmentRed=\\\"0\\\" crs:HueAdjustmentOrange=\\\"0\\\" crs:HueAdjustmentYellow=\\\"0\\\" crs:HueAdjustmentGreen=\\\"0\\\" crs:HueAdjustmentAqua=\\\"0\\\" crs:HueAdjustmentBlue=\\\"0\\\" crs:HueAdjustmentPurple=\\\"0\\\" crs:HueAdjustmentMagenta=\\\"0\\\" crs:SaturationAdjustmentRed=\\\"0\\\" crs:SaturationAdjustmentOrange=\\\"0\\\" crs:SaturationAdjustmentYellow=\\\"0\\\" crs:SaturationAdjustmentGreen=\\\"0\\\" crs:SaturationAdjustmentAqua=\\\"0\\\" crs:SaturationAdjustmentBlue=\\\"0\\\" crs:SaturationAdjustmentPurple=\\\"0\\\" crs:SaturationAdjustmentMagenta=\\\"0\\\" crs:LuminanceAdjustmentRed=\\\"0\\\" crs:LuminanceAdjustmentOrange=\\\"0\\\" crs:LuminanceAdjustmentYellow=\\\"0\\\" crs:LuminanceAdjustmentGreen=\\\"0\\\" crs:LuminanceAdjustmentAqua=\\\"0\\\" crs:LuminanceAdjustmentBlue=\\\"0\\\" crs:LuminanceAdjustmentPurple=\\\"0\\\" crs:LuminanceAdjustmentMagenta=\\\"0\\\" crs:SplitToningShadowHue=\\\"0\\\" crs:SplitToningShadowSaturation=\\\"0\\\" crs:SplitToningHighlightHue=\\\"0\\\" crs:SplitToningHighlightSaturation=\\\"0\\\" crs:SplitToningBalance=\\\"0\\\" crs:ParametricShadows=\\\"0\\\" crs:ParametricDarks=\\\"0\\\" crs:ParametricLights=\\\"0\\\" crs:ParametricHighlights=\\\"0\\\" crs:ParametricShadowSplit=\\\"25\\\" crs:ParametricMidtoneSplit=\\\"50\\\" crs:ParametricHighlightSplit=\\\"75\\\" crs:SharpenRadius=\\\"+1.0\\\" crs:SharpenDetail=\\\"25\\\" crs:SharpenEdgeMasking=\\\"0\\\" crs:PostCropVignetteAmount=\\\"0\\\" crs:GrainAmount=\\\"0\\\" crs:LensProfileEnable=\\\"0\\\" crs:LensManualDistortionAmount=\\\"0\\\" crs:PerspectiveVertical=\\\"0\\\" crs:PerspectiveHorizontal=\\\"0\\\" crs:PerspectiveRotate=\\\"0.0\\\" crs:PerspectiveScale=\\\"100\\\" crs:PerspectiveAspect=\\\"0\\\" crs:PerspectiveUpright=\\\"5\\\" crs:PerspectiveX=\\\"0.00\\\" crs:PerspectiveY=\\\"0.00\\\" crs:AutoLateralCA=\\\"0\\\" crs:Exposure2012=\\\"0.00\\\" crs:Contrast2012=\\\"0\\\" crs:Highlights2012=\\\"0\\\" crs:Shadows2012=\\\"0\\\" crs:Whites2012=\\\"0\\\" crs:Blacks2012=\\\"0\\\" crs:Clarity2012=\\\"0\\\" crs:DefringePurpleAmount=\\\"0\\\" crs:DefringePurpleHueLo=\\\"30\\\" crs:DefringePurpleHueHi=\\\"70\\\" crs:DefringeGreenAmount=\\\"0\\\" crs:DefringeGreenHueLo=\\\"40\\\" crs:DefringeGreenHueHi=\\\"60\\\" crs:Dehaze=\\\"0\\\" crs:Texture=\\\"0\\\" crs:ToneMapStrength=\\\"0\\\" crs:ConvertToGrayscale=\\\"False\\\" crs:OverrideLookVignette=\\\"False\\\" crs:ToneCurveName=\\\"Linear\\\" crs:ToneCurveName2012=\\\"Linear\\\" crs:CameraProfile=\\\"Embedded\\\" crs:CameraProfileDigest=\\\"54650A341B5B5CCAE8442D0B43A92BCE\\\" crs:LensProfileSetup=\\\"LensDefaults\\\" crs:UprightVersion=\\\"151388160\\\" crs:UprightCenterMode=\\\"0\\\" crs:UprightCenterNormX=\\\"0.5\\\" crs:UprightCenterNormY=\\\"0.5\\\" crs:UprightFocalMode=\\\"0\\\" crs:UprightFocalLength35mm=\\\"35\\\" crs:UprightPreview=\\\"False\\\" crs:UprightGuidedDependentDigest=\\\"F7173540FD9FB419BD947A976070F4D2\\\" crs:UprightTransformCount=\\\"6\\\" crs:UprightTransform_5=\\\"1.039357088,-0.000108501,-0.003125183,-0.000018587,1.057735296,-0.010513773,0.001767865,0.034718470,1.000000000\\\" crs:UprightFourSegmentsCount=\\\"2\\\" crs:UprightFourSegments_0=\\\"0.216999993,0.850666642,0.808333337,0.851555586\\\" crs:UprightFourSegments_1=\\\"0.810999990,0.663111091,0.797666609,0.178666711\\\" crs:HasSettings=\\\"True\\\" crs:CropTop=\\\"0.019089\\\" crs:CropLeft=\\\"0.460746\\\" crs:CropBottom=\\\"0.694646\\\" crs:CropRight=\\\"0.591986\\\" crs:CropAngle=\\\"45\\\" crs:CropConstrainToWarp=\\\"0\\\" crs:HasCrop=\\\"True\\\"> <crs:ToneCurve> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurve> <crs:ToneCurveRed> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveRed> <crs:ToneCurveGreen> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveGreen> <crs:ToneCurveBlue> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurveBlue> <crs:ToneCurvePV2012> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012> <crs:ToneCurvePV2012Red> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Red> <crs:ToneCurvePV2012Green> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Green> <crs:ToneCurvePV2012Blue> <rdf:Seq> <rdf:li>0, 0<\\/rdf:li> <rdf:li>255, 255<\\/rdf:li> <\\/rdf:Seq> <\\/crs:ToneCurvePV2012Blue> <crs:Look crs:Name=\\\"\\\"\\/> <\\/rdf:Description> <\\/rdf:RDF> <\\/x:xmpmeta>\"\n  },\n  \"outputs\": [\n    {\n      \"href\": \"https://some-bucket-us-east-1.amazonaws.com/s3_presigned_putObject..\",\n      \"storage\": \"external\",\n      \"type\": \"image/jpeg\",\n      \"quality\": 10,\n      \"overwrite\": true\n    }\n  ]\n}",
           "type": "http"
         },
         {
           "title": "Curl Usage:",
-          "content": "curl -H \"authorization: Bearer $token\" -H \"Content-Type:application/json\" -H \"x-api-key:$x-api-key\" -X POST -d '{\"inputs\":{\"href\":\"<href>\",\"storage\":\"<storage>\"}, \"options\": {\"xmp\": \"<xmp>\"}, \"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\",\"type\":\"<type>\"}]}' https://image.adobe.io/lrService/xmp",
+          "content": "curl -H \"authorization: Bearer $token\" -H \"Content-Type:application/json\" -H \"x-api-key:$x-api-key\" -X POST -d '{\"inputs\":{\"href\":\"<href>\",\"storage\":\"<storage>\"}, \"options\": {\"xmp\": \"<xmp>\"}, \"outputs\":[{\"href\":\"<href>\",\"storage\":\"<storage>\",\"type\":\"<type>\",\"quality\": \"<quality>\",\"overwrite\": <overwrite>}]}' https://image.adobe.io/lrService/xmp",
           "type": "curl"
         }
       ]
