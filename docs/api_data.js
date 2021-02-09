@@ -7704,7 +7704,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p> <ul>   <li>400: InputValidationError</li>   <li>400: PayloadValidationError</li>   <li>400: RequestBodyError</li>   <li>401: MissingAuthTokenError</li>   <li>401: InvalidAuthTokenError</li>   <li>402: QuotaExhaustedError</li>   <li>403: AuthForbidden</li>   <li>404: FileExistsErrors</li>   <li>404: ResourceNotFound</li>   <li>415: InvalidContentTypeError</li>   <li>500: UndefinedError</li> </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p> <ul>   <li>400: InputValidationError</li>   <li>400: PayloadValidationError</li>   <li>400: RequestBodyError</li>   <li>401: MissingAuthTokenError</li>   <li>401: InvalidAuthTokenError</li>   <li>403: AuthForbidden</li>   <li>404: FileExistsErrors</li>   <li>404: ResourceNotFound</li>   <li>415: InvalidContentTypeError</li>   <li>500: UndefinedError</li> </ul>"
           }
         ]
       },
