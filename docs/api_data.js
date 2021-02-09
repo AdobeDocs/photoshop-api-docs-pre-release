@@ -433,6 +433,11 @@ define({ "api": [
           "type": "json"
         },
         {
+          "title": "Example QuotaExhaustedError:",
+          "content": " HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
+          "type": "json"
+        },
+        {
           "title": "Example UndefinedError:",
           "content": "HTTP/1.1 500 Internal Server Error\nContent-Type: application/json\n{\n  \"title\": \"Internal Service Error\",\n  \"code\": 500,\n  \"type\": \"InternalServiceError\"\n}",
           "type": "json"
@@ -871,6 +876,11 @@ define({ "api": [
         {
           "title": "Example InvalidAuthTokenError:",
           "content": "HTTP/1.1 401 Unauthorized\nContent-Type: application/json\n{\n  \"title\": \"Unauthorized\",\n  \"code\": 401,\n  \"type\": \"InvalidAuthTokenError\",\n  \"details\": {\n    \"reason\": \"Unable to access the input href\",\n    \"name\": \"<path_to_invalid_file>\"\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Example QuotaExhaustedError:",
+          "content": " HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "json"
         },
         {
@@ -1527,6 +1537,11 @@ define({ "api": [
           "type": "json"
         },
         {
+          "title": "Example QuotaExhaustedError:",
+          "content": " HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
+          "type": "json"
+        },
+        {
           "title": "Example UndefinedError:",
           "content": "HTTP/1.1 500 Internal Server Error\nContent-Type: application/json\n{\n  \"title\": \"Internal Service Error\",\n  \"code\": 500,\n  \"type\": \"InternalServiceError\"\n}",
           "type": "json"
@@ -2003,6 +2018,11 @@ define({ "api": [
           "type": "json"
         },
         {
+          "title": "Example QuotaExhaustedError:",
+          "content": " HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
+          "type": "json"
+        },
+        {
           "title": "Example UndefinedError:",
           "content": "HTTP/1.1 500 Internal Server Error\nContent-Type: application/json\n{\n  \"title\": \"Internal Service Error\",\n  \"code\": 500,\n  \"type\": \"InternalServiceError\"\n}",
           "type": "json"
@@ -2465,6 +2485,11 @@ define({ "api": [
           "type": "json"
         },
         {
+          "title": "Example QuotaExhaustedError:",
+          "content": " HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
+          "type": "json"
+        },
+        {
           "title": "Example UndefinedError:",
           "content": "HTTP/1.1 500 Internal Server Error\nContent-Type: application/json\n{\n  \"title\": \"Internal Service Error\",\n  \"code\": 500,\n  \"type\": \"InternalServiceError\"\n}",
           "type": "json"
@@ -2729,7 +2754,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -2752,6 +2777,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -2995,7 +3025,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -3008,6 +3038,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -3372,7 +3407,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -3385,6 +3420,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -3590,7 +3630,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -3603,6 +3643,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -4586,7 +4631,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -4609,6 +4654,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -5858,7 +5908,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -5871,6 +5921,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -7381,7 +7436,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -7394,6 +7449,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -7654,7 +7714,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p> <ul>   <li>400: InputValidationError</li>   <li>400: PayloadValidationError</li>   <li>400: RequestBodyError</li>   <li>401: MissingAuthTokenError</li>   <li>401: InvalidAuthTokenError</li>   <li>403: AuthForbidden</li>   <li>404: FileExistsErrors</li>   <li>404: ResourceNotFound</li>   <li>415: InvalidContentTypeError</li>   <li>500: UndefinedError</li> </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p> <ul>   <li>400: InputValidationError</li>   <li>400: PayloadValidationError</li>   <li>400: RequestBodyError</li>   <li>401: MissingAuthTokenError</li>   <li>401: InvalidAuthTokenError</li>   <li>402: QuotaExhaustedError</li>   <li>403: AuthForbidden</li>   <li>404: FileExistsErrors</li>   <li>404: ResourceNotFound</li>   <li>415: InvalidContentTypeError</li>   <li>500: UndefinedError</li> </ul>"
           }
         ]
       },
@@ -7672,6 +7732,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -8013,7 +8078,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -8036,6 +8101,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -8340,7 +8410,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -8363,6 +8433,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -8667,7 +8742,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -8690,6 +8765,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -9048,7 +9128,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -9061,6 +9141,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -9338,7 +9423,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -9361,6 +9446,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -9807,7 +9897,7 @@ define({ "api": [
             "type": "details",
             "optional": false,
             "field": "errorCodes",
-            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
           }
         ]
       },
@@ -9820,6 +9910,11 @@ define({ "api": [
         {
           "title": "Response: Error Example",
           "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -9989,6 +10084,64 @@ define({ "api": [
         {
           "title": "Response: Success Example",
           "content": "HTTP/1.1 202 ACCEPTED\nContent-Type: application/json\nContent-Length: 682\n{\n  \"_links\": {\n      \"self\" :{ \"href\" : \"https://image.adobe.io/sensei/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\" }\n  }\n}",
+          "type": "object"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Errors": [
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>a machine-readable error type</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "code",
+            "description": "<p>a machine-readable error code</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>short, human-readable summary of the problem</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "array",
+            "optional": false,
+            "field": "errorDetails",
+            "description": "<p>further descriptions of the exact errors where <code>errorDetail</code> is substituted for a specific issue.</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "details",
+            "optional": false,
+            "field": "errorCodes",
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Error Templated",
+          "content": "// This is a templated example for when the call itself fails\n\nHTTP/1.1 <Status_Code> <Reason>\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"type\": \"<errorType>\",\n  \"code\": \"<errorCode>\",\n  \"title\": \"<errorDescription>\",\n  \"<errorDetails>\": [\n    {\n      \"name\":\"<paramName>\",\n      \"reason\":\"<error>\"\n    }\n  ]\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Error Example",
+          "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
@@ -10512,6 +10665,64 @@ define({ "api": [
         {
           "title": "Response: Success Example",
           "content": "HTTP/1.1 202 ACCEPTED\nContent-Type: application/json\nContent-Length: 682\n{\n  \"_links\": {\n      \"self\" :{ \"href\" : \"https://image.adobe.io/sensei/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\" }\n  }\n}",
+          "type": "object"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Errors": [
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "type",
+            "description": "<p>a machine-readable error type</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "code",
+            "description": "<p>a machine-readable error code</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>short, human-readable summary of the problem</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "array",
+            "optional": false,
+            "field": "errorDetails",
+            "description": "<p>further descriptions of the exact errors where <code>errorDetail</code> is substituted for a specific issue.</p>"
+          },
+          {
+            "group": "Errors",
+            "type": "details",
+            "optional": false,
+            "field": "errorCodes",
+            "description": "<p>This field does not appear in the response but is a partial list of error codes and types</p>  <ul>    <li>400: InputValidationError</li>    <li>400: PayloadValidationError</li>    <li>400: RequestBodyError</li>    <li>401: MissingAuthTokenError</li>    <li>401: InvalidAuthTokenError</li>    <li>402: QuotaExhaustedError</li>    <li>403: AuthForbidden</li>    <li>404: FileExistsErrors</li>    <li>404: InputFileExistsErrors</li>    <li>404: ResourceNotFound</li>    <li>415: InvalidContentTypeError</li>    <li>500: UndefinedError</li>  </ul>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response: Error Templated",
+          "content": "// This is a templated example for when the call itself fails\n\nHTTP/1.1 <Status_Code> <Reason>\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\n{\n  \"type\": \"<errorType>\",\n  \"code\": \"<errorCode>\",\n  \"title\": \"<errorDescription>\",\n  \"<errorDetails>\": [\n    {\n      \"name\":\"<paramName>\",\n      \"reason\":\"<error>\"\n    }\n  ]\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Error Example",
+          "content": "// This is an example for when the call itself fails\n\nHTTP/1.1 404 OK\nContent-Type: application/json\nContent-Length: 584\nLocation: \"/psdService/status/f54e0fcb-260b-47c3-b520-de0d17dc2b67\"\n{\n    \"type\": \"ResourceNotFound\",\n    \"title\": \"Requested resource was not found\",\n    \"code\": 404\n}",
+          "type": "object"
+        },
+        {
+          "title": "Response: Quota Exhausted Error Example:",
+          "content": " // This is an example for when quota assigned is already used.\n HTTP/1.1 402 Payment Required\n Content-Type: application/json\n {\n  \"title\": \"Quota Exhausted Error\",\n  \"code\": 402,\n  \"type\": \"QuotaExhaustedError\",\n  \"details\": \"Quota limit for the subscribed plan has been exceeded. Please reach out to PS team at psdservices@adobe.com\"\n}",
           "type": "object"
         }
       ]
