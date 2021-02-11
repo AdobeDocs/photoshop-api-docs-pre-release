@@ -942,7 +942,7 @@ The `/documentManifest` api can take one or more input PSD's to generate JSON ma
 
 #### Sample 5.1: Initiate a job to retrieve a PSD's JSON manifest
 
-Using Example.psd, with the use case of a document stored in Adobe's Creative Cloud, a typical curl call might look like this:
+Using Example.psd, with the use case of a document stored in your external storage (ie. azure, aws, dropbox), a typical curl call might look like this:
 
 ```shell
 curl -X POST \
@@ -953,8 +953,8 @@ curl -X POST \
   -d '{
   "inputs": [
     {
-      "href":"files/Example.psd",
-      "storage":"adobe"
+      "href":"<YOUR_PRESIGNED_URL>",
+      "storage":"external"
     }
   ]
 }'
