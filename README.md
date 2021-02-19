@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Private Beta](#private-beta)
+- [Public Beta](#public-beta)
 - [Welcome to Photoshop APIs!](#welcome-to-photoshop-apis)
 - [General Setup and Onboarding](#general-setup-and-onboarding)
   - [Authentication](#authentication)
