@@ -83,11 +83,12 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Private Beta
+# Public Beta
 
-The Photoshop APIs are made available through an invitation only Private Beta. In order to be considered for the Private Beta please apply here https://photoshop.adobelanding.com/api-signup/
+The Photoshop APIs are open for free trials. The trial is currently limited to 5,000 calls in a non production environment. In order to gain access to the trial please sign up using the link below and follow the steps to generate your trial credentials. https://photoshop.adobelanding.com/api-signup/
 
-Make sure to take a look at the Pre-release agreement before applying and ensure you understand the aspects of the program.
+Make sure to take a look at the Pre-release agreement linked in the sign up form before getting started and ensure you understand the aspects of the program.
+
 
 # Welcome to Photoshop APIs!
 
@@ -114,45 +115,25 @@ The API documentation is published at
 ## Authentication
 ### Overview
 
-The Photoshop API uses client id’s (also know as api keys) and authentication tokens to authenticate requests. There are two different kinds of authorization tokens available:  
-
-1. Individual user access (OAuth 2.0 access token)
-2. Adobe Enterprise ETLA (Service token using JSON Web Token/JWT)
-
-If this is your first time using Adobe API’s we suggest trying out the OAuth workflow.
-
-In order to use the Photoshop API's you’ll need to get a Client ID (also known as an API key) and a Client Secret. Once you have those you can use them to programmatically get an access token to authenticate your requests.  We’ll walk you through the steps below.
+The Photoshop API uses client id’s (also known as api keys) and authentication tokens to authenticate requests. There are two different kinds of authorization tokens available:
+Internal Adobe user access (OAuth 2.0 access token)
+Free trial user (Service token using JSON Web Token/JWT)
+In order to use the Photoshop API's you’ll need to get an API key (also known as a CLIENT ID) and a Client Secret. Once you have those you can use them to programmatically get an access token to authenticate your requests. We’ll walk you through the steps below.
 
 
-### Workflow and Use Cases
-
-Here are the workflows we currently support.  You are…
-
-- An individual user logged in who has an Adobe Creative Cloud Account
-- An organization with an Adobe ETLA (an enterprise account)
-- Running a job on a server
-- Running in a browser
-
-If your workflow falls outside of these please contact us at psdservices@adobe.com so we can help meet your needs.
-
-### Individual users
-1. Get your client id and client secret.
-After you've been accepted to the PreRelease program you will be emailed your credentials (your client ID and client Secret) required for API authentication.
-
+### Internal Adobe Users Only
+1. Get your client id and client secret from the CIS team.
 2. Test out your credentials.
-This will allow you to verify that your credentials work and show you want an OAuth token looks like for when you eventually do this programmatically.
   - Browse to https://ps-prerelease-us-east-1.cloud.adobe.io
   - Enter the client id and secret
   - Follow through the login process
   - If your credentials work you should see an authorization token appear on your screen
-This is the OAuth token that’s required to make calls to the Photoshop API’s and if you’d like you can jump ahead and immediately try them out now.  Eventually you will make this process programmatic (instructions below) but in the meantime the token expires in 24 hours and you can use this workflow during development for as long as you’d like.
-
 3. Make an authenticated call to ensure you can round trip successfully with the API’s
 ```shell
 curl --request GET \
   --url https://image.adobe.io/pie/psdService/hello  \
-  --header 'Authorization: Bearer <YOUR_OAUTH_TOKEN>' \
-  --header 'x-api-key: <YOUR_CLIENT_ID>' \
+  --header "Authorization: Bearer <YOUR_OAUTH_TOKEN>" \
+  --header "x-api-key: <YOUR_CLIENT_ID>" \
 ```
   Congrats! You just made your first request to the Photoshop API.
 
@@ -175,16 +156,12 @@ curl --request GET \
     ]
   }'
   ```
+  
+5.  Notes on token retrieval
+The access token must never be transmitted as a URI parameter. Doing so would expose it to being captured in-the-clear by intermediaries such as proxy server logs. The API does not allow you to send an access token anywhere except the Authorization header field.
 
-5. Notes on token retrieval
-
-  The access token must never be transmitted as a URI parameter. Doing so would expose it to being captured in-the-clear by intermediaries such as proxy server logs. The API does not allow you to send an access token anywhere except the Authorization header field.
-
-  Your access token will expire typically in 24 hours.  You will receive a ‘refresh_token’ when you initially obtain the access token that you can use to get a new access token.  Be aware that refreshing your token might require a new login event.  Please reference the [OAuth documentation](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/OAuth/OAuth.md) for additional instructions.
-
-6. Automate token retrieval
-
-  Please contact psdservices@adobe.com for more information on how you can automate token generation for your workflow.
+Your access token will expire typically in 24 hours. You will receive a ‘refresh_token’ when you initially obtain the access token that you can use to get a new access token. Be aware that refreshing your token might require a new login event. Please reference the OAuth documentation for additional instructions.
+Please contact psdservices@adobe.com for more information on how you can automate token generation for your workflow.
 
 #### Additional OAuth 2.0 and IMS Information
 
@@ -194,29 +171,41 @@ You can find details on interacting with Adobe IMS API’s and authentication in
 3. [IMS API’s](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/Resources/IMS.md)
 4. [OAuth Sample Code](sample_code/oauth-sample-app)
 
-### Service Token Workflow (Adobe ETLA users)
-To automate the token generation , we suggest using JWT tokens.
-To find out if you have an ETLA reach out to your system administrator or your Adobe Account Executive.  
+### Free trial users (JWT authentication) 
 
-Enterprise users will not have access to assets stored in the Creative Cloud so you must use an external storage source when making calls to the API.
+NOTE: Free Trial users will not have access to assets stored in the Creative Cloud so you must use an external storage source when making calls to the API. All free trial users will have 5,000 API calls to test their use case and provide feedback. Please see Rate Limiting Section for more information (hyper link to Rate limiting Section)
 
-1. Reach out to psdservices@adobe.com and request a JWT integration.
-2. Create a JSON Web Token (JWT) and exchange it for an access token
-Take the information from the email, and follow the instructions at 
-    - [JWT Instructions for Python](https://www.datanalyst.info/python/adobe-io-user-management/adobe-io-jwt-authentication-with-python/)
-    - [JWT Instructions for Node](https://www.npmjs.com/package/@adobe/jwt-auth)
-
-3. Make your first Photoshop API call
-Make an authenticated call to ensure you can round trip successfully with the API’s
+1. If you haven't signed up and generated credentials please follow this link and follow the steps on the confirmation modal: 
+https://photoshop.adobelanding.com/api-signup/
+2. If you have already signed up and need a new keyGo to https://console.adobe.io/home and sign in to the Admin Console.
+3. Click on “Create a new project” under the “Quick Start” section on the middle of your screen
+4. Click on “Add API”
+5. Select the “Adobe Photoshop APIs (Trial)” and click on “Next”
+6. You should see a zip file named “Config” in your downloads
+7. Open the contents of the zip and locate the file name “private.key”
+8. Open the file named “private.key” in a text editor like Atom or Sublime
+9. Copy the entire contents of the file and paste it in your project page in the section labeled “Generate access token” and click on “Generate token” on the bottom right hand corner.
+10. Congrats! You have just created a JWT token. Now copy your token and Client ID from this screen into a secure document. You are going to need them for the next step. 
+11. Open your terminal and paste the code below. Make sure to replace the variables "YOUR_ACCESS_TOKEN" and "YOUR_CLIENT_ID" with the information you copied from the last step and run the command.
 
 ``` shell
 
 curl --request GET \
   --url https://image.adobe.io/pie/psdService/hello \
-  --header 'Authorization: Bearer <YOUR_SERVICE_TOKEN>' \
-  --header 'x-api-key: <YOUR_CLIENT_ID>'
+  --header "Authorization: Bearer <YOUR_ACCESS_TOKEN>" \
+  --header "x-api-key: <YOUR_CLIENT_ID>"
   ```
-  Congrats! You just made your first request to the Photoshop API.
+
+Congrats! You just made your first request to the Photoshop API.
+
+NOTE: Your token will expire every 24 hours and will need to be refreshed after it expires. See the next section for more information on retrieving your token programmatically. 
+
+## Automating your JWT token
+
+Check out these modules for a quick path to automating your token retrieval:
+
+- JWT Instructions for Python
+- JWT Instructions for Node
 
 #### Additional Service Token and JWT Information
 
@@ -240,6 +229,11 @@ Also known as the `client_id`. You must additionally pass in your Adobe API key 
 ## Rate Limiting
 
 We have not put a throttle limit on requests to the API at this time.
+
+## Quota Limits
+
+All free trial users will have 5,000 API calls in order to test and evaluate the API in a non production environment. If for any reason you reach your limit and need to extend your quota please reach out psdservices@adobe.com for more information. 
+
 
 # Photoshop
 
