@@ -205,7 +205,7 @@ NOTE: Your token will expire every 24 hours and will need to be refreshed after 
 
 Check out these modules for a quick path to automating your token retrieval:
 
-- [JWT Instructions for Python](#https://www.datanalyst.info/python/adobe-io-user-management/adobe-io-jwt-authentication-with-python/)
+- [JWT Instructions for Python](https://www.datanalyst.info/python/adobe-io-user-management/adobe-io-jwt-authentication-with-python/)
 - [JWT Instructions for Node](https://www.npmjs.com/package/@adobe/jwt-auth)
 
 #### Additional Service Token and JWT Information
