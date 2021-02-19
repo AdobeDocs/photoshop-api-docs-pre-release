@@ -15,6 +15,7 @@
   - [API Keys](#api-keys)
   - [Retries](#retries)
   - [Rate Limiting](#rate-limiting)
+  - [Quota Limits](#quota-limits)
 - [Photoshop](#photoshop)
   - [General Workflow](#general-workflow)
     - [Input and Output file storage](#input-and-output-file-storage)
@@ -173,7 +174,7 @@ You can find details on interacting with Adobe IMS API’s and authentication in
 
 ### Free trial users (JWT authentication) 
 
-NOTE: Free Trial users will not have access to assets stored in the Creative Cloud so you must use an external storage source when making calls to the API. All free trial users will have 5,000 API calls to test their use case and provide feedback. Please see Rate Limiting Section for more information (hyper link to Rate limiting Section)
+NOTE: Free Trial users will not have access to assets stored in the Creative Cloud so you must use an external storage source when making calls to the API. All free trial users will have 5,000 API calls to test their use case and provide feedback. Please see [Quota Limits](#quota-limits) for more information.
 
 1. If you haven't signed up and generated credentials please follow this link and follow the steps on the confirmation modal: 
 https://photoshop.adobelanding.com/api-signup/
@@ -204,8 +205,8 @@ NOTE: Your token will expire every 24 hours and will need to be refreshed after 
 
 Check out these modules for a quick path to automating your token retrieval:
 
-- JWT Instructions for Python
-- JWT Instructions for Node
+- [JWT Instructions for Python](#https://www.datanalyst.info/python/adobe-io-user-management/adobe-io-jwt-authentication-with-python/)
+- [JWT Instructions for Node](https://www.npmjs.com/package/@adobe/jwt-auth)
 
 #### Additional Service Token and JWT Information
 
