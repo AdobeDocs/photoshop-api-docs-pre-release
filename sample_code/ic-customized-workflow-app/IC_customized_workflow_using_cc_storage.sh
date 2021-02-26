@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# this is a demo code snippet to use Sensei-CutOut service to generate cutout result as Photoshop path
+# this is a demo code snippet to use ImageCutOut service to generate cutout result as Photoshop path (Use Adobe Creative Cloud Storage)
 
 # set up authorization token variable, by default it is the first argument
 token='Your_Access_Token'
