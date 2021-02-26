@@ -67,6 +67,11 @@
   - [How to use the API's](#how-to-use-the-apis)
     - [Example 1: Initiate a job to create an image cutout](#example-1-initiate-a-job-to-create-an-image-cutout)
     - [Example 2: Initiate a job to create an image mask](#example-2-initiate-a-job-to-create-an-image-mask)
+  - [Customized Workflow](#customized-workflow)
+    - [Example 3: (Generate ImageCutOut result as Photoshop path)](#example-3-generate-imagecutout-result-as-photoshop-path)
+      - [Sample Input/Output](#sample-inputoutput)
+      - [Instructions](#instructions)
+      - [Sample Code](#sample-code-1)
 - [Lightroom APIs](#lightroom-apis)
   - [General Workflow](#general-workflow-2)
   - [How to use the API's](#how-to-use-the-apis-1)
@@ -157,7 +162,7 @@ curl --request GET \
     ]
   }'
   ```
-  
+
 5.  Notes on token retrieval
 The access token must never be transmitted as a URI parameter. Doing so would expose it to being captured in-the-clear by intermediaries such as proxy server logs. The API does not allow you to send an access token anywhere except the Authorization header field.
 
@@ -172,11 +177,11 @@ You can find details on interacting with Adobe IMS API’s and authentication in
 3. [IMS API’s](https://www.adobe.io/authentication/auth-methods.html#!AdobeDocs/adobeio-auth/master/Resources/IMS.md)
 4. [OAuth Sample Code](sample_code/oauth-sample-app)
 
-### Free trial users (JWT authentication) 
+### Free trial users (JWT authentication)
 
 NOTE: Free Trial users will not have access to assets stored in the Creative Cloud so you must use an external storage source when making calls to the API. All free trial users will have 5,000 API calls to test their use case and provide feedback. Please see [Quota Limits](#quota-limits) for more information.
 
-1. If you haven't signed up and generated credentials please follow this link and follow the steps on the confirmation modal: 
+1. If you haven't signed up and generated credentials please follow this link and follow the steps on the confirmation modal:
 https://photoshop.adobelanding.com/api-signup/
 2. If you have already signed up and need a new keyGo to https://console.adobe.io/home and sign in to the Admin Console.
 3. Click on “Create a new project” under the “Quick Start” section on the middle of your screen
@@ -186,7 +191,7 @@ https://photoshop.adobelanding.com/api-signup/
 7. Open the contents of the zip and locate the file name “private.key”
 8. Open the file named “private.key” in a text editor like Atom or Sublime
 9. Copy the entire contents of the file and paste it in your project page in the section labeled “Generate access token” and click on “Generate token” on the bottom right hand corner.
-10. Congrats! You have just created a JWT token. Now copy your token and Client ID from this screen into a secure document. You are going to need them for the next step. 
+10. Congrats! You have just created a JWT token. Now copy your token and Client ID from this screen into a secure document. You are going to need them for the next step.
 11. Open your terminal and paste the code below. Make sure to replace the variables "YOUR_ACCESS_TOKEN" and "YOUR_CLIENT_ID" with the information you copied from the last step and run the command.
 
 ``` shell
@@ -199,7 +204,7 @@ curl --request GET \
 
 Congrats! You just made your first request to the Photoshop API.
 
-NOTE: Your token will expire every 24 hours and will need to be refreshed after it expires. See the next section for more information on retrieving your token programmatically. 
+NOTE: Your token will expire every 24 hours and will need to be refreshed after it expires. See the next section for more information on retrieving your token programmatically.
 
 ## Automating your JWT token
 
@@ -233,7 +238,7 @@ We have not put a throttle limit on requests to the API at this time.
 
 ## Quota Limits
 
-All free trial users will have 5,000 API calls in order to test and evaluate the API in a non production environment. If for any reason you reach your limit and need to extend your quota please reach out psdservices@adobe.com for more information. 
+All free trial users will have 5,000 API calls in order to test and evaluate the API in a non production environment. If for any reason you reach your limit and need to extend your quota please reach out psdservices@adobe.com for more information.
 
 
 # Photoshop
@@ -933,7 +938,7 @@ A call to this API initiates an asynchronous job and returns a response containi
 
 ### Example 5: /documentManifest (Retrieving a PSD manifest)
 
-The `/documentManifest` api can take one or more input PSD's to generate JSON manifest files from. The JSON manifest is the tree representation of all of the layer objects contained in the PSD document. 
+The `/documentManifest` api can take one or more input PSD's to generate JSON manifest files from. The JSON manifest is the tree representation of all of the layer objects contained in the PSD document.
 
 #### Sample 5.1: Initiate a job to retrieve a PSD's JSON manifest
 
@@ -956,7 +961,7 @@ curl -X POST \
 ```
 A call to this API initiates an asynchronous job and returns a response containing an href. Use the value in the href to poll for the status of the job and the same response will also contain the JSON manifest. This is illustrated in [Example 6](#example-6-fetch-the-status-of-the-job-after-successfully-submitting-a-request) below.
 
-###  Example 6: Fetch the status of the job after successfully submitting a request 
+###  Example 6: Fetch the status of the job after successfully submitting a request
 Each of our Photoshop APIs, when invoked, initiates an asynchronous job and returns a response body that contains the href to poll for status of the job.
 
 ```json
@@ -1148,7 +1153,7 @@ Once your job completes successfully (no errors/failures reported), the status r
 ```
 #### Sample 6.2 Poll for job status and get the results of all other APIs
 
-Once your job completes successfully (no errors/failures reported), this will return a response body containing the job status for each requested output. For the `/renditionCreate` API call in Example 4 in Sample 4.1 as illustrated above, a sample response containing the job status is as shown below: 
+Once your job completes successfully (no errors/failures reported), this will return a response body containing the job status for each requested output. For the `/renditionCreate` API call in Example 4 in Sample 4.1 as illustrated above, a sample response containing the job status is as shown below:
 
 ```json
 {
@@ -1358,6 +1363,29 @@ Once the job is complete your successful `/status` response will look similar to
 ### Example 2: Initiate a job to create an image mask
 
 The workflow is exactly the same as [creating an image cutout](#example-1-initiate-a-job-to-create-an-image-cutout) except you use the `/mask` endpoint instead of `/cutout`.  
+
+## Customized Workflow
+This section will demonstrate how to make a 'customized workflow' by chaining different APIs. 
+
+### Example 3: (Generate ImageCutOut result as Photoshop path)
+This workflow is ONLY for users who'd like to generate cutout result as Photoshop path instead of regular mask or cutout in above example 1([link](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-1-initiate-a-job-to-create-an-image-cutout)) and example 2([link](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-2-initiate-a-job-to-create-an-image-mask)). You will need to chain API calls to ImageCutOut service and Photoshop Service to achieve this goal. 
+
+#### Sample Input/Output
+Sample input from [here](assets/ic_customized_workflow/input.jpg).
+Sample output from [here](assets/ic_customized_workflow/result_with_path.jpg) (Note: you will need to open result in Photoshop Desktop application so that you will see the path in path panel)
+
+#### Instructions
+
+1. Download the make-file.atn file from [here](assets/ic_customized_workflow/make-path.atn) (this file will be used in the Photoshop action API call)
+2. Make the first API call one to ImageCutOut service to generate intermediate result as RGBA cutout (https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei-cutout)
+3. Make the second API call to Photoshop action service to use above intermediate result as well as the make-file.atn file to generate final JPEG format result with desired PS path embedded (https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Photoshop-photoshopActions)
+4. Open the final result with Photoshop Desktop app to check generated path in path panel 
+
+
+#### Sample Code
+You can download the sample end-to-end bash script [here](sample_code/ic-customized-workflow-app) and then follow the comments to try it out this customized workflow. 
+
+
 
 # Lightroom APIs
 
