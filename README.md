@@ -7,10 +7,10 @@
 - [General Setup and Onboarding](#general-setup-and-onboarding)
   - [Authentication](#authentication)
     - [Overview](#overview)
-    - [Workflow and Use Cases](#workflow-and-use-cases)
-    - [Individual users](#individual-users)
+    - [Internal Adobe Users Only](#internal-adobe-users-only)
       - [Additional OAuth 2.0 and IMS Information](#additional-oauth-20-and-ims-information)
-    - [Service Token Workflow (Adobe ETLA users)](#service-token-workflow-adobe-etla-users)
+    - [Free trial users (JWT authentication)](#free-trial-users-jwt-authentication)
+  - [Automating your JWT token](#automating-your-jwt-token)
       - [Additional Service Token and JWT Information](#additional-service-token-and-jwt-information)
   - [API Keys](#api-keys)
   - [Retries](#retries)
@@ -67,6 +67,11 @@
   - [How to use the API's](#how-to-use-the-apis)
     - [Example 1: Initiate a job to create an image cutout](#example-1-initiate-a-job-to-create-an-image-cutout)
     - [Example 2: Initiate a job to create an image mask](#example-2-initiate-a-job-to-create-an-image-mask)
+  - [Customized Workflow](#customized-workflow)
+    - [Example 3: (Generate ImageCutOut result as Photoshop path)](#example-3-generate-imagecutout-result-as-photoshop-path)
+      - [Sample Input/Output](#sample-inputoutput)
+      - [Instructions](#instructions)
+      - [Sample Code](#sample-code-1)
 - [Lightroom APIs](#lightroom-apis)
   - [General Workflow](#general-workflow-2)
   - [How to use the API's](#how-to-use-the-apis-1)
@@ -1362,14 +1367,14 @@ The workflow is exactly the same as [creating an image cutout](#example-1-initia
 ## Customized Workflow
 This section will demonstrate how to make a 'customized workflow' by chaining different APIs. 
 
-### Example 3 (Generate ImageCutOut result as Photoshop path)
+### Example 3: (Generate ImageCutOut result as Photoshop path)
 This workflow is ONLY for users who'd like to generate cutout result as Photoshop path (instead of regular mask or cutout in above example 1 and example 2). You will need to chain API calls to ImageCutOut service and Photoshop Service to achieve this goal. 
 
 #### Sample Input/Output
 Sample input from [here](assets/ic_customized_workflow/input.jpg)
 Sample output from [here](assets/ic_customized_workflow/result_with_path.jpg) (Note: you will need to open result in Photoshop Desktop application so that you will see the path in path panel)
 
-#### Instructions:
+#### Instructions
 
 1. Download the make-file.atn file from [here](assets/ic_customized_workflow/make-path.atn) (this file will be used in the Photoshop action API call)
 2. Make the first API call one to ImageCutOut service to generate intermediate result as RGBA cutout (https://adobedocs.github.io/photoshop-api-docs-pre-release/#api-Sensei-cutout)
