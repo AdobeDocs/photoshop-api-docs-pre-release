@@ -1368,10 +1368,10 @@ The workflow is exactly the same as [creating an image cutout](#example-1-initia
 This section will demonstrate how to make a 'customized workflow' by chaining different APIs. 
 
 ### Example 3: (Generate ImageCutOut result as Photoshop path)
-This workflow is ONLY for users who'd like to generate cutout result as Photoshop path (instead of regular mask or cutout in above example 1 and example 2). You will need to chain API calls to ImageCutOut service and Photoshop Service to achieve this goal. 
+This workflow is ONLY for users who'd like to generate cutout result as Photoshop path instead of regular mask or cutout in above example 1([link](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-1-initiate-a-job-to-create-an-image-cutout)) and example 2([link](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-2-initiate-a-job-to-create-an-image-mask)). You will need to chain API calls to ImageCutOut service and Photoshop Service to achieve this goal. 
 
 #### Sample Input/Output
-Sample input from [here](assets/ic_customized_workflow/input.jpg)
+Sample input from [here](assets/ic_customized_workflow/input.jpg).
 Sample output from [here](assets/ic_customized_workflow/result_with_path.jpg) (Note: you will need to open result in Photoshop Desktop application so that you will see the path in path panel)
 
 #### Instructions
