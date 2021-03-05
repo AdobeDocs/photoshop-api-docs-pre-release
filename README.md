@@ -1182,20 +1182,20 @@ Once your job completes successfully (no errors/failures reported), this will re
   "jobId":"de2415fb-82c6-47fc-b102-04ad651c5ed4",
   "outputs":[
     {
-      "input":"/files/Example.psd",
+      "input":"<SIGNED_GET_URL>",
       "status":"succeeded",
       "created":"2018-01-04T12:57:15.12345:Z",
       "modified":"2018-01-04T12:58:36.12345:Z",
       "_links":{
         "renditions":[
           {
-            "href":"files/Example.jpeg",          
+            "href":"<SIGNED_GET_URL>",          
             "width": 512,
             "storage":"adobe",
             "type":"image/jpeg"    
           },
           {
-            "href":"files/Example.png",
+            "href":"<SIGNED_GET_URL>",
             "storage":"adobe",
             "type":"image/png"
           }
