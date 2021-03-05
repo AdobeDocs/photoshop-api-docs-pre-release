@@ -1445,7 +1445,7 @@ In order to start receiving the events in your Webhook Application, the addition
 
 #### Step 1: Initiate a job to retrieve a PSD's JSON manifest
 
-The `/documentManifest` api can take one or more input PSD's to generate JSON manifest files from. The JSON manifest is the tree representation of all of the layer objects contained in the PSD document. Using Example.psd, with the use case of a document stored in Adobe's Creative Cloud, a typical curl call might look like this:
+The `/documentManifest` api can take one or more input PSD's to generate JSON manifest files from. The JSON manifest is the tree representation of all of the layer objects contained in the PSD document. Using Example.psd, with the use case of a document stored in your external storage, a typical curl call might look like this:
 
 ```shell
 curl -X POST \
