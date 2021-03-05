@@ -208,7 +208,7 @@ NOTE: Your token will expire every 24 hours and will need to be refreshed after 
 
 12. Make a Photoshop API call with real assets
 
-  Now that you can successfully authenticate and talk to the API’s it’s time to make “real” calls. You need to store your Assets in any of your storage(S3, Azure or Dropbox). Please refer [File Storage](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#input-and-output-file-storage).You can use one of our [sample psd files](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/master/sample_files) and store in your storage as well for testing.
+  Now that you can successfully authenticate and communicate with the API it’s time to make “real” calls. In order to make a call using your own assets you will need to have them stored in any of the accepted external storage solutions(S3, Azure or Dropbox). For more information on storage please refer to the [File Storage](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#input-and-output-file-storage).If you dont have any assets and want to start testing you can download some of our [sample files](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/master/sample_files) and upload them to your supported external solution of choice.
 
   ```shell
   curl -X POST \
@@ -451,7 +451,7 @@ Here are some examples of making various layer level edits.
 ## How to use the APIs
 
 The API's are documented at https://adobedocs.github.io/photoshop-api-docs-pre-release/
-Sample examples are using the Input File [Example.psd](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/blob/master/sample_files/Example.psd). You can download the file and store in your storage.
+The code snippets are using one of our [sample psd](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/blob/master/sample_files/Example.psd) files. Please feel free to download and use it for testing. Just remember you will need to have this file stored in one of the accepted external storage. For more information on storage please refer to the [File Storage](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#input-and-output-file-storage).
 
 ### Example 1: /smartObject (Replacing smartobject)
 
@@ -1013,7 +1013,7 @@ Once your job completes successfully (no errors/failures reported), the status r
   "jobId":"63c6e812-6cb8-43de-8a60-3681a9ec6feb",
   "outputs":[
     {
-      "input":"https://khound-bucket.s3.amazonaws.com/Example.psd?AWSAccessKeyId=ASIAZRDTDXV2VTXLEWCK&Expires=1614978865&x-amz-security-token=FwoGZXIvYXdzENT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDLZ%2FQjwov06sjk4PyiLqAYrb1qCxEoIJwEd8ctfir%2BWIoODwGJakh3X2ZpAECnTlWBkZVu37BXmyB1qUUzFDwOFfqHXFmoAKJIT2ycgpO0rnF5YmZ1L4Ypx%2FtkzDQGsv5f%2F%2B1sGlWCs6dNTyD3lbxcCL8hAKfRMpiW6tVTncDuT3gD81HXy%2BqaPJjHrdLZbj4eJQoDD9UxfrsS%2FzEiFFys0tzYboRtTo4WVCorjgdjpA1hlj6DKiSWftmVRPxkpFP0nuoPaOjkorOsXGoWytMeqqSgiOBqhog8YQFFvNjkxB7I%2Fr1NLpKI5qN5e%2BcNp4ARZELzYwlqmO0CixyoSCBjItGzb23sKVInVTXauGjEYfyMb6gOGjpTGUQMMG8PKX8dXLNUkdkpWwrILt6mhG&Signature=Ww0ixyNHymRL%2B6N0OLERz5xcFRM%3D",
+      "input":"<SIGNED_GET_URL>",
       "status":"succeeded",
       "created":"2018-08-24T23:07:36.8Z",
       "modified":"2018-08-24T23:07:37.688Z",
@@ -1311,11 +1311,9 @@ The API's are documented at [https://adobedocs.github.io/photoshop-api-docs/#api
 
 First be sure to follow the instructions in the [Authentication](#authentication) section to get your token.
 
-Sample examples are using the Input File [Example.jpg](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/blob/master/sample_files/Example.jpg). You can download the file and store in your storage.
-
 ### Example 1: Initiate a job to create an image cutout
 
-The `/cutout` api takes a single input image to generate your mask or cutout from. Using Example.jpg, with the use case of a document stored in Adobe's Creative Cloud, a typical curl call might look like this:
+The `/cutout` api takes a single input image to generate your mask or cutout from. Using [Example.jpg](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/blob/master/sample_files/Example.jpg), a typical curl call might look like this:
 
 ```shell
 curl -X POST \
@@ -1371,7 +1369,7 @@ Once the job is complete your successful `/status` response will look similar to
     "input": "<SIGNED_GET_URL>",
     "_links": {
         "self": {
-            "href": "https://image-stage.adobe.io/sensei/status/e3a13d81-a462-4b71-9964-28b2ef34aca7"
+            "href": "https://image.adobe.io/sensei/status/e3a13d81-a462-4b71-9964-28b2ef34aca7"
         }
     },
     "output": {
@@ -1401,7 +1399,7 @@ Sample output from [here](assets/ic_customized_workflow/result_with_path.jpg) (N
 #### Instructions
 
 1. Download the make-file.atn file from [here](assets/ic_customized_workflow/make-path.atn) (this file will be used in the Photoshop action API call)
-2. Make the first API call one to ImageCutOut service to generate intermediate result as RGBA cutout
+2. Make the first API call to ImageCutOut service to generate intermediate result as RGBA cutout
 3. Make the second API call to Photoshop action service to use above intermediate result as well as the make-file.atn file to generate final JPEG format result with desired PS path embedded
 4. Open the final result with Photoshop Desktop app to check generated path in path panel
 
