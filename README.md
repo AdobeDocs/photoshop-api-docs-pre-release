@@ -206,6 +206,26 @@ Congrats! You just made your first request to the Photoshop API.
 
 NOTE: Your token will expire every 24 hours and will need to be refreshed after it expires. See the next section for more information on retrieving your token programmatically.
 
+12. Make a Photoshop API call with real assets
+
+  Now that you can successfully authenticate and talk to the API’s it’s time to make “real” calls. You need to store your Assets in any of your storage(S3, Azure or Dropbox). Please refer [File Storage](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#input-and-output-file-storage).You can use one of our [sample psd files](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/master/sample_files) and store in your storage as well for testing.
+
+  ```shell
+  curl -X POST \
+    https://image.adobe.io/pie/psdService/documentManifest \
+    -H 'Authorization: Bearer <auth_token>' \
+    -H 'Content-Type: application/json' \
+    -H 'x-api-key: <YOUR_API_KEY>' \
+    -d '{
+    "inputs": [
+      {
+        "href":"<SIGNED_GET_URL>",
+        "storage":"external"
+      }
+    ]
+  }'
+  ```
+
 ## Automating your JWT token
 
 Check out these modules for a quick path to automating your token retrieval:
@@ -431,6 +451,7 @@ Here are some examples of making various layer level edits.
 ## How to use the APIs
 
 The API's are documented at https://adobedocs.github.io/photoshop-api-docs-pre-release/
+Sample examples are using the Input File [Example.psd](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/blob/master/sample_files/Example.psd). You can download the file and store in your storage.
 
 ### Example 1: /smartObject (Replacing smartobject)
 
@@ -448,23 +469,23 @@ https: //image.adobe.io/pie/psdService/smartObject \
 - d '{
   "inputs": [
   {
-    "href": "files/SOCreate.psd",
-    "storage": "adobe"
+    "href": "<SIGNED_GET_URL>",
+    "storage": "external"
   }],
   "options": {
     "layers": [{
-      "name": "New",
+      "name": "HeroImage",
       "input": {
-        "href": "files/jt-guitar.jpeg",
-        "storage": "adobe"
+        "href": "<SIGNED_GET_URL>",
+        "storage": "external"
       }
      }
     ]
   },
   "outputs": [
   {
-    "storage": "adobe",
-    "href": "files/SOedit.psd",
+    "storage": "external",
+    "href": "<SIGNED_PUT_URL>",
     "type": "vnd.adobe.photoshop"
   }
 ]}'
@@ -481,8 +502,8 @@ https: //image.adobe.io/pie/psdService/smartObject
 - d '{
   "inputs": [
   {
-    "href": "files/SO.psd",
-    "storage": "adobe"
+    "href": "<SIGNED_GET_URL>",
+    "storage": "external"
   }],
   "options": {
     "layers": [{
@@ -491,16 +512,16 @@ https: //image.adobe.io/pie/psdService/smartObject
         "insertTop": true
       },
       "input": {
-        "href": "files/jt-drums.jpeg",
-        "storage": "adobe"
+        "href": "<SIGNED_GET_URL>",
+        "storage": "external"
        }
       }
     ]
   },
   "outputs": [
   {
-    "storage": "adobe",
-    "href": "files/SOCreate.psd",
+    "storage": "external",
+    "href": "<SIGNED_PUT_URL>",
     "type": "vnd.adobe.photoshop"
   }
 ]}'
@@ -523,8 +544,8 @@ curl -X POST \
   -d '{
   "inputs":[
     {
-      "href":"files/Example.psd",
-      "storage":"adobe"
+      "href":"<SIGNED_GET_URL>",
+      "storage":"external"
     }
   ],
   "options":{
@@ -555,8 +576,8 @@ curl -X POST \
   },
   "outputs":[
     {
-      "href":"files/Example_Out.psd",
-      "storage":"adobe",
+      "href":"<SIGNED_POST_URL>",
+      "storage":"external",
       "type":"vnd.adobe.photoshop",
       "overwrite":true
     }
@@ -576,14 +597,14 @@ curl -X POST \
   -d '{
   "inputs":[
     {
-      "href":"files/Example.psd",
-      "storage":"adobe"
+      "href":"<SIGNED_GET_URL>",
+      "storage":"external"
     }
   ],
   "options":{
     "fonts": {
-        storage: "adobe",
-        href: "files/pits/input/VeganStylePersonalUse.ttf"
+        storage: "external",
+        href: "<SIGNED_GET_URL_TO_VeganStylePersonalUse.ttf>"
     },
     "layers":[
       {
@@ -609,8 +630,8 @@ curl -X POST \
   },
   "outputs":[
     {
-      "href":"files/Example_Out.psd",
-      "storage":"adobe",
+      "href":"<SIGNED_POST_URL>",
+      "storage":"external",
       "type":"vnd.adobe.photoshop",
       "overwrite":true
     }
@@ -628,16 +649,16 @@ curl -X POST \
   -d '{
   "inputs":[
     {
-      "href":"files/Example.psd",
-      "storage":"adobe"
+      "href":"<SIGNED_GET_URL>",
+      "storage":"external"
     }
   ],
   "options":{
     "manageMissingFonts": "useDefault",
     "globalFont": "MySampleFont",
     "fonts": {
-        storage: "adobe",
-        href: "files/pits/input/VeganStylePersonalUse.ttf"
+        storage: "external",
+        href: "<SIGNED_GET_URL_TO_VeganStylePersonalUse.ttf>"
     },
     "layers":[
       {
@@ -663,8 +684,8 @@ curl -X POST \
   },
   "outputs":[
     {
-      "href":"files/Example_Out.psd",
-      "storage":"adobe",
+      "href":"<SIGNED_POST_URL>",
+      "storage":"external",
       "type":"vnd.adobe.photoshop",
       "overwrite":true
     }
@@ -690,8 +711,8 @@ curl -X POST \
   -d '{
   "inputs":[
     {
-      "href":"files/Example.psd",
-      "storage":"adobe"
+      "href":"<SIGNED_GET_URL>",
+      "storage":"external"
     }
   ],
   "options":{
@@ -709,8 +730,8 @@ curl -X POST \
   },
   "outputs":[
     {
-      "href":"files/Example_Out.psd",
-      "storage":"adobe",
+      "href":"<SIGNED_POST_URL>",
+      "storage":"external",
       "type":"vnd.adobe.photoshop",
       "overwrite":true
     }
@@ -740,8 +761,8 @@ curl -X POST \
   -d '{
   "inputs":[
     {
-      "href":"files/Example.psd",
-      "storage":"adobe"
+      "href":"<SIGNED_GET_URL>",
+      "storage":"external"
     }
   ],
   "options":{
@@ -749,8 +770,8 @@ curl -X POST \
       {
         "edit":{},     
         "input":{                                       
-          "href":"files/heroImage.png",  
-          "storage":"adobe"
+          "href":"<SIGNED_GET_URL>",  
+          "storage":"external"
         },
         "smartObject" : {                
           "type" : "image/png"
@@ -774,8 +795,8 @@ curl -X POST \
   },
   "outputs":[
     {
-      "href":"files/Example_Out.psd",
-      "storage":"adobe",
+      "href":"<SIGNED_POST_URL>",
+      "storage":"external",
       "type":"vnd.adobe.photoshop",
       "overwrite":true
     }
@@ -802,8 +823,8 @@ curl -X POST \
   -d '{
   "inputs":[
     {
-      "href":"files/Example.psd",
-      "storage":"adobe"
+      "href":"<SIGNED_GET_URL>",
+      "storage":"external"
     }
   ],
   "options":{
@@ -827,8 +848,8 @@ curl -X POST \
   },
   "outputs":[
     {
-      "href":"files/Example_Out.jpeg",
-      "storage":"adobe",
+      "href":"<SIGNED_POST_URL>",
+      "storage":"external",
       "type":"image/jpeg"
     }
   ]
@@ -844,6 +865,7 @@ In this example we want to replace the image in an existing pixel layer, the Her
 - NEW KEYWORD TO INDICATE AN EDIT: The `edit` key is included to indicate we want to edit this layer
 - NEW KEYWORD TO INDICATE IMAGE REPLACEMENT INFO: The `layers.input` object is included to indicate where the replacement image can be found
 
+
 ```shell
 curl -X POST \
   https://image.adobe.io/pie/psdService/documentOperations \
@@ -853,8 +875,8 @@ curl -X POST \
   -d '{
   "inputs":[
     {
-      "href":"files/Example.psd",
-      "storage":"adobe"
+      "href":"<SIGNED_GET_URL>",
+      "storage":"external"
     }
   ],
   "options":{
@@ -862,8 +884,8 @@ curl -X POST \
       {
         "edit":{},                    // <--- NEW KEYWORD TO INDICATE AN ADDITION
         "input":{                                       // <--- NEW KEYWORD TO INDICATE IMAGE REPLACEMENT INFO
-          "href":"/files/newBackgroundImage.jpeg",
-          "storage":"adobe"
+          "href":"<SIGNED_GET_URL>",
+          "storage":"external"
         },
         "bounds":{
           "height":405,
@@ -882,8 +904,8 @@ curl -X POST \
   },
   "outputs":[
     {
-      "href":"files/Example_Out.psd",
-      "storage":"adobe",
+      "href":"<SIGNED_POST_URL>",
+      "storage":"external",
       "type":"vnd.adobe.photoshop",
       "overwrite":true
     }
@@ -914,20 +936,20 @@ curl -X POST \
   -d '{
   "inputs":[
     {
-      "href":"files/Example.psd",
-      "storage":"adobe"
+      "href":"<SIGNED_GET_URL>",
+      "storage":"external"
     }
   ],
   "outputs":[
     {
-      "href":"files/Example.jpeg",          
+      "href":"<SIGNED_POST_URL1>",          
       "width": 512,
-      "storage":"adobe",
+      "storage":"external",
       "type":"image/jpeg"      
     },
     {
-      "href":"files/Example.png",
-      "storage":"adobe",
+      "href":"<SIGNED_POST_URL2>",
+      "storage":"external",
       "type":"image/png"
     }
   ]
@@ -991,7 +1013,7 @@ Once your job completes successfully (no errors/failures reported), the status r
   "jobId":"63c6e812-6cb8-43de-8a60-3681a9ec6feb",
   "outputs":[
     {
-      "input":"files/Example.psd",
+      "input":"https://khound-bucket.s3.amazonaws.com/Example.psd?AWSAccessKeyId=ASIAZRDTDXV2VTXLEWCK&Expires=1614978865&x-amz-security-token=FwoGZXIvYXdzENT%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDLZ%2FQjwov06sjk4PyiLqAYrb1qCxEoIJwEd8ctfir%2BWIoODwGJakh3X2ZpAECnTlWBkZVu37BXmyB1qUUzFDwOFfqHXFmoAKJIT2ycgpO0rnF5YmZ1L4Ypx%2FtkzDQGsv5f%2F%2B1sGlWCs6dNTyD3lbxcCL8hAKfRMpiW6tVTncDuT3gD81HXy%2BqaPJjHrdLZbj4eJQoDD9UxfrsS%2FzEiFFys0tzYboRtTo4WVCorjgdjpA1hlj6DKiSWftmVRPxkpFP0nuoPaOjkorOsXGoWytMeqqSgiOBqhog8YQFFvNjkxB7I%2Fr1NLpKI5qN5e%2BcNp4ARZELzYwlqmO0CixyoSCBjItGzb23sKVInVTXauGjEYfyMb6gOGjpTGUQMMG8PKX8dXLNUkdkpWwrILt6mhG&Signature=Ww0ixyNHymRL%2B6N0OLERz5xcFRM%3D",
       "status":"succeeded",
       "created":"2018-08-24T23:07:36.8Z",
       "modified":"2018-08-24T23:07:37.688Z",
@@ -1289,6 +1311,8 @@ The API's are documented at [https://adobedocs.github.io/photoshop-api-docs/#api
 
 First be sure to follow the instructions in the [Authentication](#authentication) section to get your token.
 
+Sample examples are using the Input File [Example.jpg](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/blob/master/sample_files/Example.jpg). You can download the file and store in your storage.
+
 ### Example 1: Initiate a job to create an image cutout
 
 The `/cutout` api takes a single input image to generate your mask or cutout from. Using Example.jpg, with the use case of a document stored in Adobe's Creative Cloud, a typical curl call might look like this:
@@ -1301,12 +1325,12 @@ curl -X POST \
   -H 'x-api-key: <YOUR_API_KEY>' \
   -d '{
    "input":{
-      "storage":"adobe",
-      "href":"/files/images/Example.jpg"
+      "storage":"external",
+      "href":"<SIGNED_GET_URL>"
    },
    "output":{
-      "storage":"adobe",
-      "href":"/files/output/cutout.png",
+      "storage":"external",
+      "href":"<SIGNED_PUT_URL>",
       "mask":{
          "format":"binary"
       }
@@ -1344,15 +1368,15 @@ Once the job is complete your successful `/status` response will look similar to
     "status": "succeeded",
     "created": "2020-02-11T21:08:43.789Z",
     "modified": "2020-02-11T21:08:48.492Z",
-    "input": "/files/images/Example.jpg",
+    "input": "<SIGNED_GET_URL>",
     "_links": {
         "self": {
             "href": "https://image-stage.adobe.io/sensei/status/e3a13d81-a462-4b71-9964-28b2ef34aca7"
         }
     },
     "output": {
-        "storage": "adobe",
-        "href": "/files/output/cutout.png",
+        "storage": "external",
+        "href": "<SIGNED_PUT_URL>",
         "mask": {
             "format": "binary"
         }
@@ -1365,10 +1389,10 @@ Once the job is complete your successful `/status` response will look similar to
 The workflow is exactly the same as [creating an image cutout](#example-1-initiate-a-job-to-create-an-image-cutout) except you use the `/mask` endpoint instead of `/cutout`.  
 
 ## Customized Workflow
-This section will demonstrate how to make a 'customized workflow' by chaining different APIs. 
+This section will demonstrate how to make a 'customized workflow' by chaining different APIs.
 
 ### Example 3: (Generate ImageCutOut result as Photoshop path)
-This workflow is ONLY for users who'd like to generate cutout result as Photoshop path instead of regular mask or cutout in above [example 1](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-1-initiate-a-job-to-create-an-image-cutout) and [example 2](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-2-initiate-a-job-to-create-an-image-mask). You will need to chain API calls to ImageCutOut service and Photoshop Service to achieve this goal. 
+This workflow is ONLY for users who'd like to generate cutout result as Photoshop path instead of regular mask or cutout in above [example 1](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-1-initiate-a-job-to-create-an-image-cutout) and [example 2](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#example-2-initiate-a-job-to-create-an-image-mask). You will need to chain API calls to ImageCutOut service and Photoshop Service to achieve this goal.
 
 #### Sample Input/Output
 Sample input from [here](assets/ic_customized_workflow/input.jpg).
@@ -1377,13 +1401,13 @@ Sample output from [here](assets/ic_customized_workflow/result_with_path.jpg) (N
 #### Instructions
 
 1. Download the make-file.atn file from [here](assets/ic_customized_workflow/make-path.atn) (this file will be used in the Photoshop action API call)
-2. Make the first API call one to ImageCutOut service to generate intermediate result as RGBA cutout 
-3. Make the second API call to Photoshop action service to use above intermediate result as well as the make-file.atn file to generate final JPEG format result with desired PS path embedded 
-4. Open the final result with Photoshop Desktop app to check generated path in path panel 
+2. Make the first API call one to ImageCutOut service to generate intermediate result as RGBA cutout
+3. Make the second API call to Photoshop action service to use above intermediate result as well as the make-file.atn file to generate final JPEG format result with desired PS path embedded
+4. Open the final result with Photoshop Desktop app to check generated path in path panel
 
 
 #### Sample Code
-You can download the sample end-to-end bash script [here](sample_code/ic-customized-workflow-app) and then follow the comments to try it out this customized workflow. 
+You can download the sample end-to-end bash script [here](sample_code/ic-customized-workflow-app) and then follow the comments to try it out this customized workflow.
 
 
 
