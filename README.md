@@ -1237,7 +1237,7 @@ curl -H "Authorization: Bearer $token" -H "x-api-key: $api_key" https://image.ad
   },
   "outputs": [
     {
-      "storage": "external"
+      "storage": "external",
       "type": "image/jpeg",
       "href": "https://some-presigned-url/output.jpeg"
     }
@@ -1269,7 +1269,7 @@ curl -H "Authorization: Bearer $token" -H "x-api-key: $api_key" https://image.ad
   },
   "outputs": [
     {
-      "storage": "external"
+      "storage": "external",
       "type": "image/jpeg",
       "href": "https://some-presigned-url/output.jpeg"
     }
