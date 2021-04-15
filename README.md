@@ -385,6 +385,7 @@ The following are known limitations for the Alpha release
 
 * Not supported, 3D and Video features
 * Custom presets (for example color swatches and brushes)
+* The action should operate on one document.  Multiple documents support will be in a future release
 
 Here are examples of submitting and executing Photoshop Actions.
 [Execute Photoshop Actions](#sample-71---play-all-actions-in-atn-file)
