@@ -22,7 +22,7 @@
     - [Tracking document changes](#tracking-document-changes)
   - [Supported Features](#supported-features)
     - [SmartObject](#smartobject)
-    - [Text layers (`New!`)](#text-layers-new)
+    - [Text layers](#text-layers)
       - [Font handling](#font-handling)
       - [Handle missing fonts in the document.](#handle-missing-fonts-in-the-document)
       - [Limitations](#limitations)
@@ -307,7 +307,7 @@ For better performance, we rasterize our smart objects that are bigger than  200
 
 For optimal processing, please make sure the embedded smart object that you want to replace only contains alphanumeric characters in it's name.
 
-### Text layers (`New!`)
+### Text layers
 
 The Photoshop APIs currently support creating and editing of Text Layer with different fonts, character styles and paragraph styles. The set of text attributes that can be edited is listed below:
 - Edit the text contents
@@ -1237,10 +1237,9 @@ curl -H "Authorization: Bearer $token" -H "x-api-key: $api_key" https://image.ad
   },
   "outputs": [
     {
-      "storage": "adobe",
+      "storage": "external",
       "type": "image/jpeg",
-      "overwrite": true,
-      "href": "files/ps-action-example/output.jpeg"
+      "href": "https://some-presigned-url/output.jpeg"
     }
   ]
 }'
@@ -1270,10 +1269,9 @@ curl -H "Authorization: Bearer $token" -H "x-api-key: $api_key" https://image.ad
   },
   "outputs": [
     {
-      "storage": "adobe",
+      "storage": "external",
       "type": "image/jpeg",
-      "overwrite": true,
-      "href": "files/ps-action-example/output.jpeg"
+      "href": "https://some-presigned-url/output.jpeg"
     }
   ]
 }'
