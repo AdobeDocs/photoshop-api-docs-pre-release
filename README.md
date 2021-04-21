@@ -91,7 +91,7 @@
 
 # Public Beta
 
-The Photoshop APIs are open for free trials. The trial is currently limited to 5,000 calls in a non production environment. In order to gain access to the trial please sign up using the link below and follow the steps to generate your trial credentials. https://photoshop.adobelanding.com/api-signup/
+The Photoshop APIs are open for free trials. The trial is currently limited to 5,000 calls in a non production environment. In order to gain access to the trial please sign up using the link below and follow the steps to generate your trial credentials. https://www.adobe-prerelease.com/sign-up/
 
 Make sure to take a look at the Pre-release agreement linked in the sign up form before getting started and ensure you understand the aspects of the program.
 
@@ -182,7 +182,7 @@ You can find details on interacting with Adobe IMS API’s and authentication in
 NOTE: Free Trial users will not have access to assets stored in the Creative Cloud so you must use an external storage source when making calls to the API. All free trial users will have 5,000 API calls to test their use case and provide feedback. Please see [Quota Limits](#quota-limits) for more information.
 
 1. If you haven't signed up and generated credentials please follow this link and follow the steps on the confirmation modal:
-https://photoshop.adobelanding.com/api-signup/
+https://www.adobe-prerelease.com/sign-up/
 2. If you have already signed up and need a new keyGo to https://console.adobe.io/home and sign in to the Admin Console.
 3. Click on “Create a new project” under the “Quick Start” section on the middle of your screen
 4. Click on “Add API”
