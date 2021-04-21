@@ -91,7 +91,7 @@
 
 # Public Beta
 
-The Photoshop APIs are open for free trials. The trial is currently limited to 5,000 calls in a non production environment. In order to gain access to the trial please sign up using the link below and follow the steps to generate your trial credentials. https://photoshop.adobelanding.com/api-signup/
+The Photoshop APIs are open for free trials. The trial is currently limited to 5,000 calls in a non production environment. In order to gain access to the trial please sign up using the link below and follow the steps to generate your trial credentials. https://www.adobe-prerelease.com/sign-up/
 
 Make sure to take a look at the Pre-release agreement linked in the sign up form before getting started and ensure you understand the aspects of the program.
 
