@@ -1432,12 +1432,12 @@ This event provider has two event types:
 As the names indicate, these event types represent events triggered by the individual APIs.
 ## Registering your application to our Event Provider
 ### Prerequisites needed to use the Event Provider
-1. Only supported for a `Service Integration`: You will have to create your own Service Integration, please refer to [this](#service-token-workflow-adobe-etla-users) section of the document for details on how to create a Service Integration.
+1. Only supported for a `JWT Integration`: You will have to create your own JWT Integration, please refer to [this](#free-trial-users-jwt-authentication) section of the document for details on how to create a Service Integration.
 2. Make sure that the integration is created under your own Organization Role in https://console.adobe.io and this will ensure that you have a unique `Organization ID`. A typical ID would look something like this: `ABCDEF123B6CCB7B0A495E2E@AdobeOrg` and can be found in the overview section of the details of the integration.
-3. Create a Webhook application. [This](https://www.adobe.io/apis/experienceplatform/events/docs.html#!adobedocs/adobeio-events/master/intro/webhook_docs_intro.md#your-first-webhook) page gives all the details of what the skeleton of a basic application would look like. You can find a sample NodeJS application [here](sample_code/webhook-sample-app)
+3. Create a Webhook application. [This](https://www.adobe.io/apis/experienceplatform/events/docs.html#!adobedocs/adobeio-events/master/intro/webhooks_intro.md) page gives all the details of what the skeleton of a basic application would look like. You can find a sample NodeJS application [here](sample_code/webhook-sample-app)
 
 ### Registering the Webhook
-Once the above prerequisites are met, you can now proceed to register the webhook to the service integration. The steps to do that can be found  [here](https://www.adobe.io/apis/experienceplatform/events/docs.html#!adobedocs/adobeio-events/master/intro/webhook_docs_intro.md#registering-the-webhook).
+Once the above prerequisites are met, you can now proceed to register the webhook to the service integration. The steps to do that can be found  [here](https://www.adobe.io/apis/experienceplatform/events/docs.html#!adobedocs/adobeio-events/master/intro/webhooks_intro.md#your-first-webhook).
 After the webhook has been successfully registered, you will start to receive the events for any submitted job that either succeeded or failed, from the Event Types selected. This eliminates the need for your application to poll for the status of the job using the jobID.
 
 ## Triggering an Event from the API's
