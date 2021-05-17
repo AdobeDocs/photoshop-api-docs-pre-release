@@ -9992,6 +9992,25 @@ define({ "api": [
             "group": "Request",
             "type": "object",
             "optional": false,
+            "field": "options",
+            "description": ""
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"batch\"",
+              "\"performance\""
+            ],
+            "optional": true,
+            "field": "options.optimize",
+            "defaultValue": "performance",
+            "description": "<p>&quot;performance&quot; optimizes for speed. &quot;batch&quot; ensures the job will not fail due to timeout.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": false,
             "field": "output",
             "description": "<p>A PNG file</p>"
           },
@@ -10207,6 +10226,24 @@ define({ "api": [
             "group": "Success 200",
             "type": "object",
             "optional": false,
+            "field": "options",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "allowedValues": [
+              "\"batch\"",
+              "\"performance\""
+            ],
+            "optional": false,
+            "field": "options.optimize",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
             "field": "output",
             "description": ""
           },
@@ -10259,7 +10296,7 @@ define({ "api": [
         },
         {
           "title": "Response: Succeeded",
-          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"succeeded\",\n   \"input\": \"/files/images/input.jpg\",\n   \"output\":{\n      \"storage\":\"adobe\",\n      \"href\":\"/files/cutout/output/mask.png\",\n      \"mask\":{\n         \"format\":\"binary\"\n      },\n      \"color\":{\n         \"space\":\"rgb\"\n      }\n   },\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
+          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"succeeded\",\n   \"input\": \"/files/images/input.jpg\",\n   \"output\":{\n      \"storage\":\"adobe\",\n      \"href\":\"/files/cutout/output/mask.png\",\n      \"mask\":{\n         \"format\":\"binary\"\n      },\n      \"color\":{\n         \"space\":\"rgb\"\n      }\n   },\n   \"options\":{\n      \"optimize\":\"performance\"\n   },\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
           "type": "object"
         },
         {
@@ -10384,6 +10421,24 @@ define({ "api": [
             "group": "Success 200",
             "type": "object",
             "optional": false,
+            "field": "options",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "string",
+            "allowedValues": [
+              "\"batch\"",
+              "\"performance\""
+            ],
+            "optional": false,
+            "field": "options.optimize",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "object",
+            "optional": false,
             "field": "output",
             "description": ""
           },
@@ -10436,7 +10491,7 @@ define({ "api": [
         },
         {
           "title": "Response: Succeeded",
-          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"succeeded\",\n   \"input\": \"/files/images/input.jpg\",\n   \"output\":{\n      \"storage\":\"adobe\",\n      \"href\":\"/files/cutout/output/mask.png\",\n      \"mask\":{\n         \"format\":\"binary\"\n      },\n      \"color\":{\n         \"space\":\"rgb\"\n      }\n   },\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
+          "content": "HTTP/1.1 200\nContent-Type: application/json\nContent-Length: <nonNegativeInteger>\nLocation: \"https://image.adobe.io/sensei/status/<:jobID>\"\n{\n   \"jobID\":\"c900e70c-03b2-43dc-b6f0-b0db16333b4b\",\n   \"status\":\"succeeded\",\n   \"input\": \"/files/images/input.jpg\",\n   \"options\":{\n      \"optimize\":\"performance\"\n   },\n   \"output\":{\n      \"storage\":\"adobe\",\n      \"href\":\"/files/cutout/output/mask.png\",\n      \"mask\":{\n         \"format\":\"binary\"\n      },\n      \"color\":{\n         \"space\":\"rgb\"\n      }\n   },\n   \"_links\":{\n      \"self\":{\n         \"href\":\"https://image.adobe.io/sensei/status/c900e70c-03b2-43dc-b6f0-b0db16333b4b\"\n      }\n   }\n}",
           "type": "object"
         },
         {
@@ -10568,6 +10623,25 @@ define({ "api": [
             "optional": false,
             "field": "input.href",
             "description": "<p>Either an href to a single Creative Cloud asset for storage='adobe' OR a presignedGETURL for other external services. Supported input file types include png, jpg and tif.</p> <li>CC Storage path must be prepended with `/files` or `/cloud-content` or `/assets`    <li>The `/files` path directly corresponds to the root of your local `Creative Cloud Files` folder</li>    <li>The `/cloud-content` path directly corresponds to the root of your `Cloud documents` folder in CC</li>    <li>The `/assets` path directly corresponds to the specific sync-group section of CC storage</li> </li>"
+          },
+          {
+            "group": "Request",
+            "type": "object",
+            "optional": false,
+            "field": "options",
+            "description": ""
+          },
+          {
+            "group": "Request",
+            "type": "string",
+            "allowedValues": [
+              "\"batch\"",
+              "\"performance\""
+            ],
+            "optional": true,
+            "field": "options.optimize",
+            "defaultValue": "performance",
+            "description": "<p>&quot;performance&quot; optimizes for speed. &quot;batch&quot; ensures the job will not fail due to timeout.</p>"
           },
           {
             "group": "Request",
