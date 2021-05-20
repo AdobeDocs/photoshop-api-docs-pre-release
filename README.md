@@ -1331,7 +1331,7 @@ curl -X POST \
       "storage":"external",
       "href":"<SIGNED_PUT_URL>",
       "mask":{
-         "format":"binary"
+         "format":"soft"
       }
    }
 }'
@@ -1377,7 +1377,7 @@ Once the job is complete your successful `/status` response will look similar to
         "storage": "external",
         "href": "<SIGNED_PUT_URL>",
         "mask": {
-            "format": "binary"
+            "format": "soft"
         }
     }
 }
