@@ -3171,7 +3171,14 @@ define({ "api": [
             "optional": true,
             "field": "outputs.output.width",
             "defaultValue": "0",
-            "description": "<p>width, in pixels, of the renditions. Width of 0 generates a full size rendition.  Height is not necessary as the rendition generate will automatically figure out the correct width-to-height aspect ratio. Only supported for image renditions</p>"
+            "description": "<p>width, in pixels, of the renditions. Width of 0 generates a full size rendition.  Height is not necessary as the rendition generate will automatically figure out the correct width-to-height aspect ratio. Only supported for image renditions.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.output.maxWidth",
+            "description": "<p>maxWidth (in pixels) of the renditions. When width is 0 and maxWidth is less than the width of the document, you get the final rendition size of maxWidth. Otherwise it will be a full size document rendition. If both width and maxWidth are provided then the lowest value gets the precedence. Height is not necessary as the API will automatically maintain the aspect ratio.</p>"
           },
           {
             "group": "Request",
@@ -5687,7 +5694,14 @@ define({ "api": [
             "optional": true,
             "field": "outputs.output.width",
             "defaultValue": "0",
-            "description": "<p>width, in pixels, of the renditions. Width of 0 generates a full size rendition.  Height is not necessary as the rendition generate will automatically figure out the correct width-to-height aspect ratio. Only supported for image renditions</p>"
+            "description": "<p>width, in pixels, of the renditions. Width of 0 generates a full size rendition.  Height is not necessary as the rendition generate will automatically figure out the correct width-to-height aspect ratio. Only supported for image renditions.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.output.maxWidth",
+            "description": "<p>maxWidth (in pixels) of the renditions. When width is 0 and maxWidth is less than the width of the document, you get the final rendition size of maxWidth. Otherwise it will be a full size document rendition. If both width and maxWidth are provided then the lowest value gets the precedence. Height is not necessary as the API will automatically maintain the aspect ratio.</p>"
           },
           {
             "group": "Request",
@@ -7215,7 +7229,14 @@ define({ "api": [
             "optional": true,
             "field": "outputs.output.width",
             "defaultValue": "0",
-            "description": "<p>width, in pixels, of the renditions. Width of 0 generates a full size rendition.  Height is not necessary as the rendition generate will automatically figure out the correct width-to-height aspect ratio. Only supported for image renditions</p>"
+            "description": "<p>width, in pixels, of the renditions. Width of 0 generates a full size rendition.  Height is not necessary as the rendition generate will automatically figure out the correct width-to-height aspect ratio. Only supported for image renditions.</p>"
+          },
+          {
+            "group": "Request",
+            "type": "int",
+            "optional": true,
+            "field": "outputs.output.maxWidth",
+            "description": "<p>maxWidth (in pixels) of the renditions. When width is 0 and maxWidth is less than the width of the document, you get the final rendition size of maxWidth. Otherwise it will be a full size document rendition. If both width and maxWidth are provided then the lowest value gets the precedence. Height is not necessary as the API will automatically maintain the aspect ratio.</p>"
           },
           {
             "group": "Request",
