@@ -206,7 +206,7 @@ Congrats! You just made your first request to the Photoshop API.
 
 NOTE: Your token will expire every 24 hours and will need to be refreshed after it expires. See the next section for more information on retrieving your token programmatically.
 
-12. Make a Photoshop API call with real assets
+11. Make a Photoshop API call with real assets
 
 Now that you can successfully authenticate and communicate with the API it’s time to make “real” calls. In order to make a call using your own assets you will need to have them stored in any of the accepted external storage solutions(S3, Azure or Dropbox). For more information on storage please refer to the [File Storage](https://github.com/AdobeDocs/photoshop-api-docs-pre-release#input-and-output-file-storage).If you dont have any assets and want to start testing you can download some of our [sample files](https://github.com/AdobeDocs/photoshop-api-docs-pre-release/tree/master/sample_files) and upload them to your supported external solution of choice.
 
