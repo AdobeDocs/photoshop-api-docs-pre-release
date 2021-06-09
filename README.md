@@ -181,18 +181,18 @@ You can find details on interacting with Adobe IMS API’s and authentication in
 
 NOTE: Free Trial users will not have access to assets stored in the Creative Cloud so you must use an external storage source when making calls to the API. All free trial users will have 5,000 API calls to test their use case and provide feedback. Please see [Quota Limits](#quota-limits) for more information.
 
-1. If you haven't signed up and generated credentials please follow this link and follow the steps on the confirmation modal:
-https://www.adobe.com/go/photoshopapi_signup
-2. If you have already signed up and need a new keyGo to https://console.adobe.io/home and sign in to the Admin Console.
-3. Click on “Create a new project” under the “Quick Start” section on the middle of your screen
-4. Click on “Add API”
-5. Select the “Adobe Photoshop APIs (Trial)” and click on “Next”
-6. You should see a zip file named “Config” in your downloads
-7. Open the contents of the zip and locate the file name “private.key”
-8. Open the file named “private.key” in a text editor like Atom or Sublime
-9. Copy the entire contents of the file and paste it in your project page in the section labeled “Generate access token” and click on “Generate token” on the bottom right hand corner.
-10. Congrats! You have just created a JWT token. Now copy your token and Client ID from this screen into a secure document. You are going to need them for the next step.
-11. Open your terminal and paste the code below. Make sure to replace the variables "YOUR_ACCESS_TOKEN" and "YOUR_CLIENT_ID" with the information you copied from the last step and run the command.
+If you haven't signed up please follow the link below to join the pre-release and create your credentials: https://www.adobe.com/go/photoshopapi_signup
+
+1. If you have already signed up and a new set of credentials, go to https://console.adobe.io/home and sign in to the Admin Console.
+2. Click on “Create a new project” under the “Quick Start” section on the middle of your screen
+3. Click on “Add API”
+4. Select the “Adobe Photoshop APIs (Trial)” and click on “Next”
+5. You should see a zip file named “Config” in your downloads
+6. Open the contents of the zip and locate the file name “private.key”
+7. Open the file named “private.key” in a text editor like Atom or Sublime
+8. Copy the entire contents of the file and paste it in your project page in the section labeled “Generate access token” and click on “Generate token” on the bottom right hand corner.
+9. Congrats! You have just created a JWT token. Now copy your token and Client ID from this screen into a secure document. You are going to need them for the next step.
+10. Open your terminal and paste the code below. Make sure to replace the variables "YOUR_ACCESS_TOKEN" and "YOUR_CLIENT_ID" with the information you copied from the last step and run the command.
 
 ``` shell
 
