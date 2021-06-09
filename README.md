@@ -183,7 +183,7 @@ NOTE: Free Trial users will not have access to assets stored in the Creative Clo
 
 If you haven't signed up please follow the link below to join the pre-release and create your credentials: https://www.adobe.com/go/photoshopapi_signup
 
-1. If you have already signed up and a new set of credentials, go to https://console.adobe.io/home and sign in to the Admin Console.
+1. If you have already signed up and need to create a new set of credentials, go to https://console.adobe.io/home and sign in to the Admin Console.
 2. Click on “Create a new project” under the “Quick Start” section on the middle of your screen
 3. Click on “Add API”
 4. Select the “Adobe Photoshop APIs (Trial)” and click on “Next”
