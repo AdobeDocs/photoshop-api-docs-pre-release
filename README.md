@@ -98,6 +98,7 @@ Make sure to take a look at the Pre-release agreement linked in the sign up form
 
 # Welcome to Photoshop APIs!
 
+
 The Adobe Photoshop API gives you access to a subset of Photoshop, Lightroom, and Sensei  services. The API will allow you to make both layer and document level edits to Photoshop PSD files as well as perform a number of image edits and improvements.
 
 The Photoshop API is designed with REST like principles and uses standard HTTP response codes, verbs and authentication and returns JSON-encoded responses.
